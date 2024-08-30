@@ -22,3 +22,4 @@ C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-wi
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.pdb
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.genruntimeconfig.cache
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\ref\LibraryManagement.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.sourcelink.json
