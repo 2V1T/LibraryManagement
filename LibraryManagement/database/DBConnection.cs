@@ -5,7 +5,7 @@ namespace LibraryManagement.database
 {
     public class DBConnection
     {
-        private static readonly string connString = "Data Source=DOANKHACVI;Initial Catalog=cty;Integrated Security=True";
+        private static readonly string connString = "Data Source=DOANKHACVI;Initial Catalog=library;Integrated Security=True";
         private static DBConnection _instance;
         private SqlConnection conn;
 

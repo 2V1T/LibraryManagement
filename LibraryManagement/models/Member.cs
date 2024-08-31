@@ -59,6 +59,5 @@ namespace LibraryManagement.Models
             get { return face_hash; }
             set { face_hash = value; }
         }
-
     }
 }

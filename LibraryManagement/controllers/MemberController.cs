@@ -15,7 +15,7 @@ namespace LibraryManagement.controllers
     {
         SqlConnection conn = DBConnection.GetInstance().GetConnection();
         SQLExecute sqlExecute = new SQLExecute();
-        public MemberController() { 
+        public MemberController() {  
             
         }
 

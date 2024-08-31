@@ -14,20 +14,65 @@ namespace LibraryManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             MemberController memberController = new MemberController();
-            Member member = memberController.getById(1);
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("ID No", typeof(long));  // Tên cột
-            dataTable.Columns.Add("Name", typeof(string));  // Tên cột
-            dataTable.Columns.Add("Phone No", typeof(long)); // Tên cột
-            dataTable.Columns.Add("Email", typeof(string));  // Tên cột
-                                                             // Thêm các cột khác nếu cần
-
-            // Thêm dữ liệu vào DataTable
-            dataTable.Rows.Add(member.IdNo, member.Name, member.PhoneNo, member.Email);
-            // Thêm các giá trị khác vào hàng nếu cần
+            DataTable members = memberController.getAll();
+            panel1.Visible = false;
 
             // Gán DataTable cho DataGridView
-            dataGridView1.DataSource = dataTable;
+        }
+
+        private void thểLoạiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hànhĐộngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void sáchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bạnĐọcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sáchToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
