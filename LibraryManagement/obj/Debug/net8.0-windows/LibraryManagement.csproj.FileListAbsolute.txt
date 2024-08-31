@@ -24,3 +24,5 @@ C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-wi
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\ref\LibraryManagement.dll
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.sourcelink.json
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.Properties.Resources.resources
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.InfoForm.resources
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.Login.resources

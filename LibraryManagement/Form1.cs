@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.controllers;
+using LibraryManagement.GUIs;
 using LibraryManagement.Models;
 using System.Data;
 
@@ -73,6 +74,36 @@ namespace LibraryManagement
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void bạnĐọcMớiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void đổiThôngTinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfoForm infoForm = new InfoForm();
+            infoForm.ShowDialog();
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn thoát ứng dụng ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            switch (result)
+            {
+                case DialogResult.OK:
+                    Application.Exit();
+                    break;
+                case DialogResult.Cancel:
+                    break;
+            }
+        }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }
