@@ -26,3 +26,6 @@ C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-wi
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.Properties.Resources.resources
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.InfoForm.resources
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.Login.resources
+C:\Users\Admin\OneDrive\Desktop\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.dll
+C:\Users\Admin\OneDrive\Desktop\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\refint\LibraryManagement.dll
+C:\Users\Admin\OneDrive\Desktop\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.pdb

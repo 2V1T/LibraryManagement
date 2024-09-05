@@ -1,6 +1,6 @@
 ﻿using LibraryManagement.adapter;
 using LibraryManagement.database;
-using LibraryManagement.Models;
+using LibraryManagement.models;
 using System;
 using System.Collections.Generic;
 using System.Data;
