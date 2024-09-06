@@ -1,6 +1,6 @@
 ﻿using LibraryManagement.controllers;
 using LibraryManagement.GUIs;
-using LibraryManagement.Models;
+using LibraryManagement.models;
 using System.Data;
 using System.Windows.Forms;
 
@@ -9,9 +9,11 @@ namespace LibraryManagement
     public partial class Form1 : Form
     {
         static Login loginForm = new Login();
-        public Form1()
+        int id; 
+        public Form1(int id)
         {
             InitializeComponent();
+            this.id = id;
         }
 
         private void Form1_Load(object sender, EventArgs e)

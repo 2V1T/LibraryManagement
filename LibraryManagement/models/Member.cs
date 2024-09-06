@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LibraryManagement.Models
+namespace LibraryManagement.models
 {
     internal class Member
     {
@@ -11,8 +15,8 @@ namespace LibraryManagement.Models
             set { id = value; }
         }
 
-        private long id_no;
-        public long IdNo
+        private int id_no;
+        public int IdNo
         {
             get { return id_no; }
             set { id_no = value; }
@@ -59,7 +63,5 @@ namespace LibraryManagement.Models
             get { return face_hash; }
             set { face_hash = value; }
         }
-
-        public Member() { }
     }
 }

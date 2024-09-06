@@ -1,6 +1,6 @@
 ﻿using LibraryManagement.adapter;
 using LibraryManagement.database;
-using LibraryManagement.Models;
+using LibraryManagement.models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -71,7 +71,6 @@ namespace LibraryManagement.controllers
                 member.Name = (string)data.Rows[0]["name"];
                 member.Email = (string)data.Rows[0]["email"];
                 member.PhoneNo = (int)data.Rows[0]["phone_no"];
-                member.IdNo = (long)data.Rows[0]["id_no"];
                 member.Address = (string)data.Rows[0]["address"];
                 return member;
             }

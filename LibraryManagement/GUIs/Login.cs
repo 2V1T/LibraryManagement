@@ -24,7 +24,8 @@ namespace LibraryManagement.GUIs
 
             if (username.Equals("") && pass.Equals(""))
             {
-                Form1 mainForm = new Form1();
+                int id = 1;
+                Form1 mainForm = new Form1(id);
                 this.Hide();
                 mainForm.ShowDialog();
                 if (Application.OpenForms.Count != 0)
