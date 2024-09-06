@@ -903,7 +903,7 @@
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            Application.Exit();
         }
 
         private void AuthorDropDownSearch_SelectedValueChanged(object sender, EventArgs e)

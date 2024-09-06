@@ -27,7 +27,10 @@ namespace LibraryManagement.GUIs
                 Form1 mainForm = new Form1();
                 this.Hide();
                 mainForm.ShowDialog();
-                this.Show();
+                if (Application.OpenForms.Count != 0)
+                {
+                    this.Show();
+                }
             }
         }
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
