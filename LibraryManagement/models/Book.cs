@@ -13,7 +13,6 @@ namespace LibraryManagement.models
         private int author_id;
         private int category_id;
         private string description;
-        private int quantity;
 
         public int Id
         {
@@ -71,28 +70,16 @@ namespace LibraryManagement.models
             }
 
         }
-        public int Quantity
-        {
-            get
-            {
-                return quantity;
-            }
-            set
-            {
-                quantity = value;
-            }
-        }
         public Book()
         {
         }
-        public Book(int id, string name, int author_id, int category_id, string description, int quantity)
+        public Book(int id, string name, int author_id, int category_id, string description)
         {
             this.id = id;
             this.name = name;
             this.author_id = author_id;
             this.category_id = category_id;
             this.description = description;
-            this.quantity = quantity;
         }
     }
 }

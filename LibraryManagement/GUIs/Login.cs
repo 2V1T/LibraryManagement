@@ -20,10 +20,15 @@ namespace LibraryManagement.GUIs
 
         private void button1_Click(object sender, EventArgs e)
         {
+            login();
+        }
+
+        private void login()
+        {
             string username = loginUsername.Text;
             string pass = loginPass.Text;
             UserController controller = new UserController();
-            
+
             if (username.Equals("") && pass.Equals(""))
             {
                 MessageBox.Show("Không bỏ trống 1 trong 2 trường!", "Thông báo");
@@ -31,7 +36,8 @@ namespace LibraryManagement.GUIs
             else
             {
                 int id = controller.Login(username, pass);
-                if (id != 0) { 
+                if (id != 0)
+                {
                     Form1 mainForm = new Form1(id);
                     this.Hide();
                     mainForm.ShowDialog();
@@ -53,12 +59,22 @@ namespace LibraryManagement.GUIs
 
         private void Login_KeyDown(object sender, KeyEventArgs e)
         {
-           
+            if (e.KeyCode == Keys.Enter) { 
+                login();
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void loginButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                login();
+            }
         }
     }
 }

@@ -35,7 +35,6 @@
             label3 = new Label();
             loginButton = new Button();
             SuspendLayout();
-            FormClosing += Login_FormClosing;
             // 
             // label1
             // 
@@ -91,6 +90,7 @@
             loginButton.Text = "Đăng nhập";
             loginButton.UseVisualStyleBackColor = true;
             loginButton.Click += button1_Click;
+            loginButton.KeyDown += loginButton_KeyDown;
             // 
             // Login
             // 
@@ -106,14 +106,14 @@
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Đăng nhập";
-            KeyDown += Login_KeyDown;
+            FormClosing += Login_FormClosing;
             Load += Login_Load;
+            KeyDown += Login_KeyDown;
             ResumeLayout(false);
             PerformLayout();
-
         }
 
-        
+
 
         #endregion
 

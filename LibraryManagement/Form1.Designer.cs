@@ -46,14 +46,14 @@
             updateBookBT = new Button();
             deleteBookBT = new Button();
             groupBox3 = new GroupBox();
-            dataGridView4 = new DataGridView();
+            dataGridViewCopies = new DataGridView();
             label8 = new Label();
             searchBookBT = new Button();
             searchNameTB = new TextBox();
             groupBox1 = new GroupBox();
             addAuthorBT = new Button();
             deleteAuthorBT = new Button();
-            dataGridView2 = new DataGridView();
+            dataGridViewAuthor = new DataGridView();
             authorTB = new TextBox();
             updateAuthorBT = new Button();
             panel4 = new Panel();
@@ -62,13 +62,13 @@
             updateCategoryBT = new Button();
             addCategoryBT = new Button();
             categoryTB = new TextBox();
-            dataGridView3 = new DataGridView();
+            dataGridViewCategory = new DataGridView();
             panel2 = new Panel();
             groupBox4 = new GroupBox();
+            descriptionBookAddTB = new RichTextBox();
             label5 = new Label();
             label7 = new Label();
             label6 = new Label();
-            descriptionBookAddTB = new TextBox();
             label4 = new Label();
             nameAddBookTB = new TextBox();
             categoryAddBookCB = new ComboBox();
@@ -111,12 +111,12 @@
             menuStrip1.SuspendLayout();
             bookPanel.SuspendLayout();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCopies).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAuthor).BeginInit();
             panel4.SuspendLayout();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCategory).BeginInit();
             panel2.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBook).BeginInit();
@@ -135,6 +135,7 @@
             menuStrip1.Size = new Size(1897, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // hànhĐộngToolStripMenuItem
             // 
@@ -147,28 +148,28 @@
             // đổiThôngTinToolStripMenuItem
             // 
             đổiThôngTinToolStripMenuItem.Name = "đổiThôngTinToolStripMenuItem";
-            đổiThôngTinToolStripMenuItem.Size = new Size(224, 26);
+            đổiThôngTinToolStripMenuItem.Size = new Size(184, 26);
             đổiThôngTinToolStripMenuItem.Text = "Đổi thông tin ";
             đổiThôngTinToolStripMenuItem.Click += đổiThôngTinToolStripMenuItem_Click;
             // 
             // đổiMậtKhẩuToolStripMenuItem
             // 
             đổiMậtKhẩuToolStripMenuItem.Name = "đổiMậtKhẩuToolStripMenuItem";
-            đổiMậtKhẩuToolStripMenuItem.Size = new Size(224, 26);
+            đổiMậtKhẩuToolStripMenuItem.Size = new Size(184, 26);
             đổiMậtKhẩuToolStripMenuItem.Text = "Đổi mật khẩu";
             đổiMậtKhẩuToolStripMenuItem.Click += đổiMậtKhẩuToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(184, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
             // thoátToolStripMenuItem
             // 
             thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            thoátToolStripMenuItem.Size = new Size(224, 26);
+            thoátToolStripMenuItem.Size = new Size(184, 26);
             thoátToolStripMenuItem.Text = "Thoát";
             thoátToolStripMenuItem.Click += thoátToolStripMenuItem_Click;
             // 
@@ -283,22 +284,25 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(dataGridView4);
+            groupBox3.Controls.Add(dataGridViewCopies);
             groupBox3.Location = new Point(3, 580);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(880, 211);
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Chi tiết mượn";
+            groupBox3.Text = "Các bản sách khả dụng";
+            groupBox3.Enter += groupBox3_Enter;
             // 
-            // dataGridView4
+            // dataGridViewCopies
             // 
-            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView4.Location = new Point(-1, 26);
-            dataGridView4.Name = "dataGridView4";
-            dataGridView4.RowHeadersWidth = 51;
-            dataGridView4.Size = new Size(883, 173);
-            dataGridView4.TabIndex = 10;
+            dataGridViewCopies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCopies.Location = new Point(-1, 26);
+            dataGridViewCopies.Name = "dataGridViewCopies";
+            dataGridViewCopies.RowHeadersWidth = 51;
+            dataGridViewCopies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewCopies.Size = new Size(883, 173);
+            dataGridViewCopies.TabIndex = 10;
+            dataGridViewCopies.CellContentClick += dataGridView4_CellContentClick;
             // 
             // label8
             // 
@@ -317,6 +321,7 @@
             searchBookBT.TabIndex = 7;
             searchBookBT.Text = "Tìm kiếm";
             searchBookBT.UseVisualStyleBackColor = true;
+            searchBookBT.Click += searchBookBT_Click;
             // 
             // searchNameTB
             // 
@@ -329,7 +334,7 @@
             // 
             groupBox1.Controls.Add(addAuthorBT);
             groupBox1.Controls.Add(deleteAuthorBT);
-            groupBox1.Controls.Add(dataGridView2);
+            groupBox1.Controls.Add(dataGridViewAuthor);
             groupBox1.Controls.Add(authorTB);
             groupBox1.Controls.Add(updateAuthorBT);
             groupBox1.Location = new Point(901, 118);
@@ -347,6 +352,7 @@
             addAuthorBT.TabIndex = 0;
             addAuthorBT.Text = "Thêm";
             addAuthorBT.UseVisualStyleBackColor = true;
+            addAuthorBT.Click += addAuthorBT_Click;
             // 
             // deleteAuthorBT
             // 
@@ -356,16 +362,19 @@
             deleteAuthorBT.TabIndex = 1;
             deleteAuthorBT.Text = "Xóa ";
             deleteAuthorBT.UseVisualStyleBackColor = true;
+            deleteAuthorBT.Click += deleteAuthorBT_Click;
             // 
-            // dataGridView2
+            // dataGridViewAuthor
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(0, 92);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(282, 133);
-            dataGridView2.TabIndex = 2;
-            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
+            dataGridViewAuthor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAuthor.Location = new Point(0, 92);
+            dataGridViewAuthor.Name = "dataGridViewAuthor";
+            dataGridViewAuthor.RowHeadersWidth = 51;
+            dataGridViewAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewAuthor.Size = new Size(282, 133);
+            dataGridViewAuthor.TabIndex = 2;
+            dataGridViewAuthor.CellClick += dataGridViewAuthor_CellClick;
+            dataGridViewAuthor.CellContentClick += dataGridView2_CellContentClick;
             // 
             // authorTB
             // 
@@ -382,6 +391,7 @@
             updateAuthorBT.TabIndex = 1;
             updateAuthorBT.Text = "Sửa";
             updateAuthorBT.UseVisualStyleBackColor = true;
+            updateAuthorBT.Click += updateAuthorBT_Click;
             // 
             // panel4
             // 
@@ -397,7 +407,7 @@
             groupBox2.Controls.Add(updateCategoryBT);
             groupBox2.Controls.Add(addCategoryBT);
             groupBox2.Controls.Add(categoryTB);
-            groupBox2.Controls.Add(dataGridView3);
+            groupBox2.Controls.Add(dataGridViewCategory);
             groupBox2.Location = new Point(3, 0);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(426, 255);
@@ -413,6 +423,7 @@
             deleteCategoryBT.TabIndex = 1;
             deleteCategoryBT.Text = "Xóa ";
             deleteCategoryBT.UseVisualStyleBackColor = true;
+            deleteCategoryBT.Click += deleteCategoryBT_Click;
             // 
             // updateCategoryBT
             // 
@@ -422,6 +433,7 @@
             updateCategoryBT.TabIndex = 1;
             updateCategoryBT.Text = "Sửa";
             updateCategoryBT.UseVisualStyleBackColor = true;
+            updateCategoryBT.Click += updateCategoryBT_Click;
             // 
             // addCategoryBT
             // 
@@ -431,6 +443,7 @@
             addCategoryBT.TabIndex = 0;
             addCategoryBT.Text = "Thêm";
             addCategoryBT.UseVisualStyleBackColor = true;
+            addCategoryBT.Click += addCategoryBT_Click;
             // 
             // categoryTB
             // 
@@ -439,14 +452,16 @@
             categoryTB.Size = new Size(277, 27);
             categoryTB.TabIndex = 4;
             // 
-            // dataGridView3
+            // dataGridViewCategory
             // 
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(0, 92);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.RowHeadersWidth = 51;
-            dataGridView3.Size = new Size(274, 133);
-            dataGridView3.TabIndex = 2;
+            dataGridViewCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCategory.Location = new Point(0, 92);
+            dataGridViewCategory.Name = "dataGridViewCategory";
+            dataGridViewCategory.RowHeadersWidth = 51;
+            dataGridViewCategory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewCategory.Size = new Size(274, 133);
+            dataGridViewCategory.TabIndex = 2;
+            dataGridViewCategory.CellClick += dataGridViewCategory_CellClick;
             // 
             // panel2
             // 
@@ -458,10 +473,10 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(descriptionBookAddTB);
             groupBox4.Controls.Add(label5);
             groupBox4.Controls.Add(label7);
             groupBox4.Controls.Add(label6);
-            groupBox4.Controls.Add(descriptionBookAddTB);
             groupBox4.Controls.Add(label4);
             groupBox4.Controls.Add(nameAddBookTB);
             groupBox4.Controls.Add(categoryAddBookCB);
@@ -472,6 +487,14 @@
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Sách";
+            // 
+            // descriptionBookAddTB
+            // 
+            descriptionBookAddTB.Location = new Point(126, 194);
+            descriptionBookAddTB.Name = "descriptionBookAddTB";
+            descriptionBookAddTB.Size = new Size(658, 232);
+            descriptionBookAddTB.TabIndex = 8;
+            descriptionBookAddTB.Text = "";
             // 
             // label5
             // 
@@ -499,14 +522,6 @@
             label6.Size = new Size(65, 20);
             label6.TabIndex = 6;
             label6.Text = "Thể loại:";
-            // 
-            // descriptionBookAddTB
-            // 
-            descriptionBookAddTB.Location = new Point(126, 180);
-            descriptionBookAddTB.Multiline = true;
-            descriptionBookAddTB.Name = "descriptionBookAddTB";
-            descriptionBookAddTB.Size = new Size(658, 195);
-            descriptionBookAddTB.TabIndex = 4;
             // 
             // label4
             // 
@@ -604,8 +619,10 @@
             dataGridViewBook.Location = new Point(0, 233);
             dataGridViewBook.Name = "dataGridViewBook";
             dataGridViewBook.RowHeadersWidth = 51;
+            dataGridViewBook.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewBook.Size = new Size(883, 308);
             dataGridViewBook.TabIndex = 0;
+            dataGridViewBook.CellClick += dataGridViewBook_CellClick;
             dataGridViewBook.CellContentClick += dataGridView1_CellContentClick;
             // 
             // memberPanel
@@ -886,14 +903,14 @@
             bookPanel.ResumeLayout(false);
             bookPanel.PerformLayout();
             groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCopies).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAuthor).EndInit();
             panel4.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCategory).EndInit();
             panel2.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
@@ -940,7 +957,6 @@
         private Label label4;
         private Button updateBookBT;
         private Label label5;
-        private TextBox descriptionBookAddTB;
         private Label label7;
         private Label label6;
         private ComboBox authorAddBookCB;
@@ -954,8 +970,8 @@
         private Button addCategoryBT;
         private Button updateCategoryBT;
         private Button deleteCategoryBT;
-        private DataGridView dataGridView3;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridViewCategory;
+        private DataGridView dataGridViewAuthor;
         private TextBox authorTB;
         private TextBox categoryTB;
         private GroupBox groupBox1;
@@ -964,7 +980,7 @@
         private Button searchBookBT;
         private TextBox searchNameTB;
         private GroupBox groupBox3;
-        private DataGridView dataGridView4;
+        private DataGridView dataGridViewCopies;
         private GroupBox groupBox4;
         private ToolStripMenuItem bạnĐọcMớiToolStripMenuItem;
         private ToolStripMenuItem đăngKíMớiToolStripMenuItem;
@@ -999,5 +1015,6 @@
         private DataGridView dataGridViewMember;
         private Label label9;
         private ToolStripMenuItem đổiMậtKhẩuToolStripMenuItem;
+        private RichTextBox descriptionBookAddTB;
     }
 }

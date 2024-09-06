@@ -2,7 +2,9 @@
 using LibraryManagement.GUIs;
 using LibraryManagement.models;
 using System.Data;
+using System.Security.Cryptography;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LibraryManagement
 {
@@ -18,18 +20,37 @@ namespace LibraryManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            loadData();
+        }
+
+        private void loadData()
+        {
             addComboboxCategory(searchCategoryCB);
             addComboboxAuthor(searchAuthorCB);
             addBookToView(dataGridViewBook);
+            addComboboxAuthor(authorAddBookCB);
+            addComboboxCategory(categoryAddBookCB);
+            addCategoryToTable(dataGridViewCategory);
+            addAuthorToTable(dataGridViewAuthor);
+            dataGridViewCategory.Columns[0].Width = 50;
+            dataGridViewAuthor.Columns[0].Width = 50;
+            bookPanel.Visible = true;
         }
 
+
+        private void addAvailibleBook(DataGridView dataGridView, int bookId)
+        {
+            CopiedBookController copiesController = new CopiedBookController();
+            DataTable data = copiesController.getAvailable(bookId);
+            dataGridView.DataSource = data;
+        }
         private void addComboboxCategory(ComboBox comboBox)
         {
             CategoryController controller = new CategoryController();
             DataTable dt = controller.getAll();
             foreach (DataRow dr in dt.Rows)
             {
-                comboBox.Items.Add(new KeyValuePair <string, int>(dr["name"].ToString(), int.Parse(dr["id"].ToString())));
+                comboBox.Items.Add(new KeyValuePair<string, int>(dr["name"].ToString(), int.Parse(dr["id"].ToString())));
                 comboBox.DisplayMember = "Key";
                 comboBox.Text = "-- Chọn thể loại --";
                 comboBox.ValueMember = "Value";
@@ -49,12 +70,12 @@ namespace LibraryManagement
             }
         }
 
-        private void addBookToView (DataGridView dataGridView)
+        private void addBookToView(DataGridView dataGridView)
         {
             BookController controller = new BookController();
             DataTable book = controller.getAll();
             dataGridView.DataSource = book;
-        } 
+        }
 
 
         private void thểLoạiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -84,7 +105,13 @@ namespace LibraryManagement
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string selectedText = searchCategoryCB.Text;
+            object selectedValue = searchCategoryCB.SelectedItem;
+            if (selectedValue is KeyValuePair<string, int> pair)
+            {
+                string key = pair.Key;
+                int value = pair.Value;
+            }
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -153,23 +180,17 @@ namespace LibraryManagement
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         private void authorDropDownSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedText = searchAuthorCB.Text;
-            Object selectedValue = searchAuthorCB.SelectedItem;
-            if (selectedValue is KeyValuePair<int, string> pair)
+            object selectedValue = searchAuthorCB.SelectedItem;
+            if (selectedValue is KeyValuePair<string, int> pair)
             {
-                int key = pair.Key;
-                string value = pair.Value;
+                string key = pair.Key;
+                int value = pair.Value;
 
-                MessageBox.Show("Giá trị Key: " + key + ", Giá trị Value: " + value);
-            }
-            else
-            {
-                MessageBox.Show("Giá trị được chọn không phải là KeyValuePair");
             }
         }
 
@@ -225,6 +246,253 @@ namespace LibraryManagement
         {
             ChangePassword changePassword = new ChangePassword(this.id);
             changePassword.ShowDialog();
+        }
+
+        private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void addCategoryToTable(DataGridView dataGridView)
+        {
+            CategoryController categoryController = new CategoryController();
+            DataTable dt = categoryController.getAll();
+            dataGridView.DataSource = dt;
+        }
+
+        private void addAuthorToTable(DataGridView dataGridView)
+        {
+            AuthorController authorController = new AuthorController();
+            DataTable dt = authorController.getAll();
+            dataGridView.DataSource = dt;
+        }
+        private void dataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BookController bookController = new BookController();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewBook.Rows[e.RowIndex];
+                int id = Convert.ToInt32(row.Cells["id"].Value);
+                addAvailibleBook(dataGridViewCopies, id);
+                Book book = bookController.getById(id);
+                nameAddBookTB.Text = book.Name;
+                descriptionBookAddTB.Text = book.Description;
+                foreach (var item in authorAddBookCB.Items)
+                {
+                    if (item is KeyValuePair<string, int> pair)
+                    {
+                        string key = pair.Key;
+                        int value = pair.Value;
+                        if (value == book.AuthorId)
+                        {
+                            authorAddBookCB.SelectedItem = item;
+                        }
+                    }
+                }
+                foreach (var item in categoryAddBookCB.Items)
+                {
+                    if (item is KeyValuePair<string, int> pair)
+                    {
+                        string key = pair.Key;
+                        int value = pair.Value;
+                        if (value == book.AuthorId)
+                        {
+                            categoryAddBookCB.SelectedItem = item;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addAuthorBT_Click(object sender, EventArgs e)
+        {
+            string name = authorTB.Text;
+            if (name == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên tác giả!", "Thông báo");
+            }
+            else
+            {
+                AuthorController authorController = new AuthorController();
+                bool result = authorController.add(new Author(1, name));
+                if (result)
+                {
+                    MessageBox.Show("Thêm tác giả thành công!", "Thông tin");
+                    loadData();
+                    authorTB.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Thêm tác giả thất bại!", "Thông tin");
+                }
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void updateAuthorBT_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewAuthor.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewAuthor.SelectedRows[0];
+                int authorID = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                string authorName = authorTB.Text;
+                AuthorController authorController = new AuthorController();
+                bool result = authorController.update(new Author(authorID, authorName));
+                if (result)
+                {
+                    MessageBox.Show("Cập nhật thông tin tác giả thành công!", "Thông báo");
+                    loadData();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thông tin tác giả thất bại!", "Thông báo");
+                }
+            }
+        }
+
+        private void dataGridViewAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridViewAuthor.CurrentRow;
+            string name = currentRow.Cells["name"].Value.ToString();
+            authorTB.Text = name;
+        }
+
+        private void deleteAuthorBT_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewAuthor.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewAuthor.SelectedRows[0];
+                int authorID = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                AuthorController authorController = new AuthorController();
+                DialogResult resultDialog = MessageBox.Show("Nếu xóa tác giả sẽ xóa các sách thuộc tác giả này. Bạn có muốn tiếp tục hành động này?", "Cảnh báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                switch (resultDialog)
+                {
+                    case DialogResult.Yes:
+                        bool result = authorController.delete(authorID);
+                        if (result)
+                        {
+                            authorTB.Text = "";
+                            MessageBox.Show("Xóa tác giả thành công!", "Thông báo");
+                            loadData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa tác giả thất bại!", "Thông báo");
+                        }
+                        break;
+                    case DialogResult.No:
+                        break;
+                }
+            }
+        }
+
+        private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridViewCategory.CurrentRow;
+            string name = currentRow.Cells["name"].Value.ToString();
+            categoryTB.Text = name;
+        }
+
+        private void addCategoryBT_Click(object sender, EventArgs e)
+        {
+            string name = categoryTB.Text;
+            if (name == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên thể loại!", "Thông báo");
+            }
+            else
+            {
+                CategoryController categoryController = new CategoryController();
+                bool result = categoryController.add(new Category(1, name));
+                if (result)
+                {
+                    MessageBox.Show("Thêm thể loại thành công!", "Thông báo");
+                    loadData();
+                    categoryTB.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Thêm thể loại thất bại!", "Thông báo");
+                }
+            }
+        }
+
+        private void updateCategoryBT_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCategory.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewCategory.SelectedRows[0];
+                int categoryID = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                string categoryName = categoryTB.Text;
+                CategoryController categoryController = new CategoryController();
+                bool result = categoryController.update(new Category(categoryID, categoryName));
+                if (result)
+                {
+                    MessageBox.Show("Cập nhật thông tin thể loại thành công!", "Thông báo");
+                    loadData();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thông tin thể loại thất bại!", "Thông báo");
+                }
+            }
+        }
+
+        private void deleteCategoryBT_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCategory.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewCategory.SelectedRows[0];
+                int categoryID = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                CategoryController categoryController = new CategoryController();
+                DialogResult resultDialog = MessageBox.Show("Nếu xóa thể loại sẽ xóa các sách thuộc thể loại này. Bạn có muốn tiếp tục hành động này?", "Cảnh báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                switch (resultDialog)
+                {
+                    case DialogResult.Yes:
+                        bool result = categoryController.delete(categoryID);
+                        if (result)
+                        {
+                            categoryTB.Text = "";
+                            MessageBox.Show("Xóa thể loại thành công!", "Thông báo");
+                            loadData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa thể loại thất bại!", "Thông báo");
+                        }
+                        break;
+                    case DialogResult.No:
+                        break;
+                }
+            }
+        }
+
+        private void searchBookBT_Click(object sender, EventArgs e)
+        {
+            object selectedValueAuthor = searchAuthorCB.SelectedItem;
+            int idAuthor = 0;
+            int idCategory = 0;
+            if (selectedValueAuthor is KeyValuePair<string, int> pairAuthor)
+            {
+                idAuthor = pairAuthor.Value;
+            }
+
+            object selectedValueCategory = searchCategoryCB.SelectedItem;
+            if (selectedValueCategory is KeyValuePair<string, int> pairCategory)
+            {
+                idCategory = pairCategory.Value;
+            }
+            BookController bookController = new BookController();
+            DataTable dtAuthor = bookController.search(searchNameTB.Text, idCategory, idAuthor);
+            dataGridViewBook.DataSource = dtAuthor;
         }
     }
 }
