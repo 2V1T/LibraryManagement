@@ -1,6 +1,6 @@
 ﻿using LibraryManagement.controllers;
 using LibraryManagement.GUIs;
-using LibraryManagement.models;
+using LibraryManagement.Models;
 using System.Data;
 
 namespace LibraryManagement
