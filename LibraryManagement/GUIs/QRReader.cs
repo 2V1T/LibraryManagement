@@ -19,16 +19,17 @@ namespace LibraryManagement.GUIs
 {
     public partial class QRReader : Form
     {
+        bool isMember;
         RegisterMember registerMember = new RegisterMember();
 
-        public QRReader()
+        public QRReader(bool isMember)
         {
             InitializeComponent();
+            this.isMember = isMember;
         }
 
         FilterInfoCollection filterInfoCollection;
         VideoCaptureDevice videoCaptureDevice;
-
         private void startScanBt_Click(object sender, EventArgs e)
         {
             videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[comboBox.SelectedIndex].MonikerString);
@@ -45,9 +46,11 @@ namespace LibraryManagement.GUIs
 
         private void exitCamera ()
         {
-            videoCaptureDevice.SignalToStop();
-            videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
-            videoCaptureDevice = null;
+            if (videoCaptureDevice != null) {
+                videoCaptureDevice.SignalToStop();
+                videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
+                videoCaptureDevice = null;
+            }
         }
 
 
@@ -70,14 +73,22 @@ namespace LibraryManagement.GUIs
                     string decode = result?.ToString().Trim();
                     if (decode != null)
                     {
+                        timer1.Stop();
                         statusLB.Text = "Detected";
                         statusLB.ForeColor = Color.Green;
                         string[] splitString = decode.Split("|");
-                        registerMember.Name = splitString[2];
-                        registerMember.idNo = splitString[0];
-                        registerMember.ShowDialog();
-                        statusLB.ForeColor = Color.DarkBlue;
-                        statusLB.Text = "Pending";
+                        if (!isMember)
+                        {
+                            registerMember.Name = splitString[2];
+                            registerMember.idNo = splitString[0];
+                            registerMember.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("idNo: " + splitString[0]);
+                        }
+                        
+                        this.Close();
                     }
                 }
                 catch (Exception ex)

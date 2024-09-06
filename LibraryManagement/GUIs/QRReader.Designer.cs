@@ -101,7 +101,7 @@ namespace LibraryManagement.GUIs
             Controls.Add(pictureBox);
             Controls.Add(startScanBt);
             Name = "QRReader";
-            Text = "QRReader";
+            Text = "Thành viên";
             FormClosing += QRReader_FormClosing;
             Load += QRReader_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();

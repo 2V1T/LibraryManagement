@@ -121,8 +121,7 @@ namespace LibraryManagement
             switch (result)
             {
                 case DialogResult.OK:
-                    this.Visible = false;
-                    loginForm.ShowDialog();
+                    this.Close();
                     break;
                 case DialogResult.Cancel:
                     break;
@@ -189,7 +188,13 @@ namespace LibraryManagement
 
         private void đăngKíMớiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            QRReader qR = new QRReader();
+            QRReader qR = new QRReader(false);
+            qR.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            QRReader qR = new QRReader(true);
             qR.ShowDialog();
         }
     }

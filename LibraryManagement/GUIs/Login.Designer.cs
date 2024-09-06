@@ -113,24 +113,7 @@
 
         }
 
-        private void Login_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void Login_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) {
-                string username = loginUsername.Text;
-                string pass = loginPass.Text;
-
-                if (username.Equals("doankhacvi") && pass.Equals("khacvi2003"))
-                {
-                    mainForm.Visible = true;
-                    this.Visible = false;
-                }
-            }
-        }
+        
 
         #endregion
 

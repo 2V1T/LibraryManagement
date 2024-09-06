@@ -124,7 +124,6 @@
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).BeginInit();
             SuspendLayout();
-            FormClosing += Form1_FormClosing;
             // 
             // menuStrip1
             // 
@@ -175,7 +174,7 @@
             // sáchToolStripMenuItem
             // 
             sáchToolStripMenuItem.Name = "sáchToolStripMenuItem";
-            sáchToolStripMenuItem.Size = new Size(224, 26);
+            sáchToolStripMenuItem.Size = new Size(146, 26);
             sáchToolStripMenuItem.Text = "Sách";
             sáchToolStripMenuItem.Click += sáchToolStripMenuItem_Click_1;
             // 
@@ -183,20 +182,20 @@
             // 
             tácGiảToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bạnĐọcMớiToolStripMenuItem, đăngKíMớiToolStripMenuItem });
             tácGiảToolStripMenuItem.Name = "tácGiảToolStripMenuItem";
-            tácGiảToolStripMenuItem.Size = new Size(224, 26);
+            tácGiảToolStripMenuItem.Size = new Size(146, 26);
             tácGiảToolStripMenuItem.Text = "Bạn đọc";
             // 
             // bạnĐọcMớiToolStripMenuItem
             // 
             bạnĐọcMớiToolStripMenuItem.Name = "bạnĐọcMớiToolStripMenuItem";
-            bạnĐọcMớiToolStripMenuItem.Size = new Size(224, 26);
+            bạnĐọcMớiToolStripMenuItem.Size = new Size(173, 26);
             bạnĐọcMớiToolStripMenuItem.Text = "Đã đăng kí";
             bạnĐọcMớiToolStripMenuItem.Click += bạnĐọcMớiToolStripMenuItem_Click;
             // 
             // đăngKíMớiToolStripMenuItem
             // 
             đăngKíMớiToolStripMenuItem.Name = "đăngKíMớiToolStripMenuItem";
-            đăngKíMớiToolStripMenuItem.Size = new Size(224, 26);
+            đăngKíMớiToolStripMenuItem.Size = new Size(173, 26);
             đăngKíMớiToolStripMenuItem.Text = "Đăng kí mới";
             đăngKíMớiToolStripMenuItem.Click += đăngKíMớiToolStripMenuItem_Click;
             // 
@@ -236,6 +235,7 @@
             button4.TabIndex = 8;
             button4.Text = "Cho mượn";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button12
             // 
@@ -863,9 +863,9 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
-            Controls.Add(memberPanel);
             Controls.Add(bookPanel);
             Controls.Add(menuStrip1);
+            Controls.Add(memberPanel);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -903,7 +903,7 @@
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+
         }
 
         private void AuthorDropDownSearch_SelectedValueChanged(object sender, EventArgs e)
