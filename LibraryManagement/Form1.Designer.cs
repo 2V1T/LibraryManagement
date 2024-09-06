@@ -31,6 +31,7 @@
             menuStrip1 = new MenuStrip();
             hànhĐộngToolStripMenuItem = new ToolStripMenuItem();
             đổiThôngTinToolStripMenuItem = new ToolStripMenuItem();
+            đổiMậtKhẩuToolStripMenuItem = new ToolStripMenuItem();
             đăngXuấtToolStripMenuItem = new ToolStripMenuItem();
             thoátToolStripMenuItem = new ToolStripMenuItem();
             quảnLýToolStripMenuItem = new ToolStripMenuItem();
@@ -39,45 +40,45 @@
             bạnĐọcMớiToolStripMenuItem = new ToolStripMenuItem();
             đăngKíMớiToolStripMenuItem = new ToolStripMenuItem();
             bookPanel = new Panel();
-            button4 = new Button();
-            button12 = new Button();
-            button1 = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            borrowBT = new Button();
+            deleteCopyBT = new Button();
+            addBookBT = new Button();
+            updateBookBT = new Button();
+            deleteBookBT = new Button();
             groupBox3 = new GroupBox();
             dataGridView4 = new DataGridView();
             label8 = new Label();
-            button11 = new Button();
-            textBox5 = new TextBox();
+            searchBookBT = new Button();
+            searchNameTB = new TextBox();
             groupBox1 = new GroupBox();
-            button5 = new Button();
-            button8 = new Button();
+            addAuthorBT = new Button();
+            deleteAuthorBT = new Button();
             dataGridView2 = new DataGridView();
-            textBox3 = new TextBox();
-            button6 = new Button();
+            authorTB = new TextBox();
+            updateAuthorBT = new Button();
             panel4 = new Panel();
             groupBox2 = new GroupBox();
-            button10 = new Button();
-            button9 = new Button();
-            button7 = new Button();
-            textBox4 = new TextBox();
+            deleteCategoryBT = new Button();
+            updateCategoryBT = new Button();
+            addCategoryBT = new Button();
+            categoryTB = new TextBox();
             dataGridView3 = new DataGridView();
             panel2 = new Panel();
             groupBox4 = new GroupBox();
             label5 = new Label();
             label7 = new Label();
             label6 = new Label();
-            textBox2 = new TextBox();
+            descriptionBookAddTB = new TextBox();
             label4 = new Label();
-            textBox1 = new TextBox();
-            comboBox3 = new ComboBox();
-            comboBox5 = new ComboBox();
+            nameAddBookTB = new TextBox();
+            categoryAddBookCB = new ComboBox();
+            authorAddBookCB = new ComboBox();
             label3 = new Label();
-            authorDropDownSearch = new ComboBox();
+            searchAuthorCB = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             comboBox4 = new ComboBox();
-            comboBox1 = new ComboBox();
+            searchCategoryCB = new ComboBox();
             dataGridViewBook = new DataGridView();
             memberPanel = new Panel();
             groupBox5 = new GroupBox();
@@ -137,7 +138,7 @@
             // 
             // hànhĐộngToolStripMenuItem
             // 
-            hànhĐộngToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { đổiThôngTinToolStripMenuItem, đăngXuấtToolStripMenuItem, thoátToolStripMenuItem });
+            hànhĐộngToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { đổiThôngTinToolStripMenuItem, đổiMậtKhẩuToolStripMenuItem, đăngXuấtToolStripMenuItem, thoátToolStripMenuItem });
             hànhĐộngToolStripMenuItem.Name = "hànhĐộngToolStripMenuItem";
             hànhĐộngToolStripMenuItem.Size = new Size(97, 24);
             hànhĐộngToolStripMenuItem.Text = "Hành động";
@@ -146,21 +147,28 @@
             // đổiThôngTinToolStripMenuItem
             // 
             đổiThôngTinToolStripMenuItem.Name = "đổiThôngTinToolStripMenuItem";
-            đổiThôngTinToolStripMenuItem.Size = new Size(184, 26);
+            đổiThôngTinToolStripMenuItem.Size = new Size(224, 26);
             đổiThôngTinToolStripMenuItem.Text = "Đổi thông tin ";
             đổiThôngTinToolStripMenuItem.Click += đổiThôngTinToolStripMenuItem_Click;
+            // 
+            // đổiMậtKhẩuToolStripMenuItem
+            // 
+            đổiMậtKhẩuToolStripMenuItem.Name = "đổiMậtKhẩuToolStripMenuItem";
+            đổiMậtKhẩuToolStripMenuItem.Size = new Size(224, 26);
+            đổiMậtKhẩuToolStripMenuItem.Text = "Đổi mật khẩu";
+            đổiMậtKhẩuToolStripMenuItem.Click += đổiMậtKhẩuToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(184, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
             // thoátToolStripMenuItem
             // 
             thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            thoátToolStripMenuItem.Size = new Size(184, 26);
+            thoátToolStripMenuItem.Size = new Size(224, 26);
             thoátToolStripMenuItem.Text = "Thoát";
             thoátToolStripMenuItem.Click += thoátToolStripMenuItem_Click;
             // 
@@ -201,24 +209,24 @@
             // 
             // bookPanel
             // 
-            bookPanel.Controls.Add(button4);
-            bookPanel.Controls.Add(button12);
-            bookPanel.Controls.Add(button1);
-            bookPanel.Controls.Add(button3);
-            bookPanel.Controls.Add(button2);
+            bookPanel.Controls.Add(borrowBT);
+            bookPanel.Controls.Add(deleteCopyBT);
+            bookPanel.Controls.Add(addBookBT);
+            bookPanel.Controls.Add(updateBookBT);
+            bookPanel.Controls.Add(deleteBookBT);
             bookPanel.Controls.Add(groupBox3);
             bookPanel.Controls.Add(label8);
-            bookPanel.Controls.Add(button11);
-            bookPanel.Controls.Add(textBox5);
+            bookPanel.Controls.Add(searchBookBT);
+            bookPanel.Controls.Add(searchNameTB);
             bookPanel.Controls.Add(groupBox1);
             bookPanel.Controls.Add(panel4);
             bookPanel.Controls.Add(panel2);
             bookPanel.Controls.Add(label3);
-            bookPanel.Controls.Add(authorDropDownSearch);
+            bookPanel.Controls.Add(searchAuthorCB);
             bookPanel.Controls.Add(label2);
             bookPanel.Controls.Add(label1);
             bookPanel.Controls.Add(comboBox4);
-            bookPanel.Controls.Add(comboBox1);
+            bookPanel.Controls.Add(searchCategoryCB);
             bookPanel.Controls.Add(dataGridViewBook);
             bookPanel.Location = new Point(69, 59);
             bookPanel.Name = "bookPanel";
@@ -227,51 +235,51 @@
             bookPanel.Visible = false;
             bookPanel.Paint += panel1_Paint;
             // 
-            // button4
+            // borrowBT
             // 
-            button4.Location = new Point(789, 816);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 8;
-            button4.Text = "Cho mượn";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            borrowBT.Location = new Point(789, 816);
+            borrowBT.Name = "borrowBT";
+            borrowBT.Size = new Size(94, 29);
+            borrowBT.TabIndex = 8;
+            borrowBT.Text = "Cho mượn";
+            borrowBT.UseVisualStyleBackColor = true;
+            borrowBT.Click += button4_Click;
             // 
-            // button12
+            // deleteCopyBT
             // 
-            button12.Location = new Point(0, 816);
-            button12.Name = "button12";
-            button12.Size = new Size(94, 29);
-            button12.TabIndex = 10;
-            button12.Text = "Xóa mất";
-            button12.UseVisualStyleBackColor = true;
+            deleteCopyBT.Location = new Point(0, 816);
+            deleteCopyBT.Name = "deleteCopyBT";
+            deleteCopyBT.Size = new Size(94, 29);
+            deleteCopyBT.TabIndex = 10;
+            deleteCopyBT.Text = "Xóa mất";
+            deleteCopyBT.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // addBookBT
             // 
-            button1.Location = new Point(1017, 816);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 0;
-            button1.Text = "Thêm";
-            button1.UseVisualStyleBackColor = true;
+            addBookBT.Location = new Point(1017, 816);
+            addBookBT.Name = "addBookBT";
+            addBookBT.Size = new Size(94, 29);
+            addBookBT.TabIndex = 0;
+            addBookBT.Text = "Thêm";
+            addBookBT.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // updateBookBT
             // 
-            button3.Location = new Point(1594, 816);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 1;
-            button3.Text = "Sửa";
-            button3.UseVisualStyleBackColor = true;
+            updateBookBT.Location = new Point(1594, 816);
+            updateBookBT.Name = "updateBookBT";
+            updateBookBT.Size = new Size(94, 29);
+            updateBookBT.TabIndex = 1;
+            updateBookBT.Text = "Sửa";
+            updateBookBT.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // deleteBookBT
             // 
-            button2.Location = new Point(1324, 816);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 1;
-            button2.Text = "Xóa ";
-            button2.UseVisualStyleBackColor = true;
+            deleteBookBT.Location = new Point(1324, 816);
+            deleteBookBT.Name = "deleteBookBT";
+            deleteBookBT.Size = new Size(94, 29);
+            deleteBookBT.TabIndex = 1;
+            deleteBookBT.Text = "Xóa ";
+            deleteBookBT.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -301,29 +309,29 @@
             label8.TabIndex = 8;
             label8.Text = "Từ khóa:";
             // 
-            // button11
+            // searchBookBT
             // 
-            button11.Location = new Point(758, 172);
-            button11.Name = "button11";
-            button11.Size = new Size(94, 29);
-            button11.TabIndex = 7;
-            button11.Text = "Tìm kiếm";
-            button11.UseVisualStyleBackColor = true;
+            searchBookBT.Location = new Point(758, 172);
+            searchBookBT.Name = "searchBookBT";
+            searchBookBT.Size = new Size(94, 29);
+            searchBookBT.TabIndex = 7;
+            searchBookBT.Text = "Tìm kiếm";
+            searchBookBT.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // searchNameTB
             // 
-            textBox5.Location = new Point(106, 173);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(616, 27);
-            textBox5.TabIndex = 6;
+            searchNameTB.Location = new Point(106, 173);
+            searchNameTB.Name = "searchNameTB";
+            searchNameTB.Size = new Size(616, 27);
+            searchNameTB.TabIndex = 6;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button5);
-            groupBox1.Controls.Add(button8);
+            groupBox1.Controls.Add(addAuthorBT);
+            groupBox1.Controls.Add(deleteAuthorBT);
             groupBox1.Controls.Add(dataGridView2);
-            groupBox1.Controls.Add(textBox3);
-            groupBox1.Controls.Add(button6);
+            groupBox1.Controls.Add(authorTB);
+            groupBox1.Controls.Add(updateAuthorBT);
             groupBox1.Location = new Point(901, 118);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(424, 255);
@@ -331,23 +339,23 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Tác giả";
             // 
-            // button5
+            // addAuthorBT
             // 
-            button5.Location = new Point(301, 36);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 29);
-            button5.TabIndex = 0;
-            button5.Text = "Thêm";
-            button5.UseVisualStyleBackColor = true;
+            addAuthorBT.Location = new Point(301, 36);
+            addAuthorBT.Name = "addAuthorBT";
+            addAuthorBT.Size = new Size(94, 29);
+            addAuthorBT.TabIndex = 0;
+            addAuthorBT.Text = "Thêm";
+            addAuthorBT.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // deleteAuthorBT
             // 
-            button8.Location = new Point(301, 196);
-            button8.Name = "button8";
-            button8.Size = new Size(94, 29);
-            button8.TabIndex = 1;
-            button8.Text = "Xóa ";
-            button8.UseVisualStyleBackColor = true;
+            deleteAuthorBT.Location = new Point(301, 196);
+            deleteAuthorBT.Name = "deleteAuthorBT";
+            deleteAuthorBT.Size = new Size(94, 29);
+            deleteAuthorBT.TabIndex = 1;
+            deleteAuthorBT.Text = "Xóa ";
+            deleteAuthorBT.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
@@ -359,21 +367,21 @@
             dataGridView2.TabIndex = 2;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             // 
-            // textBox3
+            // authorTB
             // 
-            textBox3.Location = new Point(0, 38);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(276, 27);
-            textBox3.TabIndex = 3;
+            authorTB.Location = new Point(0, 38);
+            authorTB.Name = "authorTB";
+            authorTB.Size = new Size(276, 27);
+            authorTB.TabIndex = 3;
             // 
-            // button6
+            // updateAuthorBT
             // 
-            button6.Location = new Point(301, 115);
-            button6.Name = "button6";
-            button6.Size = new Size(94, 29);
-            button6.TabIndex = 1;
-            button6.Text = "Sửa";
-            button6.UseVisualStyleBackColor = true;
+            updateAuthorBT.Location = new Point(301, 115);
+            updateAuthorBT.Name = "updateAuthorBT";
+            updateAuthorBT.Size = new Size(94, 29);
+            updateAuthorBT.TabIndex = 1;
+            updateAuthorBT.Text = "Sửa";
+            updateAuthorBT.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -385,10 +393,10 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(button10);
-            groupBox2.Controls.Add(button9);
-            groupBox2.Controls.Add(button7);
-            groupBox2.Controls.Add(textBox4);
+            groupBox2.Controls.Add(deleteCategoryBT);
+            groupBox2.Controls.Add(updateCategoryBT);
+            groupBox2.Controls.Add(addCategoryBT);
+            groupBox2.Controls.Add(categoryTB);
             groupBox2.Controls.Add(dataGridView3);
             groupBox2.Location = new Point(3, 0);
             groupBox2.Name = "groupBox2";
@@ -397,39 +405,39 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Thể loại";
             // 
-            // button10
+            // deleteCategoryBT
             // 
-            button10.Location = new Point(299, 196);
-            button10.Name = "button10";
-            button10.Size = new Size(94, 29);
-            button10.TabIndex = 1;
-            button10.Text = "Xóa ";
-            button10.UseVisualStyleBackColor = true;
+            deleteCategoryBT.Location = new Point(299, 196);
+            deleteCategoryBT.Name = "deleteCategoryBT";
+            deleteCategoryBT.Size = new Size(94, 29);
+            deleteCategoryBT.TabIndex = 1;
+            deleteCategoryBT.Text = "Xóa ";
+            deleteCategoryBT.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // updateCategoryBT
             // 
-            button9.Location = new Point(299, 115);
-            button9.Name = "button9";
-            button9.Size = new Size(94, 29);
-            button9.TabIndex = 1;
-            button9.Text = "Sửa";
-            button9.UseVisualStyleBackColor = true;
+            updateCategoryBT.Location = new Point(299, 115);
+            updateCategoryBT.Name = "updateCategoryBT";
+            updateCategoryBT.Size = new Size(94, 29);
+            updateCategoryBT.TabIndex = 1;
+            updateCategoryBT.Text = "Sửa";
+            updateCategoryBT.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // addCategoryBT
             // 
-            button7.Location = new Point(299, 35);
-            button7.Name = "button7";
-            button7.Size = new Size(94, 29);
-            button7.TabIndex = 0;
-            button7.Text = "Thêm";
-            button7.UseVisualStyleBackColor = true;
+            addCategoryBT.Location = new Point(299, 35);
+            addCategoryBT.Name = "addCategoryBT";
+            addCategoryBT.Size = new Size(94, 29);
+            addCategoryBT.TabIndex = 0;
+            addCategoryBT.Text = "Thêm";
+            addCategoryBT.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // categoryTB
             // 
-            textBox4.Location = new Point(-3, 36);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(277, 27);
-            textBox4.TabIndex = 4;
+            categoryTB.Location = new Point(-3, 36);
+            categoryTB.Name = "categoryTB";
+            categoryTB.Size = new Size(277, 27);
+            categoryTB.TabIndex = 4;
             // 
             // dataGridView3
             // 
@@ -453,11 +461,11 @@
             groupBox4.Controls.Add(label5);
             groupBox4.Controls.Add(label7);
             groupBox4.Controls.Add(label6);
-            groupBox4.Controls.Add(textBox2);
+            groupBox4.Controls.Add(descriptionBookAddTB);
             groupBox4.Controls.Add(label4);
-            groupBox4.Controls.Add(textBox1);
-            groupBox4.Controls.Add(comboBox3);
-            groupBox4.Controls.Add(comboBox5);
+            groupBox4.Controls.Add(nameAddBookTB);
+            groupBox4.Controls.Add(categoryAddBookCB);
+            groupBox4.Controls.Add(authorAddBookCB);
             groupBox4.Location = new Point(3, 248);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(849, 500);
@@ -492,13 +500,13 @@
             label6.TabIndex = 6;
             label6.Text = "Thể loại:";
             // 
-            // textBox2
+            // descriptionBookAddTB
             // 
-            textBox2.Location = new Point(126, 180);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(658, 195);
-            textBox2.TabIndex = 4;
+            descriptionBookAddTB.Location = new Point(126, 180);
+            descriptionBookAddTB.Multiline = true;
+            descriptionBookAddTB.Name = "descriptionBookAddTB";
+            descriptionBookAddTB.Size = new Size(658, 195);
+            descriptionBookAddTB.TabIndex = 4;
             // 
             // label4
             // 
@@ -509,30 +517,30 @@
             label4.TabIndex = 2;
             label4.Text = "Tên sách:";
             // 
-            // textBox1
+            // nameAddBookTB
             // 
-            textBox1.Location = new Point(126, 42);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(658, 27);
-            textBox1.TabIndex = 3;
+            nameAddBookTB.Location = new Point(126, 42);
+            nameAddBookTB.Name = "nameAddBookTB";
+            nameAddBookTB.Size = new Size(658, 27);
+            nameAddBookTB.TabIndex = 3;
             // 
-            // comboBox3
+            // categoryAddBookCB
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(126, 111);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(263, 28);
-            comboBox3.TabIndex = 1;
-            comboBox3.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            categoryAddBookCB.FormattingEnabled = true;
+            categoryAddBookCB.Location = new Point(126, 111);
+            categoryAddBookCB.Name = "categoryAddBookCB";
+            categoryAddBookCB.Size = new Size(263, 28);
+            categoryAddBookCB.TabIndex = 1;
+            categoryAddBookCB.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // comboBox5
+            // authorAddBookCB
             // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(497, 111);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(287, 28);
-            comboBox5.TabIndex = 1;
-            comboBox5.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            authorAddBookCB.FormattingEnabled = true;
+            authorAddBookCB.Location = new Point(497, 111);
+            authorAddBookCB.Name = "authorAddBookCB";
+            authorAddBookCB.Size = new Size(287, 28);
+            authorAddBookCB.TabIndex = 1;
+            authorAddBookCB.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -545,15 +553,15 @@
             label3.Text = "QUẢN LÝ SÁCH";
             label3.Click += label3_Click;
             // 
-            // authorDropDownSearch
+            // searchAuthorCB
             // 
-            authorDropDownSearch.FormattingEnabled = true;
-            authorDropDownSearch.Location = new Point(456, 121);
-            authorDropDownSearch.Name = "authorDropDownSearch";
-            authorDropDownSearch.Size = new Size(266, 28);
-            authorDropDownSearch.TabIndex = 4;
-            authorDropDownSearch.SelectedIndexChanged += authorDropDownSearch_SelectedIndexChanged;
-            authorDropDownSearch.SelectedValueChanged += AuthorDropDownSearch_SelectedValueChanged;
+            searchAuthorCB.FormattingEnabled = true;
+            searchAuthorCB.Location = new Point(456, 121);
+            searchAuthorCB.Name = "searchAuthorCB";
+            searchAuthorCB.Size = new Size(266, 28);
+            searchAuthorCB.TabIndex = 4;
+            searchAuthorCB.SelectedIndexChanged += authorDropDownSearch_SelectedIndexChanged;
+            searchAuthorCB.SelectedValueChanged += AuthorDropDownSearch_SelectedValueChanged;
             // 
             // label2
             // 
@@ -581,14 +589,14 @@
             comboBox4.TabIndex = 1;
             comboBox4.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // comboBox1
+            // searchCategoryCB
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(106, 118);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(241, 28);
-            comboBox1.TabIndex = 1;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            searchCategoryCB.FormattingEnabled = true;
+            searchCategoryCB.Location = new Point(106, 118);
+            searchCategoryCB.Name = "searchCategoryCB";
+            searchCategoryCB.Size = new Size(241, 28);
+            searchCategoryCB.TabIndex = 1;
+            searchCategoryCB.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // dataGridViewBook
             // 
@@ -918,50 +926,50 @@
         private ToolStripMenuItem quảnLýToolStripMenuItem;
         private Panel bookPanel;
         private DataGridView dataGridViewBook;
-        private ComboBox comboBox1;
+        private ComboBox searchCategoryCB;
         private Label label1;
-        private ComboBox authorDropDownSearch;
+        private ComboBox searchAuthorCB;
         private Label label2;
         private Label label3;
         private Panel panel2;
         private ToolStripMenuItem sáchToolStripMenuItem;
         private ToolStripMenuItem tácGiảToolStripMenuItem;
-        private Button button2;
-        private Button button1;
-        private TextBox textBox1;
+        private Button deleteBookBT;
+        private Button addBookBT;
+        private TextBox nameAddBookTB;
         private Label label4;
-        private Button button3;
+        private Button updateBookBT;
         private Label label5;
-        private TextBox textBox2;
+        private TextBox descriptionBookAddTB;
         private Label label7;
         private Label label6;
-        private ComboBox comboBox5;
-        private ComboBox comboBox3;
+        private ComboBox authorAddBookCB;
+        private ComboBox categoryAddBookCB;
         private ComboBox comboBox4;
-        private Button button4;
+        private Button borrowBT;
         private Panel panel4;
-        private Button button5;
-        private Button button6;
-        private Button button8;
-        private Button button7;
-        private Button button9;
-        private Button button10;
+        private Button addAuthorBT;
+        private Button updateAuthorBT;
+        private Button deleteAuthorBT;
+        private Button addCategoryBT;
+        private Button updateCategoryBT;
+        private Button deleteCategoryBT;
         private DataGridView dataGridView3;
         private DataGridView dataGridView2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox authorTB;
+        private TextBox categoryTB;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private Label label8;
-        private Button button11;
-        private TextBox textBox5;
+        private Button searchBookBT;
+        private TextBox searchNameTB;
         private GroupBox groupBox3;
         private DataGridView dataGridView4;
         private GroupBox groupBox4;
         private ToolStripMenuItem bạnĐọcMớiToolStripMenuItem;
         private ToolStripMenuItem đăngKíMớiToolStripMenuItem;
         private ToolStripMenuItem thoátToolStripMenuItem;
-        private Button button12;
+        private Button deleteCopyBT;
         private Panel memberPanel;
         private GroupBox groupBox5;
         private TextBox textBox14;
@@ -990,5 +998,6 @@
         private Label label10;
         private DataGridView dataGridViewMember;
         private Label label9;
+        private ToolStripMenuItem đổiMậtKhẩuToolStripMenuItem;
     }
 }

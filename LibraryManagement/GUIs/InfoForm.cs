@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryManagement.controllers;
+using LibraryManagement.models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,18 @@ namespace LibraryManagement.GUIs
 {
     public partial class InfoForm : Form
     {
-        public InfoForm()
+        int id;
+        public InfoForm(int id)
         {
+            this.id = id;
+            UserController userController = new UserController();
+            User user = userController.getById(id);
             InitializeComponent();
+            usernameLB.Text = user.Username.ToString();
+            nameTB.Text = user.Name.ToString();
+            emailTB.Text = user.Email.ToString();
+            phoneNoTB.Text = user.PhoneNo.ToString();
+            addressTB.Text = user.Address.ToString();
         }
 
         private void label3_Click(object sender, EventArgs e)

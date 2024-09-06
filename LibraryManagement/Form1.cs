@@ -9,7 +9,7 @@ namespace LibraryManagement
     public partial class Form1 : Form
     {
         static Login loginForm = new Login();
-        int id; 
+        int id;
         public Form1(int id)
         {
             InitializeComponent();
@@ -18,23 +18,44 @@ namespace LibraryManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MemberController memberController = new MemberController();
-            bookPanel.Visible = true;
-            List<Member> memberList = new List<Member>();
-            DataTable members = memberController.getAll();
-            DataTable showView = new DataTable();
-            showView.Columns.Add("ID No", typeof(long));  // Tên cột
-            showView.Columns.Add("Name", typeof(string));  // Tên cột
-            showView.Columns.Add("Address", typeof(string));
-            showView.Columns.Add("Phone No", typeof(string)); // Tên cột
-            showView.Columns.Add("Email", typeof(string));  // Tên cột
-            foreach (DataRow row in members.Rows)
-            {
-                showView.Rows.Add((long)row["id_no"], (string)row["name"], (string)row["address"], '0' + (string)row["phone_no"].ToString(), (string)row["email"]);
-            }
-            dataGridViewMember.DataSource = showView;
-            // Gán DataTable cho DataGridView
+            addComboboxCategory(searchCategoryCB);
+            addComboboxAuthor(searchAuthorCB);
+            addBookToView(dataGridViewBook);
         }
+
+        private void addComboboxCategory(ComboBox comboBox)
+        {
+            CategoryController controller = new CategoryController();
+            DataTable dt = controller.getAll();
+            foreach (DataRow dr in dt.Rows)
+            {
+                comboBox.Items.Add(new KeyValuePair <string, int>(dr["name"].ToString(), int.Parse(dr["id"].ToString())));
+                comboBox.DisplayMember = "Key";
+                comboBox.Text = "-- Chọn thể loại --";
+                comboBox.ValueMember = "Value";
+            }
+        }
+
+        private void addComboboxAuthor(ComboBox comboBox)
+        {
+            AuthorController controller = new AuthorController();
+            DataTable dt = controller.getAll();
+            foreach (DataRow dr in dt.Rows)
+            {
+                comboBox.Items.Add(new KeyValuePair<string, int>(dr["name"].ToString(), int.Parse(dr["id"].ToString())));
+                comboBox.DisplayMember = "Key";
+                comboBox.Text = "-- Chọn tác giả --";
+                comboBox.ValueMember = "Value";
+            }
+        }
+
+        private void addBookToView (DataGridView dataGridView)
+        {
+            BookController controller = new BookController();
+            DataTable book = controller.getAll();
+            dataGridView.DataSource = book;
+        } 
+
 
         private void thểLoạiToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -100,7 +121,7 @@ namespace LibraryManagement
 
         private void đổiThôngTinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InfoForm infoForm = new InfoForm();
+            InfoForm infoForm = new InfoForm(this.id);
             infoForm.ShowDialog();
         }
 
@@ -137,8 +158,8 @@ namespace LibraryManagement
 
         private void authorDropDownSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedText = authorDropDownSearch.Text;
-            Object selectedValue = authorDropDownSearch.SelectedItem;
+            string selectedText = searchAuthorCB.Text;
+            Object selectedValue = searchAuthorCB.SelectedItem;
             if (selectedValue is KeyValuePair<int, string> pair)
             {
                 int key = pair.Key;
@@ -198,6 +219,12 @@ namespace LibraryManagement
         {
             QRReader qR = new QRReader(true);
             qR.ShowDialog();
+        }
+
+        private void đổiMậtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword(this.id);
+            changePassword.ShowDialog();
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagement.controllers
 {
-    internal class AuthorController
+    internal class CategoryController
     {
         SqlConnection conn = DBConnection.GetInstance().GetConnection();
         SQLExecute sqlExecute = new SQLExecute();
@@ -20,7 +20,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "SELECT * FROM author";
+                string sql = "SELECT * FROM category";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 DataTable data = sqlExecute.executeQuery(cmd);
                 return data;
@@ -37,7 +37,7 @@ namespace LibraryManagement.controllers
             }
         }
 
-        public bool add(Author author)
+        public bool add(Category category)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "DELETE * FROM author WHERE id = @Id";
+                string sql = "DELETE * FROM category WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 bool result = sqlExecute.executeNoneQuery(cmd);
@@ -81,15 +81,15 @@ namespace LibraryManagement.controllers
             }
         }
 
-        public bool update(Author author)
+        public bool update(Category category)
         {
             try
             {
                 conn.Open();
-                string sql = "Update * FROM author SET name=@Name WHERE id = @Id";
+                string sql = "Update * FROM category SET name=@Name WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Id", author.Id);
-                cmd.Parameters.AddWithValue("@Name", author.Name);
+                cmd.Parameters.AddWithValue("@Id", category.Id);
+                cmd.Parameters.AddWithValue("@Name", category.Name);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
             }

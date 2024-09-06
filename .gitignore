@@ -1,1 +1,30 @@
 .vs/
+
+# Đặt các mẫu chung ở đầu
+*.[oa]
+*~
+
+# Bỏ qua các thư mục được tạo tự động
+build/
+obj/
+packages/
+
+# Bỏ qua các tệp cấu hình người dùng
+*.suo
+*.user
+*.tmp
+*.log
+
+# Bỏ qua các tệp kết quả biên dịch
+*.exe
+*.dll
+*.pdb
+
+# Bỏ qua các tệp IDE
+*.suo
+*.user
+*.sln.docstates
+
+# Bỏ qua tệp database
+*.mdf
+*.ldf

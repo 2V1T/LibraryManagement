@@ -35,3 +35,4 @@ C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-wi
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\zxing.dll
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.QRReader.resources
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.RegisterMember.resources
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.ChangePassword.resources

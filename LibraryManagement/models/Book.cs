@@ -13,7 +13,6 @@ namespace LibraryManagement.models
         private int author_id;
         private int category_id;
         private string description;
-        private byte[] book_img;
         private int quantity;
 
         public int Id
@@ -72,17 +71,6 @@ namespace LibraryManagement.models
             }
 
         }
-        public byte[] BookImg
-        {
-            get
-            {
-                return book_img;
-            }
-            set
-            {
-                book_img = value;
-            }
-        }
         public int Quantity
         {
             get
@@ -97,14 +85,13 @@ namespace LibraryManagement.models
         public Book()
         {
         }
-        public Book(int id, string name, int author_id, int category_id, string description, byte[] book_img, int quantity)
+        public Book(int id, string name, int author_id, int category_id, string description, int quantity)
         {
             this.id = id;
             this.name = name;
             this.author_id = author_id;
             this.category_id = category_id;
             this.description = description;
-            this.book_img = book_img;
             this.quantity = quantity;
         }
     }

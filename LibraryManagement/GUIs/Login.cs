@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagement.controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,16 +22,27 @@ namespace LibraryManagement.GUIs
         {
             string username = loginUsername.Text;
             string pass = loginPass.Text;
-
+            UserController controller = new UserController();
+            
             if (username.Equals("") && pass.Equals(""))
             {
-                int id = 1;
-                Form1 mainForm = new Form1(id);
-                this.Hide();
-                mainForm.ShowDialog();
-                if (Application.OpenForms.Count != 0)
+                MessageBox.Show("Không bỏ trống 1 trong 2 trường!", "Thông báo");
+            }
+            else
+            {
+                int id = controller.Login(username, pass);
+                if (id != 0) { 
+                    Form1 mainForm = new Form1(id);
+                    this.Hide();
+                    mainForm.ShowDialog();
+                    if (Application.OpenForms.Count != 0)
+                    {
+                        this.Show();
+                    }
+                }
+                else
                 {
-                    this.Show();
+                    MessageBox.Show("Đăng nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
