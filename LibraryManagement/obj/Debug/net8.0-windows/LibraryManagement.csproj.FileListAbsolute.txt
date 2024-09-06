@@ -26,3 +26,12 @@ C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-wi
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.Properties.Resources.resources
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.InfoForm.resources
 C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.Login.resources
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.BorrowForm.resources
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\Aspose.BarCode.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\Aspose.Drawing.Common.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\AForge.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\AForge.Video.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\AForge.Video.DirectShow.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\bin\Debug\net8.0-windows\zxing.dll
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.QRReader.resources
+C:\Users\as\source\repos\LibraryManagement\LibraryManagement\obj\Debug\net8.0-windows\LibraryManagement.GUIs.RegisterMember.resources

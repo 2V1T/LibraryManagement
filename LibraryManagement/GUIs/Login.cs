@@ -12,6 +12,8 @@ namespace LibraryManagement.GUIs
 {
     public partial class Login : Form
     {
+        static Form1 mainForm = new Form1();
+        static InfoForm infoForm = new InfoForm();
         public Login()
         {
             InitializeComponent();
@@ -19,9 +21,19 @@ namespace LibraryManagement.GUIs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
-            form.ShowDialog();
-            this.Close();
+            string username = loginUsername.Text;
+            string pass = loginPass.Text;
+
+            if (username.Equals("doankhacvi") && pass.Equals("khacvi2003"))
+            {
+                mainForm.Visible = true;
+                this.Visible = false;
+            }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

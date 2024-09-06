@@ -38,7 +38,12 @@
             tácGiảToolStripMenuItem = new ToolStripMenuItem();
             bạnĐọcMớiToolStripMenuItem = new ToolStripMenuItem();
             đăngKíMớiToolStripMenuItem = new ToolStripMenuItem();
-            panel1 = new Panel();
+            bookPanel = new Panel();
+            button4 = new Button();
+            button12 = new Button();
+            button1 = new Button();
+            button3 = new Button();
+            button2 = new Button();
             groupBox3 = new GroupBox();
             dataGridView4 = new DataGridView();
             label8 = new Label();
@@ -59,27 +64,51 @@
             dataGridView3 = new DataGridView();
             panel2 = new Panel();
             groupBox4 = new GroupBox();
-            button4 = new Button();
             label5 = new Label();
             label7 = new Label();
-            button1 = new Button();
             label6 = new Label();
-            button2 = new Button();
-            button3 = new Button();
             textBox2 = new TextBox();
             label4 = new Label();
             textBox1 = new TextBox();
             comboBox3 = new ComboBox();
             comboBox5 = new ComboBox();
             label3 = new Label();
-            comboBox2 = new ComboBox();
+            authorDropDownSearch = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             comboBox4 = new ComboBox();
             comboBox1 = new ComboBox();
-            dataGridView1 = new DataGridView();
+            dataGridViewBook = new DataGridView();
+            memberPanel = new Panel();
+            groupBox5 = new GroupBox();
+            textBox14 = new TextBox();
+            textBox13 = new TextBox();
+            textBox12 = new TextBox();
+            textBox11 = new TextBox();
+            textBox10 = new TextBox();
+            label17 = new Label();
+            label16 = new Label();
+            label15 = new Label();
+            label14 = new Label();
+            label13 = new Label();
+            button14 = new Button();
+            searchMemberTB = new TextBox();
+            searchMembersBT = new Button();
+            panel3 = new Panel();
+            button13 = new Button();
+            button15 = new Button();
+            textBox9 = new TextBox();
+            textBox8 = new TextBox();
+            textBox7 = new TextBox();
+            textBox6 = new TextBox();
+            S = new Label();
+            label12 = new Label();
+            label11 = new Label();
+            label10 = new Label();
+            dataGridViewMember = new DataGridView();
+            label9 = new Label();
             menuStrip1.SuspendLayout();
-            panel1.SuspendLayout();
+            bookPanel.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             groupBox1.SuspendLayout();
@@ -89,8 +118,13 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             panel2.SuspendLayout();
             groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBook).BeginInit();
+            memberPanel.SuspendLayout();
+            groupBox5.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMember).BeginInit();
             SuspendLayout();
+            FormClosing += Form1_FormClosing;
             // 
             // menuStrip1
             // 
@@ -98,7 +132,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { hànhĐộngToolStripMenuItem, quảnLýToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1858, 28);
+            menuStrip1.Size = new Size(1897, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -113,21 +147,21 @@
             // đổiThôngTinToolStripMenuItem
             // 
             đổiThôngTinToolStripMenuItem.Name = "đổiThôngTinToolStripMenuItem";
-            đổiThôngTinToolStripMenuItem.Size = new Size(224, 26);
+            đổiThôngTinToolStripMenuItem.Size = new Size(184, 26);
             đổiThôngTinToolStripMenuItem.Text = "Đổi thông tin ";
             đổiThôngTinToolStripMenuItem.Click += đổiThôngTinToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(184, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
             // thoátToolStripMenuItem
             // 
             thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            thoátToolStripMenuItem.Size = new Size(224, 26);
+            thoátToolStripMenuItem.Size = new Size(184, 26);
             thoátToolStripMenuItem.Text = "Thoát";
             thoátToolStripMenuItem.Click += thoátToolStripMenuItem_Click;
             // 
@@ -141,7 +175,7 @@
             // sáchToolStripMenuItem
             // 
             sáchToolStripMenuItem.Name = "sáchToolStripMenuItem";
-            sáchToolStripMenuItem.Size = new Size(146, 26);
+            sáchToolStripMenuItem.Size = new Size(224, 26);
             sáchToolStripMenuItem.Text = "Sách";
             sáchToolStripMenuItem.Click += sáchToolStripMenuItem_Click_1;
             // 
@@ -149,44 +183,95 @@
             // 
             tácGiảToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bạnĐọcMớiToolStripMenuItem, đăngKíMớiToolStripMenuItem });
             tácGiảToolStripMenuItem.Name = "tácGiảToolStripMenuItem";
-            tácGiảToolStripMenuItem.Size = new Size(146, 26);
+            tácGiảToolStripMenuItem.Size = new Size(224, 26);
             tácGiảToolStripMenuItem.Text = "Bạn đọc";
             // 
             // bạnĐọcMớiToolStripMenuItem
             // 
             bạnĐọcMớiToolStripMenuItem.Name = "bạnĐọcMớiToolStripMenuItem";
-            bạnĐọcMớiToolStripMenuItem.Size = new Size(173, 26);
+            bạnĐọcMớiToolStripMenuItem.Size = new Size(224, 26);
             bạnĐọcMớiToolStripMenuItem.Text = "Đã đăng kí";
             bạnĐọcMớiToolStripMenuItem.Click += bạnĐọcMớiToolStripMenuItem_Click;
             // 
             // đăngKíMớiToolStripMenuItem
             // 
             đăngKíMớiToolStripMenuItem.Name = "đăngKíMớiToolStripMenuItem";
-            đăngKíMớiToolStripMenuItem.Size = new Size(173, 26);
+            đăngKíMớiToolStripMenuItem.Size = new Size(224, 26);
             đăngKíMớiToolStripMenuItem.Text = "Đăng kí mới";
+            đăngKíMớiToolStripMenuItem.Click += đăngKíMớiToolStripMenuItem_Click;
             // 
-            // panel1
+            // bookPanel
             // 
-            panel1.Controls.Add(groupBox3);
-            panel1.Controls.Add(label8);
-            panel1.Controls.Add(button11);
-            panel1.Controls.Add(textBox5);
-            panel1.Controls.Add(groupBox1);
-            panel1.Controls.Add(panel4);
-            panel1.Controls.Add(panel2);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(comboBox2);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(comboBox4);
-            panel1.Controls.Add(comboBox1);
-            panel1.Controls.Add(dataGridView1);
-            panel1.Location = new Point(79, 72);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1750, 810);
-            panel1.TabIndex = 2;
-            panel1.Visible = false;
-            panel1.Paint += panel1_Paint;
+            bookPanel.Controls.Add(button4);
+            bookPanel.Controls.Add(button12);
+            bookPanel.Controls.Add(button1);
+            bookPanel.Controls.Add(button3);
+            bookPanel.Controls.Add(button2);
+            bookPanel.Controls.Add(groupBox3);
+            bookPanel.Controls.Add(label8);
+            bookPanel.Controls.Add(button11);
+            bookPanel.Controls.Add(textBox5);
+            bookPanel.Controls.Add(groupBox1);
+            bookPanel.Controls.Add(panel4);
+            bookPanel.Controls.Add(panel2);
+            bookPanel.Controls.Add(label3);
+            bookPanel.Controls.Add(authorDropDownSearch);
+            bookPanel.Controls.Add(label2);
+            bookPanel.Controls.Add(label1);
+            bookPanel.Controls.Add(comboBox4);
+            bookPanel.Controls.Add(comboBox1);
+            bookPanel.Controls.Add(dataGridViewBook);
+            bookPanel.Location = new Point(69, 59);
+            bookPanel.Name = "bookPanel";
+            bookPanel.Size = new Size(1905, 926);
+            bookPanel.TabIndex = 2;
+            bookPanel.Visible = false;
+            bookPanel.Paint += panel1_Paint;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(789, 816);
+            button4.Name = "button4";
+            button4.Size = new Size(94, 29);
+            button4.TabIndex = 8;
+            button4.Text = "Cho mượn";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            button12.Location = new Point(0, 816);
+            button12.Name = "button12";
+            button12.Size = new Size(94, 29);
+            button12.TabIndex = 10;
+            button12.Text = "Xóa mất";
+            button12.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(1017, 816);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 0;
+            button1.Text = "Thêm";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(1594, 816);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 29);
+            button3.TabIndex = 1;
+            button3.Text = "Sửa";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(1324, 816);
+            button2.Name = "button2";
+            button2.Size = new Size(94, 29);
+            button2.TabIndex = 1;
+            button2.Text = "Xóa ";
+            button2.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -365,13 +450,9 @@
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(button4);
             groupBox4.Controls.Add(label5);
             groupBox4.Controls.Add(label7);
-            groupBox4.Controls.Add(button1);
             groupBox4.Controls.Add(label6);
-            groupBox4.Controls.Add(button2);
-            groupBox4.Controls.Add(button3);
             groupBox4.Controls.Add(textBox2);
             groupBox4.Controls.Add(label4);
             groupBox4.Controls.Add(textBox1);
@@ -379,19 +460,10 @@
             groupBox4.Controls.Add(comboBox5);
             groupBox4.Location = new Point(3, 248);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(849, 441);
+            groupBox4.Size = new Size(849, 500);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Sách";
-            // 
-            // button4
-            // 
-            button4.Location = new Point(690, 399);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 8;
-            button4.Text = "Cho mượn";
-            button4.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -411,15 +483,6 @@
             label7.TabIndex = 7;
             label7.Text = "Tác giả: ";
             // 
-            // button1
-            // 
-            button1.Location = new Point(126, 399);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 0;
-            button1.Text = "Thêm";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -428,24 +491,6 @@
             label6.Size = new Size(65, 20);
             label6.TabIndex = 6;
             label6.Text = "Thể loại:";
-            // 
-            // button2
-            // 
-            button2.Location = new Point(322, 399);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 1;
-            button2.Text = "Xóa ";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(507, 399);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 1;
-            button3.Text = "Sửa";
-            button3.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
@@ -500,13 +545,15 @@
             label3.Text = "QUẢN LÝ SÁCH";
             label3.Click += label3_Click;
             // 
-            // comboBox2
+            // authorDropDownSearch
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(456, 121);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(266, 28);
-            comboBox2.TabIndex = 4;
+            authorDropDownSearch.FormattingEnabled = true;
+            authorDropDownSearch.Location = new Point(456, 121);
+            authorDropDownSearch.Name = "authorDropDownSearch";
+            authorDropDownSearch.Size = new Size(266, 28);
+            authorDropDownSearch.TabIndex = 4;
+            authorDropDownSearch.SelectedIndexChanged += authorDropDownSearch_SelectedIndexChanged;
+            authorDropDownSearch.SelectedValueChanged += AuthorDropDownSearch_SelectedValueChanged;
             // 
             // label2
             // 
@@ -543,32 +590,293 @@
             comboBox1.TabIndex = 1;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // dataGridView1
+            // dataGridViewBook
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 233);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(883, 308);
-            dataGridView1.TabIndex = 0;
+            dataGridViewBook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBook.Location = new Point(0, 233);
+            dataGridViewBook.Name = "dataGridViewBook";
+            dataGridViewBook.RowHeadersWidth = 51;
+            dataGridViewBook.Size = new Size(883, 308);
+            dataGridViewBook.TabIndex = 0;
+            dataGridViewBook.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // memberPanel
+            // 
+            memberPanel.Controls.Add(groupBox5);
+            memberPanel.Controls.Add(searchMemberTB);
+            memberPanel.Controls.Add(searchMembersBT);
+            memberPanel.Controls.Add(panel3);
+            memberPanel.Controls.Add(dataGridViewMember);
+            memberPanel.Controls.Add(label9);
+            memberPanel.Location = new Point(69, 59);
+            memberPanel.Name = "memberPanel";
+            memberPanel.Size = new Size(1780, 884);
+            memberPanel.TabIndex = 14;
+            memberPanel.Visible = false;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(textBox14);
+            groupBox5.Controls.Add(textBox13);
+            groupBox5.Controls.Add(textBox12);
+            groupBox5.Controls.Add(textBox11);
+            groupBox5.Controls.Add(textBox10);
+            groupBox5.Controls.Add(label17);
+            groupBox5.Controls.Add(label16);
+            groupBox5.Controls.Add(label15);
+            groupBox5.Controls.Add(label14);
+            groupBox5.Controls.Add(label13);
+            groupBox5.Controls.Add(button14);
+            groupBox5.Location = new Point(912, 444);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(865, 401);
+            groupBox5.TabIndex = 7;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Chi tiết mượn:";
+            // 
+            // textBox14
+            // 
+            textBox14.Location = new Point(150, 277);
+            textBox14.Name = "textBox14";
+            textBox14.Size = new Size(623, 27);
+            textBox14.TabIndex = 2;
+            // 
+            // textBox13
+            // 
+            textBox13.Location = new Point(150, 216);
+            textBox13.Name = "textBox13";
+            textBox13.Size = new Size(623, 27);
+            textBox13.TabIndex = 2;
+            // 
+            // textBox12
+            // 
+            textBox12.Location = new Point(152, 159);
+            textBox12.Name = "textBox12";
+            textBox12.Size = new Size(623, 27);
+            textBox12.TabIndex = 2;
+            // 
+            // textBox11
+            // 
+            textBox11.Location = new Point(153, 105);
+            textBox11.Name = "textBox11";
+            textBox11.Size = new Size(623, 27);
+            textBox11.TabIndex = 2;
+            // 
+            // textBox10
+            // 
+            textBox10.Location = new Point(153, 54);
+            textBox10.Name = "textBox10";
+            textBox10.Size = new Size(623, 27);
+            textBox10.TabIndex = 2;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(29, 280);
+            label17.Name = "label17";
+            label17.Size = new Size(78, 20);
+            label17.TabIndex = 1;
+            label17.Text = "Trạng thái:";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(29, 219);
+            label16.Name = "label16";
+            label16.Size = new Size(102, 20);
+            label16.TabIndex = 1;
+            label16.Text = "Ngày trả sách:";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(31, 162);
+            label15.Name = "label15";
+            label15.Size = new Size(105, 20);
+            label15.TabIndex = 1;
+            label15.Text = "Mã bản mượn:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(32, 108);
+            label14.Name = "label14";
+            label14.Size = new Size(66, 20);
+            label14.TabIndex = 1;
+            label14.Text = "Mã sách:";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(32, 57);
+            label13.Name = "label13";
+            label13.Size = new Size(68, 20);
+            label13.TabIndex = 1;
+            label13.Text = "Tên sách:";
+            // 
+            // button14
+            // 
+            button14.Location = new Point(682, 337);
+            button14.Name = "button14";
+            button14.Size = new Size(94, 29);
+            button14.TabIndex = 0;
+            button14.Text = "Trả sách";
+            button14.UseVisualStyleBackColor = true;
+            // 
+            // searchMemberTB
+            // 
+            searchMemberTB.Location = new Point(48, 217);
+            searchMemberTB.Name = "searchMemberTB";
+            searchMemberTB.Size = new Size(589, 27);
+            searchMemberTB.TabIndex = 4;
+            // 
+            // searchMembersBT
+            // 
+            searchMembersBT.Location = new Point(683, 215);
+            searchMembersBT.Name = "searchMembersBT";
+            searchMembersBT.Size = new Size(94, 29);
+            searchMembersBT.TabIndex = 3;
+            searchMembersBT.Text = "Tìm kiếm";
+            searchMembersBT.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(button13);
+            panel3.Controls.Add(button15);
+            panel3.Controls.Add(textBox9);
+            panel3.Controls.Add(textBox8);
+            panel3.Controls.Add(textBox7);
+            panel3.Controls.Add(textBox6);
+            panel3.Controls.Add(S);
+            panel3.Controls.Add(label12);
+            panel3.Controls.Add(label11);
+            panel3.Controls.Add(label10);
+            panel3.Location = new Point(912, 187);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(868, 266);
+            panel3.TabIndex = 2;
+            // 
+            // button13
+            // 
+            button13.Location = new Point(717, 147);
+            button13.Name = "button13";
+            button13.Size = new Size(94, 29);
+            button13.TabIndex = 5;
+            button13.Text = "Xóa";
+            button13.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            button15.Location = new Point(717, 61);
+            button15.Name = "button15";
+            button15.Size = new Size(94, 29);
+            button15.TabIndex = 5;
+            button15.Text = "Sửa";
+            button15.UseVisualStyleBackColor = true;
+            // 
+            // textBox9
+            // 
+            textBox9.Location = new Point(153, 179);
+            textBox9.Name = "textBox9";
+            textBox9.Size = new Size(487, 27);
+            textBox9.TabIndex = 2;
+            // 
+            // textBox8
+            // 
+            textBox8.Location = new Point(153, 128);
+            textBox8.Name = "textBox8";
+            textBox8.Size = new Size(487, 27);
+            textBox8.TabIndex = 2;
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(153, 79);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(487, 27);
+            textBox7.TabIndex = 2;
+            // 
+            // textBox6
+            // 
+            textBox6.Enabled = false;
+            textBox6.Location = new Point(153, 25);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(487, 27);
+            textBox6.TabIndex = 1;
+            // 
+            // S
+            // 
+            S.AutoSize = true;
+            S.Location = new Point(34, 182);
+            S.Name = "S";
+            S.Size = new Size(49, 20);
+            S.TabIndex = 0;
+            S.Text = "Email:";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(34, 132);
+            label12.Name = "label12";
+            label12.Size = new Size(58, 20);
+            label12.TabIndex = 0;
+            label12.Text = "Địa chỉ:";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(34, 82);
+            label11.Name = "label11";
+            label11.Size = new Size(100, 20);
+            label11.TabIndex = 0;
+            label11.Text = "Số điện thoại:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(34, 28);
+            label10.Name = "label10";
+            label10.Size = new Size(35, 20);
+            label10.TabIndex = 0;
+            label10.Text = "Tên:";
+            // 
+            // dataGridViewMember
+            // 
+            dataGridViewMember.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewMember.Location = new Point(48, 286);
+            dataGridViewMember.Name = "dataGridViewMember";
+            dataGridViewMember.RowHeadersWidth = 51;
+            dataGridViewMember.Size = new Size(804, 509);
+            dataGridViewMember.TabIndex = 1;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 32F);
+            label9.Location = new Point(809, 16);
+            label9.Name = "label9";
+            label9.Size = new Size(263, 72);
+            label9.TabIndex = 0;
+            label9.Text = "BẠN ĐỌC";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1858, 914);
-            Controls.Add(panel1);
+            ClientSize = new Size(1897, 970);
+            Controls.Add(memberPanel);
+            Controls.Add(bookPanel);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý thư viện";
             WindowState = FormWindowState.Maximized;
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            bookPanel.ResumeLayout(false);
+            bookPanel.PerformLayout();
             groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
             groupBox1.ResumeLayout(false);
@@ -581,9 +889,25 @@
             panel2.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBook).EndInit();
+            memberPanel.ResumeLayout(false);
+            memberPanel.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMember).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void AuthorDropDownSearch_SelectedValueChanged(object sender, EventArgs e)
+        {
         }
 
         #endregion
@@ -592,11 +916,11 @@
         private ToolStripMenuItem đổiThôngTinToolStripMenuItem;
         private ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private ToolStripMenuItem quảnLýToolStripMenuItem;
-        private Panel panel1;
-        private DataGridView dataGridView1;
+        private Panel bookPanel;
+        private DataGridView dataGridViewBook;
         private ComboBox comboBox1;
         private Label label1;
-        private ComboBox comboBox2;
+        private ComboBox authorDropDownSearch;
         private Label label2;
         private Label label3;
         private Panel panel2;
@@ -637,5 +961,34 @@
         private ToolStripMenuItem bạnĐọcMớiToolStripMenuItem;
         private ToolStripMenuItem đăngKíMớiToolStripMenuItem;
         private ToolStripMenuItem thoátToolStripMenuItem;
+        private Button button12;
+        private Panel memberPanel;
+        private GroupBox groupBox5;
+        private TextBox textBox14;
+        private TextBox textBox13;
+        private TextBox textBox12;
+        private TextBox textBox11;
+        private TextBox textBox10;
+        private Label label17;
+        private Label label16;
+        private Label label15;
+        private Label label14;
+        private Label label13;
+        private Button button14;
+        private TextBox searchMemberTB;
+        private Button searchMembersBT;
+        private Panel panel3;
+        private Button button13;
+        private Button button15;
+        private TextBox textBox9;
+        private TextBox textBox8;
+        private TextBox textBox7;
+        private TextBox textBox6;
+        private Label S;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private DataGridView dataGridViewMember;
+        private Label label9;
     }
 }

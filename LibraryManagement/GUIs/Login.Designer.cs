@@ -30,11 +30,12 @@
         {
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            loginUsername = new TextBox();
+            loginPass = new TextBox();
             label3 = new Label();
-            button1 = new Button();
+            loginButton = new Button();
             SuspendLayout();
+            FormClosing += Login_FormClosing;
             // 
             // label1
             // 
@@ -55,20 +56,22 @@
             label2.TabIndex = 1;
             label2.Text = "Tên đăng nhập:";
             // 
-            // textBox1
+            // loginUsername
             // 
-            textBox1.Location = new Point(201, 166);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(338, 27);
-            textBox1.TabIndex = 2;
+            loginUsername.Location = new Point(201, 166);
+            loginUsername.Name = "loginUsername";
+            loginUsername.Size = new Size(338, 27);
+            loginUsername.TabIndex = 2;
+            loginUsername.KeyDown += Login_KeyDown;
             // 
-            // textBox2
+            // loginPass
             // 
-            textBox2.Location = new Point(201, 230);
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(338, 27);
-            textBox2.TabIndex = 3;
+            loginPass.Location = new Point(201, 230);
+            loginPass.Name = "loginPass";
+            loginPass.PasswordChar = '*';
+            loginPass.Size = new Size(338, 27);
+            loginPass.TabIndex = 3;
+            loginPass.KeyDown += Login_KeyDown;
             // 
             // label3
             // 
@@ -79,41 +82,63 @@
             label3.TabIndex = 1;
             label3.Text = "Mật khẩu:";
             // 
-            // button1
+            // loginButton
             // 
-            button1.Location = new Point(445, 305);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 4;
-            button1.Text = "Đăng nhập";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            loginButton.Location = new Point(445, 305);
+            loginButton.Name = "loginButton";
+            loginButton.Size = new Size(94, 29);
+            loginButton.TabIndex = 4;
+            loginButton.Text = "Đăng nhập";
+            loginButton.UseVisualStyleBackColor = true;
+            loginButton.Click += button1_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(663, 377);
-            Controls.Add(button1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(loginButton);
+            Controls.Add(loginPass);
+            Controls.Add(loginUsername);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Đăng nhập";
+            KeyDown += Login_KeyDown;
+            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
+
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                string username = loginUsername.Text;
+                string pass = loginPass.Text;
+
+                if (username.Equals("doankhacvi") && pass.Equals("khacvi2003"))
+                {
+                    mainForm.Visible = true;
+                    this.Visible = false;
+                }
+            }
         }
 
         #endregion
 
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox loginUsername;
+        private TextBox loginPass;
         private Label label3;
-        private Button button1;
+        private Button loginButton;
     }
 }

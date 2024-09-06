@@ -58,6 +58,26 @@ namespace LibraryManagement.controllers
             return member;
         }
 
+        public Member getByName(string name)
+        {
+            string sql = "SELECT * FROM member WHERE name = @name";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@name",name);
+            DataTable data = sqlExecute.executeQuery(cmd);
+            Member member = new Member();
+            if (data.Rows.Count > 0)
+            {
+                member.Id = (int)data.Rows[0]["id"];
+                member.Name = (string)data.Rows[0]["name"];
+                member.Email = (string)data.Rows[0]["email"];
+                member.PhoneNo = (int)data.Rows[0]["phone_no"];
+                member.IdNo = (long)data.Rows[0]["id_no"];
+                member.Address = (string)data.Rows[0]["address"];
+                return member;
+            }
+            return null;
+        }
+
         public Member getByCopiesId(int copiesId) {
             string sql = "";
             SqlCommand cmd = new SqlCommand(sql, conn);
