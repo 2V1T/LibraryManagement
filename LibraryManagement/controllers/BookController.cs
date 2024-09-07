@@ -60,6 +60,27 @@ namespace LibraryManagement.controllers
             }
         }
 
+        public int getQuantity(int bookId)
+        {
+            int quantity = 0;
+            try
+            {
+                string sql = "SELECT COUNT(*) AS quantity FROM Copies WHERE book_id = @Id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Id", bookId);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                if (data.Rows.Count > 0)
+                {
+                    quantity = int.Parse(data.Rows[0]["quantity"].ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                    return 0;
+            }
+            return quantity;
+        }
+
         public DataTable getByCategoryId(int CategoryId)
         {
             try
@@ -186,12 +207,12 @@ namespace LibraryManagement.controllers
                 conn.Open();
 
                 // Build dynamic SQL with parameter checks
-                StringBuilder sql = new StringBuilder("SELECT * FROM book WHERE ");
+                StringBuilder sql = new StringBuilder("SELECT book.id, book.name, author.name as 'author' , category.name as 'category', description,book_img FROM book full join author on author.id = Book.author_id full join Category on Category.id = Book.category_id WHERE ");
                 bool whereClauseAdded = false;
 
                 if (name != null)
                 {
-                    sql.Append("name LIKE @Name");
+                    sql.Append("book.name LIKE @Name");
                     whereClauseAdded = true;
                 }
 

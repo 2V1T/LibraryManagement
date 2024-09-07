@@ -33,8 +33,17 @@ namespace LibraryManagement
             addCategoryToTable(dataGridViewCategory);
             addAuthorToTable(dataGridViewAuthor);
             dataGridViewCategory.Columns[0].Width = 50;
+            dataGridViewAuthor.Columns[1].Width = dataGridViewAuthor.Width - 130;
             dataGridViewAuthor.Columns[0].Width = 50;
+            dataGridViewCategory.Columns[1].Width = dataGridViewCategory.Width - 130;
             bookPanel.Visible = true;
+            int maxWidthDGWBook = dataGridViewBook.Width;
+            dataGridViewBook.Columns[0].Width = 50;
+            for (int i = 1; i <= 5; i++)
+            {
+                dataGridViewBook.Columns[i].Width = (maxWidthDGWBook-130)/5;
+            }
+       
         }
 
 
@@ -43,6 +52,11 @@ namespace LibraryManagement
             CopiedBookController copiesController = new CopiedBookController();
             DataTable data = copiesController.getAvailable(bookId);
             dataGridView.DataSource = data;
+            int maxWidthCopies = dataGridView.Width;
+            for (int i = 0; i < 3; i++)
+            {
+                dataGridView.Columns[i].Width = (maxWidthCopies - 80) / 3;
+            }
         }
         private void addComboboxCategory(ComboBox comboBox)
         {
@@ -276,6 +290,7 @@ namespace LibraryManagement
                 Book book = bookController.getById(id);
                 nameAddBookTB.Text = book.Name;
                 descriptionBookAddTB.Text = book.Description;
+                quantityLabel.Text = bookController.getQuantity(id).ToString();
                 foreach (var item in authorAddBookCB.Items)
                 {
                     if (item is KeyValuePair<string, int> pair)

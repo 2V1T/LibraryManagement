@@ -108,6 +108,10 @@
             label10 = new Label();
             dataGridViewMember = new DataGridView();
             label9 = new Label();
+            label18 = new Label();
+            quantityLabel = new Label();
+            numericUpDown1 = new NumericUpDown();
+            label19 = new Label();
             menuStrip1.SuspendLayout();
             bookPanel.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -124,6 +128,7 @@
             groupBox5.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -473,6 +478,10 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(label19);
+            groupBox4.Controls.Add(numericUpDown1);
+            groupBox4.Controls.Add(quantityLabel);
+            groupBox4.Controls.Add(label18);
             groupBox4.Controls.Add(descriptionBookAddTB);
             groupBox4.Controls.Add(label5);
             groupBox4.Controls.Add(label7);
@@ -490,16 +499,16 @@
             // 
             // descriptionBookAddTB
             // 
-            descriptionBookAddTB.Location = new Point(126, 194);
+            descriptionBookAddTB.Location = new Point(126, 160);
             descriptionBookAddTB.Name = "descriptionBookAddTB";
-            descriptionBookAddTB.Size = new Size(658, 232);
+            descriptionBookAddTB.Size = new Size(658, 215);
             descriptionBookAddTB.TabIndex = 8;
             descriptionBookAddTB.Text = "";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(40, 183);
+            label5.Location = new Point(43, 163);
             label5.Name = "label5";
             label5.Size = new Size(51, 20);
             label5.TabIndex = 5;
@@ -508,7 +517,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(429, 114);
+            label7.Location = new Point(420, 106);
             label7.Name = "label7";
             label7.Size = new Size(62, 20);
             label7.TabIndex = 7;
@@ -517,7 +526,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(40, 114);
+            label6.Location = new Point(43, 106);
             label6.Name = "label6";
             label6.Size = new Size(65, 20);
             label6.TabIndex = 6;
@@ -542,7 +551,7 @@
             // categoryAddBookCB
             // 
             categoryAddBookCB.FormattingEnabled = true;
-            categoryAddBookCB.Location = new Point(126, 111);
+            categoryAddBookCB.Location = new Point(126, 101);
             categoryAddBookCB.Name = "categoryAddBookCB";
             categoryAddBookCB.Size = new Size(263, 28);
             categoryAddBookCB.TabIndex = 1;
@@ -551,7 +560,7 @@
             // authorAddBookCB
             // 
             authorAddBookCB.FormattingEnabled = true;
-            authorAddBookCB.Location = new Point(497, 111);
+            authorAddBookCB.Location = new Point(497, 101);
             authorAddBookCB.Name = "authorAddBookCB";
             authorAddBookCB.Size = new Size(287, 28);
             authorAddBookCB.TabIndex = 1;
@@ -883,6 +892,40 @@
             label9.TabIndex = 0;
             label9.Text = "BẠN ĐỌC";
             // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(42, 402);
+            label18.Name = "label18";
+            label18.Size = new Size(76, 20);
+            label18.TabIndex = 9;
+            label18.Text = "Số lượng: ";
+            // 
+            // quantityLabel
+            // 
+            quantityLabel.AutoSize = true;
+            quantityLabel.Location = new Point(131, 402);
+            quantityLabel.Name = "quantityLabel";
+            quantityLabel.Size = new Size(17, 20);
+            quantityLabel.TabIndex = 9;
+            quantityLabel.Text = "0";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(631, 400);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(150, 27);
+            numericUpDown1.TabIndex = 10;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(497, 402);
+            label19.Name = "label19";
+            label19.Size = new Size(111, 20);
+            label19.TabIndex = 11;
+            label19.Text = "Thêm số lượng:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -922,6 +965,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1016,5 +1060,9 @@
         private Label label9;
         private ToolStripMenuItem đổiMậtKhẩuToolStripMenuItem;
         private RichTextBox descriptionBookAddTB;
+        private Label label18;
+        private Label quantityLabel;
+        private Label label19;
+        private NumericUpDown numericUpDown1;
     }
 }

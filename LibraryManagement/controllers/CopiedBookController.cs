@@ -61,13 +61,14 @@ namespace LibraryManagement.controllers
                 conn.Close();
             }
         }
-        public bool add(CopiedBook copiedBook)
+        public bool add(int bookId)
         {
             try
             {
                 conn.Open();
-                string sql = "";
+                string sql = "EXEC them_copies @bookId";
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@bookId", bookId);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
             }
