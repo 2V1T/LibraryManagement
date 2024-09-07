@@ -44,9 +44,10 @@ namespace LibraryManagement.GUIs
             exitCamera();
         }
 
-        private void exitCamera ()
+        private void exitCamera()
         {
-            if (videoCaptureDevice != null) {
+            if (videoCaptureDevice != null)
+            {
                 videoCaptureDevice.SignalToStop();
                 videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
                 videoCaptureDevice = null;
@@ -87,15 +88,20 @@ namespace LibraryManagement.GUIs
                         {
                             MessageBox.Show("idNo: " + splitString[0]);
                         }
-                        
+
                         this.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show("Lỗi: " + ex.Message);
                 }
-            } 
+            }
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

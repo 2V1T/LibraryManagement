@@ -15,8 +15,8 @@ namespace LibraryManagement.models
             set { id = value; }
         }
 
-        private int id_no;
-        public int IdNo
+        private long id_no;
+        public long IdNo
         {
             get { return id_no; }
             set { id_no = value; }
