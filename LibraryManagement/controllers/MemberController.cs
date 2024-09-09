@@ -102,9 +102,34 @@ namespace LibraryManagement.controllers
                 member.Name = (string)data.Rows[0]["name"];
                 member.Email = (string)data.Rows[0]["email"];
                 member.PhoneNo = (int)data.Rows[0]["phone_no"];
-                member.IdNo = (int)data.Rows[0]["id_no"];
+                member.IdNo = (long)data.Rows[0]["id_no"];
             }
             return member;
         }
+
+        public Member getByIdNo(int idNo) {
+            try
+            {
+                conn.Open();
+                string sql = "select * from [member] where id_no = @id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", idNo);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                Member member = new Member();
+                if (data.Rows.Count > 0)
+                {
+                    member.Id = (int)data.Rows[0]["id"];
+                    member.Name = (string)data.Rows[0]["name"];
+                    member.Email = (string)data.Rows[0]["email"];
+                    member.PhoneNo = (int)data.Rows[0]["phone_no"];
+                    member.IdNo = (long)data.Rows[0]["id_no"];
+                }
+                return member;
+            }
+            catch (Exception ex) {
+                return null;
+            }
+        }
+
     }
 }
