@@ -30,5 +30,6 @@ namespace LibraryManagement.database
         {
             return conn;
         }
+        public void test() { };
     }
 }
