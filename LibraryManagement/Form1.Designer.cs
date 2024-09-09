@@ -87,11 +87,11 @@
             dataGridViewBook = new DataGridView();
             memberPanel = new Panel();
             groupBox5 = new GroupBox();
-            textBox14 = new TextBox();
-            textBox13 = new TextBox();
-            textBox12 = new TextBox();
-            textBox11 = new TextBox();
-            textBox10 = new TextBox();
+            statusBorrowLabel = new Label();
+            detailReturnDateTB = new TextBox();
+            detailCopiesIdTB = new TextBox();
+            detailBookIdTB = new TextBox();
+            detailBookNameTB = new TextBox();
             label17 = new Label();
             label16 = new Label();
             label15 = new Label();
@@ -103,13 +103,15 @@
             panel3 = new Panel();
             button13 = new Button();
             button15 = new Button();
-            textBox9 = new TextBox();
-            textBox8 = new TextBox();
-            textBox7 = new TextBox();
-            textBox6 = new TextBox();
+            memberEmailTB = new TextBox();
+            memberAddressTB = new TextBox();
+            memberPhoneNoTB = new TextBox();
+            memberNameTB = new TextBox();
+            memberCCCDTB = new TextBox();
             S = new Label();
             label12 = new Label();
             label11 = new Label();
+            label20 = new Label();
             label10 = new Label();
             dataGridViewMember = new DataGridView();
             label9 = new Label();
@@ -698,14 +700,15 @@
             memberPanel.Size = new Size(1780, 884);
             memberPanel.TabIndex = 14;
             memberPanel.Visible = false;
+            memberPanel.Paint += memberPanel_Paint;
             // 
             // groupBox5
             // 
-            groupBox5.Controls.Add(textBox14);
-            groupBox5.Controls.Add(textBox13);
-            groupBox5.Controls.Add(textBox12);
-            groupBox5.Controls.Add(textBox11);
-            groupBox5.Controls.Add(textBox10);
+            groupBox5.Controls.Add(statusBorrowLabel);
+            groupBox5.Controls.Add(detailReturnDateTB);
+            groupBox5.Controls.Add(detailCopiesIdTB);
+            groupBox5.Controls.Add(detailBookIdTB);
+            groupBox5.Controls.Add(detailBookNameTB);
             groupBox5.Controls.Add(label17);
             groupBox5.Controls.Add(label16);
             groupBox5.Controls.Add(label15);
@@ -719,40 +722,48 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "Chi tiết mượn:";
             // 
-            // textBox14
+            // statusBorrowLabel
             // 
-            textBox14.Location = new Point(150, 277);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(623, 27);
-            textBox14.TabIndex = 2;
+            statusBorrowLabel.AutoSize = true;
+            statusBorrowLabel.BackColor = SystemColors.Control;
+            statusBorrowLabel.ForeColor = Color.DeepSkyBlue;
+            statusBorrowLabel.Location = new Point(150, 280);
+            statusBorrowLabel.Name = "statusBorrowLabel";
+            statusBorrowLabel.Size = new Size(119, 20);
+            statusBorrowLabel.TabIndex = 3;
+            statusBorrowLabel.Text = "Chưa mượn sách";
             // 
-            // textBox13
+            // detailReturnDateTB
             // 
-            textBox13.Location = new Point(150, 216);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(623, 27);
-            textBox13.TabIndex = 2;
+            detailReturnDateTB.Location = new Point(150, 216);
+            detailReturnDateTB.Name = "detailReturnDateTB";
+            detailReturnDateTB.ReadOnly = true;
+            detailReturnDateTB.Size = new Size(623, 27);
+            detailReturnDateTB.TabIndex = 2;
             // 
-            // textBox12
+            // detailCopiesIdTB
             // 
-            textBox12.Location = new Point(152, 159);
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(623, 27);
-            textBox12.TabIndex = 2;
+            detailCopiesIdTB.Location = new Point(152, 159);
+            detailCopiesIdTB.Name = "detailCopiesIdTB";
+            detailCopiesIdTB.ReadOnly = true;
+            detailCopiesIdTB.Size = new Size(623, 27);
+            detailCopiesIdTB.TabIndex = 2;
             // 
-            // textBox11
+            // detailBookIdTB
             // 
-            textBox11.Location = new Point(153, 105);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(623, 27);
-            textBox11.TabIndex = 2;
+            detailBookIdTB.Location = new Point(153, 105);
+            detailBookIdTB.Name = "detailBookIdTB";
+            detailBookIdTB.ReadOnly = true;
+            detailBookIdTB.Size = new Size(623, 27);
+            detailBookIdTB.TabIndex = 2;
             // 
-            // textBox10
+            // detailBookNameTB
             // 
-            textBox10.Location = new Point(153, 54);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(623, 27);
-            textBox10.TabIndex = 2;
+            detailBookNameTB.Location = new Point(153, 54);
+            detailBookNameTB.Name = "detailBookNameTB";
+            detailBookNameTB.ReadOnly = true;
+            detailBookNameTB.Size = new Size(623, 27);
+            detailBookNameTB.TabIndex = 2;
             // 
             // label17
             // 
@@ -801,23 +812,24 @@
             // 
             // button14
             // 
-            button14.Location = new Point(682, 337);
+            button14.Location = new Point(679, 276);
             button14.Name = "button14";
             button14.Size = new Size(94, 29);
             button14.TabIndex = 0;
             button14.Text = "Trả sách";
             button14.UseVisualStyleBackColor = true;
+            button14.Click += button14_Click;
             // 
             // searchMemberTB
             // 
             searchMemberTB.Location = new Point(48, 217);
             searchMemberTB.Name = "searchMemberTB";
-            searchMemberTB.Size = new Size(589, 27);
+            searchMemberTB.Size = new Size(667, 27);
             searchMemberTB.TabIndex = 4;
             // 
             // searchMembersBT
             // 
-            searchMembersBT.Location = new Point(683, 215);
+            searchMembersBT.Location = new Point(758, 217);
             searchMembersBT.Name = "searchMembersBT";
             searchMembersBT.Size = new Size(94, 29);
             searchMembersBT.TabIndex = 3;
@@ -828,13 +840,15 @@
             // 
             panel3.Controls.Add(button13);
             panel3.Controls.Add(button15);
-            panel3.Controls.Add(textBox9);
-            panel3.Controls.Add(textBox8);
-            panel3.Controls.Add(textBox7);
-            panel3.Controls.Add(textBox6);
+            panel3.Controls.Add(memberEmailTB);
+            panel3.Controls.Add(memberAddressTB);
+            panel3.Controls.Add(memberPhoneNoTB);
+            panel3.Controls.Add(memberNameTB);
+            panel3.Controls.Add(memberCCCDTB);
             panel3.Controls.Add(S);
             panel3.Controls.Add(label12);
             panel3.Controls.Add(label11);
+            panel3.Controls.Add(label20);
             panel3.Controls.Add(label10);
             panel3.Location = new Point(912, 187);
             panel3.Name = "panel3";
@@ -852,46 +866,56 @@
             // 
             // button15
             // 
-            button15.Location = new Point(717, 61);
+            button15.Location = new Point(717, 81);
             button15.Name = "button15";
             button15.Size = new Size(94, 29);
             button15.TabIndex = 5;
             button15.Text = "Sửa";
             button15.UseVisualStyleBackColor = true;
             // 
-            // textBox9
+            // memberEmailTB
             // 
-            textBox9.Location = new Point(153, 179);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(487, 27);
-            textBox9.TabIndex = 2;
+            memberEmailTB.Location = new Point(153, 213);
+            memberEmailTB.Name = "memberEmailTB";
+            memberEmailTB.Size = new Size(487, 27);
+            memberEmailTB.TabIndex = 2;
             // 
-            // textBox8
+            // memberAddressTB
             // 
-            textBox8.Location = new Point(153, 128);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(487, 27);
-            textBox8.TabIndex = 2;
+            memberAddressTB.Location = new Point(153, 162);
+            memberAddressTB.Name = "memberAddressTB";
+            memberAddressTB.Size = new Size(487, 27);
+            memberAddressTB.TabIndex = 2;
             // 
-            // textBox7
+            // memberPhoneNoTB
             // 
-            textBox7.Location = new Point(153, 79);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(487, 27);
-            textBox7.TabIndex = 2;
+            memberPhoneNoTB.Location = new Point(153, 113);
+            memberPhoneNoTB.Name = "memberPhoneNoTB";
+            memberPhoneNoTB.Size = new Size(487, 27);
+            memberPhoneNoTB.TabIndex = 2;
             // 
-            // textBox6
+            // memberNameTB
             // 
-            textBox6.Enabled = false;
-            textBox6.Location = new Point(153, 25);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(487, 27);
-            textBox6.TabIndex = 1;
+            memberNameTB.Enabled = false;
+            memberNameTB.Location = new Point(154, 10);
+            memberNameTB.Name = "memberNameTB";
+            memberNameTB.ReadOnly = true;
+            memberNameTB.Size = new Size(487, 27);
+            memberNameTB.TabIndex = 1;
+            // 
+            // memberCCCDTB
+            // 
+            memberCCCDTB.Enabled = false;
+            memberCCCDTB.Location = new Point(153, 59);
+            memberCCCDTB.Name = "memberCCCDTB";
+            memberCCCDTB.ReadOnly = true;
+            memberCCCDTB.Size = new Size(487, 27);
+            memberCCCDTB.TabIndex = 1;
             // 
             // S
             // 
             S.AutoSize = true;
-            S.Location = new Point(34, 182);
+            S.Location = new Point(34, 216);
             S.Name = "S";
             S.Size = new Size(49, 20);
             S.TabIndex = 0;
@@ -900,7 +924,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(34, 132);
+            label12.Location = new Point(34, 166);
             label12.Name = "label12";
             label12.Size = new Size(58, 20);
             label12.TabIndex = 0;
@@ -909,20 +933,29 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(34, 82);
+            label11.Location = new Point(34, 116);
             label11.Name = "label11";
             label11.Size = new Size(100, 20);
             label11.TabIndex = 0;
             label11.Text = "Số điện thoại:";
             // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(35, 13);
+            label20.Name = "label20";
+            label20.Size = new Size(35, 20);
+            label20.TabIndex = 0;
+            label20.Text = "Tên:";
+            // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(34, 28);
+            label10.Location = new Point(34, 62);
             label10.Name = "label10";
-            label10.Size = new Size(35, 20);
+            label10.Size = new Size(50, 20);
             label10.TabIndex = 0;
-            label10.Text = "Tên:";
+            label10.Text = "CCCD:";
             // 
             // dataGridViewMember
             // 
@@ -930,8 +963,10 @@
             dataGridViewMember.Location = new Point(48, 286);
             dataGridViewMember.Name = "dataGridViewMember";
             dataGridViewMember.RowHeadersWidth = 51;
+            dataGridViewMember.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewMember.Size = new Size(804, 509);
             dataGridViewMember.TabIndex = 1;
+            dataGridViewMember.CellClick += dataGridViewMember_CellClick;
             // 
             // label9
             // 
@@ -948,9 +983,9 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
-            Controls.Add(bookPanel);
             Controls.Add(menuStrip1);
             Controls.Add(memberPanel);
+            Controls.Add(bookPanel);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1049,11 +1084,10 @@
         private Button deleteCopyBT;
         private Panel memberPanel;
         private GroupBox groupBox5;
-        private TextBox textBox14;
-        private TextBox textBox13;
-        private TextBox textBox12;
-        private TextBox textBox11;
-        private TextBox textBox10;
+        private TextBox detailReturnDateTB;
+        private TextBox detailCopiesIdTB;
+        private TextBox detailBookIdTB;
+        private TextBox detailBookNameTB;
         private Label label17;
         private Label label16;
         private Label label15;
@@ -1065,10 +1099,10 @@
         private Panel panel3;
         private Button button13;
         private Button button15;
-        private TextBox textBox9;
-        private TextBox textBox8;
-        private TextBox textBox7;
-        private TextBox textBox6;
+        private TextBox memberEmailTB;
+        private TextBox memberAddressTB;
+        private TextBox memberPhoneNoTB;
+        private TextBox memberCCCDTB;
         private Label S;
         private Label label12;
         private Label label11;
@@ -1082,5 +1116,9 @@
         private Label label19;
         private NumericUpDown quantityNumberic;
         private Button showAllBT;
+        private TextBox memberNameTB;
+        private Label label20;
+        private Label label21;
+        private Label statusBorrowLabel;
     }
 }

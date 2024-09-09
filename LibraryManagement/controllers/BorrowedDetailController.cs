@@ -16,7 +16,7 @@ namespace LibraryManagement.controllers
         SqlConnection conn = DBConnection.GetInstance().GetConnection();
         SQLExecute sqlExecute = new SQLExecute();
 
-        public bool add(int idCopies, int idNo, DateTime returnDate)
+        public bool add(int idCopies, long idNo, DateTime returnDate)
         {
             try
             {
@@ -88,6 +88,30 @@ namespace LibraryManagement.controllers
             {
                 conn.Close();
             }
+        }
+
+        public DataRow getByIdNo(long idNo)
+        {
+            try
+            {
+                conn.Open();
+                string sql = "SELECT c.*, bd.return_date, b.name FROM Member m JOIN BorrowedDetails bd ON m.id = bd.member_id JOIN Copies c ON bd.copies_id = c.id Join book b on c.book_id = b.id WHERE m.id_no = @id_no";
+                SqlCommand sqlCommand = new SqlCommand(sql, conn);
+                sqlCommand.Parameters.AddWithValue("@id_no", idNo);
+                DataTable data = sqlExecute.executeQuery(sqlCommand);
+                if (data.Rows.Count > 0) { 
+                    return data.Rows[0]; 
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
         }
     }
 }

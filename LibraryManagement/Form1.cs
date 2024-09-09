@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.controllers;
 using LibraryManagement.GUIs;
 using LibraryManagement.models;
+using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -32,6 +33,7 @@ namespace LibraryManagement
             addComboboxCategory(categoryAddBookCB);
             addCategoryToTable(dataGridViewCategory);
             addAuthorToTable(dataGridViewAuthor);
+            addMemberToView(dataGridViewMember);
             dataGridViewCategory.Columns[0].Width = 50;
             dataGridViewAuthor.Columns[1].Width = dataGridViewAuthor.Width - 130;
             dataGridViewAuthor.Columns[0].Width = 50;
@@ -79,6 +81,18 @@ namespace LibraryManagement
         {
             addBookToView(dataGridViewBook);
 
+        }
+
+        private void addMemberToView(DataGridView dataGridView)
+        {
+            MemberController memberController = new MemberController();
+            DataTable data = memberController.getAll();
+            dataGridView.DataSource = data;
+        }
+
+        private void reloadMember()
+        {
+            addMemberToView(dataGridViewMember);
         }
         private void addComboboxCategory(ComboBox comboBox)
         {
@@ -165,6 +179,7 @@ namespace LibraryManagement
         private void sáchToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             bookPanel.Visible = true;
+            memberPanel.Visible = false;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -305,7 +320,7 @@ namespace LibraryManagement
 
         private void đăngKíMớiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            QRReader qR = new QRReader(false,0);
+            QRReader qR = new QRReader(false, 0);
             qR.ShowDialog();
         }
 
@@ -320,8 +335,8 @@ namespace LibraryManagement
             }
             if (bookId != 0)
             {
-            QRReader qR = new QRReader(true, bookId);
-            qR.ShowDialog();
+                QRReader qR = new QRReader(true, bookId);
+                qR.ShowDialog();
             }
             else
             {
@@ -337,7 +352,7 @@ namespace LibraryManagement
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
         private void addCategoryToTable(DataGridView dataGridView)
         {
@@ -674,6 +689,68 @@ namespace LibraryManagement
         private void showAllBT_Click(object sender, EventArgs e)
         {
             reloadBook();
+        }
+
+        private void memberPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void addInforMember(Member member)
+        {
+            memberNameTB.Text = member.Name;
+            memberAddressTB.Text = member.Address;
+            memberCCCDTB.Text = '0' + member.IdNo.ToString();
+            memberEmailTB.Text = member.Email;
+            memberPhoneNoTB.Text = '0' + member.PhoneNo.ToString();
+
+            BorrowedDetailController borrowedDetailController = new BorrowedDetailController();
+            DataRow data = borrowedDetailController.getByIdNo(member.IdNo);
+            if (data != null)
+            {
+                detailBookIdTB.Text = data["book_id"].ToString();
+                detailBookNameTB.Text = data["name"].ToString();
+                detailCopiesIdTB.Text = data["id"].ToString();
+                detailReturnDateTB.Text = ((DateTime)data["return_date"]).ToString("dd-MM-yyyy");
+                DateTime returnDate = ((DateTime)data["return_date"]);
+                DateTime currentDate = DateTime.Now;
+                if (returnDate >= currentDate)
+                {
+                    statusBorrowLabel.Text = "Còn hạn trả";
+                    statusBorrowLabel.ForeColor = Color.Green;
+                }
+                else
+                {
+                    statusBorrowLabel.ForeColor = Color.Red;
+                }
+            }
+            else
+            {
+                detailBookIdTB.Text = "";
+                detailBookNameTB.Text = "";
+                detailReturnDateTB.Text = "";
+                detailCopiesIdTB.Text = "";
+                statusBorrowLabel.Text = "Chưa mượn sách";
+                statusBorrowLabel.ForeColor = Color.Blue;
+            }
+        }
+        private void dataGridViewMember_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int idMember = 0;
+            if (dataGridViewMember.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewMember.SelectedRows[0];
+                idMember = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                MemberController memberController = new MemberController();
+                Member member = memberController.getById(idMember);
+                addInforMember(member);
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            QRReader qRReader = new QRReader(true, 1, true);
+            qRReader.ShowDialog();
         }
     }
 }

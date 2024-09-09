@@ -23,6 +23,7 @@ namespace LibraryManagement.GUIs
     {
         bool isMember;
         int bookId = 0;
+        bool isReturn;
         RegisterMember registerMember = new RegisterMember();
 
         public QRReader(bool isMember, int bookId)
@@ -30,6 +31,13 @@ namespace LibraryManagement.GUIs
             InitializeComponent();
             this.isMember = isMember;
             this.bookId = bookId;
+        }
+        public QRReader(bool isMember, int bookId, bool isReturn)
+        {
+            InitializeComponent();
+            this.isMember = isMember;
+            this.bookId = bookId;
+            this.isReturn = isReturn;
         }
 
         FilterInfoCollection filterInfoCollection;
@@ -67,20 +75,42 @@ namespace LibraryManagement.GUIs
             pictureBox.Image = (Bitmap)bitmap.Clone();
         }
 
-        private void borrowBook (int idNo, int idCopies)
+        private void borrowBook (long idNo, int idCopies)
         {
-            DateTime currentDate = DateTime.Now;
-            DateTime nextMonthDate = currentDate.AddMonths(1);
-            DateTime returnDate = DateTime.Parse(nextMonthDate.ToString("yyyy-MM-dd"));
-            BorrowedDetailController borrowedDetailController = new BorrowedDetailController();
-            bool result = borrowedDetailController.add(idCopies, idNo, returnDate);
-            if (result)
+            MemberController memberController = new MemberController();
+      
+            if (memberController.memberAvailable(idNo)) {
+                DateTime currentDate = DateTime.Now;
+                DateTime nextMonthDate = currentDate.AddMonths(1);
+                DateTime returnDate = DateTime.Parse(nextMonthDate.ToString("yyyy-MM-dd"));
+                BorrowedDetailController borrowedDetailController = new BorrowedDetailController();
+                bool result = borrowedDetailController.add(idCopies, idNo, returnDate);
+                if (result)
                 {
-                MessageBox.Show("Cho bạn đọc có mã cccd " + idNo + " mượn sách thành công!", "Thông báo", MessageBoxButtons.OK);
+                    MessageBox.Show("Cho bạn đọc có mã cccd " + idNo + " mượn sách thành công!", "Thông báo", MessageBoxButtons.OK);
                 }
+                else
+                {
+                    MessageBox.Show("Cho bạn đọc mượn thất bại vui lòng thử lại!", "Thông báo");
+                }
+            }
             else
             {
-                MessageBox.Show("Cho bạn đọc mượn thất bại vui lòng thử lại!", "Thông báo");
+                MessageBox.Show("Bạn đọc chưa trả sách đã mượn không thể mượn thêm", "Thông báo");
+            }
+            
+        }
+
+        private void returnBook(int idCopies)
+        {
+            BookController bookController = new BookController();
+            if (bookController.returnBook(idCopies))
+            {
+                MessageBox.Show("Trả sách thành công!", "Thông báo");
+            }
+            else
+            {
+                MessageBox.Show("Trả sách thất bại!", "Thông báo");
             }
         }
 
@@ -100,17 +130,25 @@ namespace LibraryManagement.GUIs
                         statusLB.Text = "Detected";
                         statusLB.ForeColor = Color.Green;
                         string[] splitString = decode.Split("|");
-                        if (!isMember) {
+                        if (!isReturn)
+                        {
+                            if (!isMember)
+                            {
                                 registerMember.Name = splitString[2];
                                 registerMember.idNo = splitString[0];
                                 registerMember.ShowDialog();
                                 this.Close();
                                 return;
+                            }
+                            else
+                            {
+                                long idNo = long.Parse(splitString[0]);
+                                borrowBook(idNo, this.bookId);
+                            }
                         }
                         else
                         {
-                            int idNo = int.Parse(splitString[0]);
-                            borrowBook(idNo, this.bookId);
+                            returnBook(int.Parse(splitString[0]));
                         }
 
                         this.Close();

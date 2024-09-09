@@ -96,6 +96,22 @@ namespace LibraryManagement.controllers
             }
         }
 
+        public DataTable getAll()
+        {
+            try
+            {
+                conn.Open();
+                string sql = "SELECT * FROM member";
+                SqlCommand sqlCommand = new SqlCommand(sql, conn);
+                DataTable data = sqlExecute.executeQuery(sqlCommand);
+                return data;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
         public bool UpdateInfo(int id, string name, string email, string address, int phoneNo) 
         {
             try

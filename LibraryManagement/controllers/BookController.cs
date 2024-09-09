@@ -37,6 +37,24 @@ namespace LibraryManagement.controllers
             }
         }
 
+        public bool returnBook (int idCopies)
+        {
+            try
+            {
+                conn.Open();
+                string sql = "EXEC tra_sach @id";
+                SqlCommand sqlCommand  = new SqlCommand(sql, conn);
+                sqlCommand.Parameters.AddWithValue("id", idCopies);
+                return sqlExecute.executeNoneQuery(sqlCommand);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally { 
+                conn.Close();
+            }
+        }
         public DataTable getByAuthorId(int AuthorId)
         {
             try
@@ -65,6 +83,7 @@ namespace LibraryManagement.controllers
             int quantity = 0;
             try
             {
+                conn.Open();
                 string sql = "SELECT COUNT(*) AS quantity FROM Copies WHERE book_id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", bookId);
@@ -73,6 +92,7 @@ namespace LibraryManagement.controllers
                 {
                     quantity = int.Parse(data.Rows[0]["quantity"].ToString());
                 }
+                conn.Close();
             }
             catch (Exception e)
             {
@@ -174,6 +194,7 @@ namespace LibraryManagement.controllers
         {
             try
             {
+                conn.Open();
                 string sql = "SELECT * FROM Book WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
@@ -188,6 +209,7 @@ namespace LibraryManagement.controllers
                     book.Description = (string)data.Rows[0]["description"];
 
                 }
+                conn.Close();
                 return book;
             }
             catch (Exception ex)
@@ -252,6 +274,7 @@ namespace LibraryManagement.controllers
                 cmd.Parameters.AddWithValue("@publisherId", publisherId);
 
                 DataTable data = sqlExecute.executeQuery(cmd);
+                conn.Close();
                 return data;
             }
             catch (Exception ex)

@@ -23,9 +23,11 @@ namespace LibraryManagement.controllers
 
         public DataTable getAll ()
         {
+            conn.Open ();
             string sql = "SELECT * FROM member"; 
             SqlCommand cmd = new SqlCommand(sql, conn);
             DataTable data = sqlExecute.executeQuery(cmd);
+            conn.Close ();
             return data;
         }
 
@@ -33,6 +35,7 @@ namespace LibraryManagement.controllers
         {
             try
             {
+                conn.Open();
                 string sql = "EXEC them_member @id_no, @name, @phone_no, @email, @address";
                 SqlCommand cmd = new SqlCommand (sql, conn);
                 cmd.Parameters.AddWithValue("id_no", idNo);
@@ -41,6 +44,7 @@ namespace LibraryManagement.controllers
                 cmd.Parameters.AddWithValue("email", email);
                 cmd.Parameters.AddWithValue("address", address);
                 DataTable data = sqlExecute.executeQuery(cmd);
+                conn.Close ();
                 return data.Rows[0][0].ToString() ;  
             }
             catch (Exception ex)
@@ -48,16 +52,34 @@ namespace LibraryManagement.controllers
                 return "Thêm không thành công";
             }
         }
+        public bool memberAvailable (long idNo)
+        {
+            bool result = false;
+                conn.Open();
+                string sql = "select count(*) as count from member inner join BorrowedDetails on member.id = BorrowedDetails.member_id WHere id_no = @id_no";
+                SqlCommand sqlCommand = new SqlCommand(sql, conn);
+                sqlCommand.Parameters.AddWithValue("@id_no", idNo);
+                DataTable data = sqlExecute.executeQuery(sqlCommand);
+                if (data.Rows.Count > 0)
+                {
+                    result =  (int)data.Rows[0]["count"] == 0;
+                }
+                conn.Close();
+            return result;
+        }
 
         public bool remove(int id) {
+            conn.Open();
             string sql = "DELETE * FROM member WHERE id = @Id";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@id", id);
             bool result = sqlExecute.executeNoneQuery(cmd);
+            conn.Close();
             return result;
         }
 
         public Member getById(int id) {
+            conn.Open();
             string sql = "SELECT * FROM member WHERE id = @Id";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@id", id);
@@ -68,12 +90,16 @@ namespace LibraryManagement.controllers
                 member.Name = (string)data.Rows[0]["name"];
                 member.Email = (string)data.Rows[0]["email"];
                 member.PhoneNo = (int)data.Rows[0]["phone_no"];
+                member.IdNo = (long)data.Rows[0]["id_no"];
+                member.Address = data.Rows[0]["address"].ToString();
             }
+            conn.Close();
             return member;
         }
 
         public Member getByName(string name)
         {
+            conn.Open();
             string sql = "SELECT * FROM member WHERE name = @name";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@name",name);
@@ -88,10 +114,12 @@ namespace LibraryManagement.controllers
                 member.Address = (string)data.Rows[0]["address"];
                 return member;
             }
+            conn.Close();
             return null;
         }
 
         public Member getByCopiesId(int copiesId) {
+            conn.Open();
             string sql = "";
             SqlCommand cmd = new SqlCommand(sql, conn);
             DataTable data = sqlExecute.executeQuery(cmd);
@@ -104,6 +132,7 @@ namespace LibraryManagement.controllers
                 member.PhoneNo = (int)data.Rows[0]["phone_no"];
                 member.IdNo = (long)data.Rows[0]["id_no"];
             }
+            conn.Close();
             return member;
         }
 
@@ -124,6 +153,7 @@ namespace LibraryManagement.controllers
                     member.PhoneNo = (int)data.Rows[0]["phone_no"];
                     member.IdNo = (long)data.Rows[0]["id_no"];
                 }
+                conn.Close();
                 return member;
             }
             catch (Exception ex) {
