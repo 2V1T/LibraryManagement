@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LibraryManagement.controllers
 {
@@ -72,6 +73,52 @@ namespace LibraryManagement.controllers
             catch (Exception ex)
             {
 
+            }
+        }
+
+        public string UpdatePassword(int id, string oldPassword, string newPassword, string retypePassword)
+        {
+            try
+            {
+                string sql = "EXEC doi_mat_khau @id, @old_password, @new_password, @retype_password";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.Parameters.AddWithValue("old_password", oldPassword);
+                cmd.Parameters.AddWithValue("new_password", newPassword);
+                cmd.Parameters.AddWithValue("retype_password", retypePassword);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                return data.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: "+ex.Message);
+                return null;
+            }
+        }
+
+        public bool UpdateInfo(int id, string name, string email, string address, int phoneNo) 
+        {
+            try
+            {   
+                conn.Open();
+                string sql = "EXEC sua_thong_tin @id, @name, @email, @address, @phone_no";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@address", address);
+                cmd.Parameters.AddWithValue("@phone_no", phoneNo);
+                bool result = sqlExecute.executeNoneQuery(cmd);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

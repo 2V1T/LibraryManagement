@@ -42,9 +42,10 @@ namespace LibraryManagement.GUIs
             // 
             // startScanBt
             // 
-            startScanBt.Location = new Point(360, 390);
+            startScanBt.Location = new Point(450, 488);
+            startScanBt.Margin = new Padding(4, 4, 4, 4);
             startScanBt.Name = "startScanBt";
-            startScanBt.Size = new Size(94, 29);
+            startScanBt.Size = new Size(118, 36);
             startScanBt.TabIndex = 0;
             startScanBt.Text = "Start";
             startScanBt.UseVisualStyleBackColor = true;
@@ -52,18 +53,21 @@ namespace LibraryManagement.GUIs
             // 
             // pictureBox
             // 
-            pictureBox.Location = new Point(25, 104);
+            pictureBox.Location = new Point(31, 130);
+            pictureBox.Margin = new Padding(4, 4, 4, 4);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(455, 254);
+            pictureBox.Size = new Size(569, 318);
             pictureBox.TabIndex = 2;
             pictureBox.TabStop = false;
+            pictureBox.Click += pictureBox_Click;
             // 
             // comboBox
             // 
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(25, 47);
+            comboBox.Location = new Point(31, 59);
+            comboBox.Margin = new Padding(4, 4, 4, 4);
             comboBox.Name = "comboBox";
-            comboBox.Size = new Size(455, 28);
+            comboBox.Size = new Size(568, 33);
             comboBox.TabIndex = 3;
             // 
             // timer1
@@ -73,9 +77,10 @@ namespace LibraryManagement.GUIs
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(46, 393);
+            label1.Location = new Point(58, 491);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(56, 20);
+            label1.Size = new Size(69, 25);
             label1.TabIndex = 7;
             label1.Text = "Status: ";
             // 
@@ -83,23 +88,25 @@ namespace LibraryManagement.GUIs
             // 
             statusLB.AutoSize = true;
             statusLB.ForeColor = Color.DarkBlue;
-            statusLB.Location = new Point(108, 394);
+            statusLB.Location = new Point(135, 492);
+            statusLB.Margin = new Padding(4, 0, 4, 0);
             statusLB.Name = "statusLB";
-            statusLB.Size = new Size(62, 20);
+            statusLB.Size = new Size(76, 25);
             statusLB.TabIndex = 8;
             statusLB.Text = "Pending";
             statusLB.Visible = false;
             // 
             // QRReader
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(513, 450);
+            ClientSize = new Size(641, 562);
             Controls.Add(statusLB);
             Controls.Add(label1);
             Controls.Add(comboBox);
             Controls.Add(pictureBox);
             Controls.Add(startScanBt);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "QRReader";
             Text = "Thành viên";
             FormClosing += QRReader_FormClosing;
