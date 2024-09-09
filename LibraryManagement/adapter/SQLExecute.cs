@@ -31,7 +31,8 @@ namespace LibraryManagement.adapter
                 return rowAffected > 0;
 
             }
-            catch (Exception ex) { 
+            catch (Exception ex) {
+                MessageBox.Show("Lỗi: " +ex.Message);
                 return false;
             }
         }

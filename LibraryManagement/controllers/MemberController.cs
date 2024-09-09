@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LibraryManagement.controllers
 {
@@ -27,12 +29,24 @@ namespace LibraryManagement.controllers
             return data;
         }
 
-        public bool add (Member member)
+        public string add(long idNo, string name, int phoneNo, string email, string address)
         {
-            string sql = "";
-            SqlCommand cmd = new SqlCommand (sql, conn);
-            bool result = sqlExecute.executeNoneQuery(cmd);
-            return result;
+            try
+            {
+                string sql = "EXEC them_member @id_no, @name, @phone_no, @email, @address";
+                SqlCommand cmd = new SqlCommand (sql, conn);
+                cmd.Parameters.AddWithValue("id_no", idNo);
+                cmd.Parameters.AddWithValue("name", name);
+                cmd.Parameters.AddWithValue("phone_no", phoneNo);
+                cmd.Parameters.AddWithValue("email", email);
+                cmd.Parameters.AddWithValue("address", address);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                return data.Rows[0][0].ToString() ;  
+            }
+            catch (Exception ex)
+            {
+                return "Thêm không thành công";
+            }
         }
 
         public bool remove(int id) {
