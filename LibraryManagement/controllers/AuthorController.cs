@@ -20,7 +20,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "SELECT * FROM author";
+                string sql = "SELECT * FROM author ORDER BY name ASC";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 DataTable data = sqlExecute.executeQuery(cmd);
                 return data;
@@ -42,12 +42,12 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "";
+                string name = author.Name;
+                string sql = "INSERT INTO [author] (name) VALUES (@name)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", name);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
-
-
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "DELETE * FROM author WHERE id = @Id";
+                string sql = "DELETE FROM [author] WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 bool result = sqlExecute.executeNoneQuery(cmd);
@@ -86,7 +86,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "Update * FROM author SET name=@Name WHERE id = @Id";
+                string sql = "Update [author] SET name=@Name WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", author.Id);
                 cmd.Parameters.AddWithValue("@Name", author.Name);

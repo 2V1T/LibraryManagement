@@ -60,6 +60,27 @@ namespace LibraryManagement.controllers
             }
         }
 
+        public int getQuantity(int bookId)
+        {
+            int quantity = 0;
+            try
+            {
+                string sql = "SELECT COUNT(*) AS quantity FROM Copies WHERE book_id = @Id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Id", bookId);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                if (data.Rows.Count > 0)
+                {
+                    quantity = int.Parse(data.Rows[0]["quantity"].ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                    return 0;
+            }
+            return quantity;
+        }
+
         public DataTable getByCategoryId(int CategoryId)
         {
             try
@@ -107,13 +128,12 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "UPDATE Book SET name=@Name, author_id=@AuthorId, category_id=@CategoryId, description=@Description, quantity=@Quantity WHERE id=@Id";
+                string sql = "UPDATE Book SET name=@Name, author_id=@AuthorId, category_id=@CategoryId, description=@Description WHERE id=@Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Name", book.Name);
                 cmd.Parameters.AddWithValue("@AuthorId", book.AuthorId);
                 cmd.Parameters.AddWithValue("@CategoryId", book.CategoryId);
                 cmd.Parameters.AddWithValue("@Description", book.Description);
-                cmd.Parameters.AddWithValue("@Quantity", book.Quantity);
                 cmd.Parameters.AddWithValue("@Id", book.Id);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
@@ -166,7 +186,6 @@ namespace LibraryManagement.controllers
                     book.AuthorId = (int)data.Rows[0]["author_id"];
                     book.CategoryId = (int)data.Rows[0]["category_id"];
                     book.Description = (string)data.Rows[0]["description"];
-                    book.Quantity = (int)data.Rows[0]["quantity"];
 
                 }
                 return book;
@@ -186,11 +205,52 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "Select * FROM Book where name=@Name, category_id=@categoryId, publisher_id=@publisherId";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Name", name);
+
+                // Build dynamic SQL with parameter checks
+                StringBuilder sql = new StringBuilder("SELECT book.id, book.name, author.name as 'author' , category.name as 'category', description,book_img FROM book full join author on author.id = Book.author_id full join Category on Category.id = Book.category_id WHERE ");
+                bool whereClauseAdded = false;
+
+                if (name != null)
+                {
+                    sql.Append("book.name LIKE @Name");
+                    whereClauseAdded = true;
+                }
+
+                if (categoryId != 0)
+                {
+                    if (whereClauseAdded)
+                    {
+                        sql.Append(" AND ");
+                    }
+                    sql.Append("category_id = @categoryId");
+                    whereClauseAdded = true;
+                }
+
+                if (publisherId != 0)
+                {
+                    if (whereClauseAdded)
+                    {
+                        sql.Append(" AND ");
+                    }
+                    sql.Append("author_id = @publisherId");
+                    whereClauseAdded = true;
+                }
+
+                // Check if any WHERE clause was built
+                if (!whereClauseAdded)
+                {
+                    // No search criteria, return empty DataTable
+                    return new DataTable();
+                }
+
+                string finalSql = sql.ToString();
+                SqlCommand cmd = new SqlCommand(finalSql, conn);
+
+                // Add parameters with appropriate values (including null checks)
+                cmd.Parameters.AddWithValue("@Name", name != null ? "%" + name + "%" : null);
                 cmd.Parameters.AddWithValue("@categoryId", categoryId);
                 cmd.Parameters.AddWithValue("@publisherId", publisherId);
+
                 DataTable data = sqlExecute.executeQuery(cmd);
                 return data;
             }
@@ -204,5 +264,7 @@ namespace LibraryManagement.controllers
                 conn.Close();
             }
         }
+
+
     }
 }

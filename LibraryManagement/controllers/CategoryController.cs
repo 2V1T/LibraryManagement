@@ -20,7 +20,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "SELECT * FROM category";
+                string sql = "SELECT * FROM [category] ORDER BY name ASC";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 DataTable data = sqlExecute.executeQuery(cmd);
                 return data;
@@ -42,8 +42,9 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "";
+                string sql = "INSERT INTO [category] (name) VALUES (@name)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", category.Name);  
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
 
@@ -64,7 +65,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "DELETE * FROM category WHERE id = @Id";
+                string sql = "DELETE FROM category WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 bool result = sqlExecute.executeNoneQuery(cmd);
@@ -86,7 +87,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "Update * FROM category SET name=@Name WHERE id = @Id";
+                string sql = "Update [category] SET name=@Name WHERE id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", category.Id);
                 cmd.Parameters.AddWithValue("@Name", category.Name);

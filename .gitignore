@@ -1,6 +1,8 @@
 .vs/
 LibraryManagement/bin/
 
+LibraryManagement/obj/
+
 # Đặt các mẫu chung ở đầu
 *.[oa]
 *~
