@@ -40,6 +40,7 @@
             bạnĐọcMớiToolStripMenuItem = new ToolStripMenuItem();
             đăngKíMớiToolStripMenuItem = new ToolStripMenuItem();
             bookPanel = new Panel();
+            showAllBT = new Button();
             borrowBT = new Button();
             deleteCopyBT = new Button();
             addBookBT = new Button();
@@ -65,6 +66,10 @@
             dataGridViewCategory = new DataGridView();
             panel2 = new Panel();
             groupBox4 = new GroupBox();
+            label19 = new Label();
+            quantityNumberic = new NumericUpDown();
+            quantityLabel = new Label();
+            label18 = new Label();
             descriptionBookAddTB = new RichTextBox();
             label5 = new Label();
             label7 = new Label();
@@ -108,10 +113,6 @@
             label10 = new Label();
             dataGridViewMember = new DataGridView();
             label9 = new Label();
-            label18 = new Label();
-            quantityLabel = new Label();
-            numericUpDown1 = new NumericUpDown();
-            label19 = new Label();
             menuStrip1.SuspendLayout();
             bookPanel.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -123,12 +124,12 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategory).BeginInit();
             panel2.SuspendLayout();
             groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)quantityNumberic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBook).BeginInit();
             memberPanel.SuspendLayout();
             groupBox5.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -215,6 +216,7 @@
             // 
             // bookPanel
             // 
+            bookPanel.Controls.Add(showAllBT);
             bookPanel.Controls.Add(borrowBT);
             bookPanel.Controls.Add(deleteCopyBT);
             bookPanel.Controls.Add(addBookBT);
@@ -240,6 +242,16 @@
             bookPanel.TabIndex = 2;
             bookPanel.Visible = false;
             bookPanel.Paint += panel1_Paint;
+            // 
+            // showAllBT
+            // 
+            showAllBT.Location = new Point(789, 552);
+            showAllBT.Name = "showAllBT";
+            showAllBT.Size = new Size(94, 29);
+            showAllBT.TabIndex = 11;
+            showAllBT.Text = "Tất cả";
+            showAllBT.UseVisualStyleBackColor = true;
+            showAllBT.Click += showAllBT_Click;
             // 
             // borrowBT
             // 
@@ -277,6 +289,7 @@
             updateBookBT.TabIndex = 1;
             updateBookBT.Text = "Sửa";
             updateBookBT.UseVisualStyleBackColor = true;
+            updateBookBT.Click += updateBookBT_Click;
             // 
             // deleteBookBT
             // 
@@ -303,6 +316,7 @@
             dataGridViewCopies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCopies.Location = new Point(-1, 26);
             dataGridViewCopies.Name = "dataGridViewCopies";
+            dataGridViewCopies.ReadOnly = true;
             dataGridViewCopies.RowHeadersWidth = 51;
             dataGridViewCopies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewCopies.Size = new Size(883, 173);
@@ -312,7 +326,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(16, 176);
+            label8.Location = new Point(20, 159);
             label8.Name = "label8";
             label8.Size = new Size(65, 20);
             label8.TabIndex = 8;
@@ -320,7 +334,7 @@
             // 
             // searchBookBT
             // 
-            searchBookBT.Location = new Point(758, 172);
+            searchBookBT.Location = new Point(762, 155);
             searchBookBT.Name = "searchBookBT";
             searchBookBT.Size = new Size(94, 29);
             searchBookBT.TabIndex = 7;
@@ -330,7 +344,7 @@
             // 
             // searchNameTB
             // 
-            searchNameTB.Location = new Point(106, 173);
+            searchNameTB.Location = new Point(110, 156);
             searchNameTB.Name = "searchNameTB";
             searchNameTB.Size = new Size(616, 27);
             searchNameTB.TabIndex = 6;
@@ -374,6 +388,7 @@
             dataGridViewAuthor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewAuthor.Location = new Point(0, 92);
             dataGridViewAuthor.Name = "dataGridViewAuthor";
+            dataGridViewAuthor.ReadOnly = true;
             dataGridViewAuthor.RowHeadersWidth = 51;
             dataGridViewAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewAuthor.Size = new Size(282, 133);
@@ -462,6 +477,7 @@
             dataGridViewCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCategory.Location = new Point(0, 92);
             dataGridViewCategory.Name = "dataGridViewCategory";
+            dataGridViewCategory.ReadOnly = true;
             dataGridViewCategory.RowHeadersWidth = 51;
             dataGridViewCategory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewCategory.Size = new Size(274, 133);
@@ -479,7 +495,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(label19);
-            groupBox4.Controls.Add(numericUpDown1);
+            groupBox4.Controls.Add(quantityNumberic);
             groupBox4.Controls.Add(quantityLabel);
             groupBox4.Controls.Add(label18);
             groupBox4.Controls.Add(descriptionBookAddTB);
@@ -496,6 +512,40 @@
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Sách";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(497, 402);
+            label19.Name = "label19";
+            label19.Size = new Size(111, 20);
+            label19.TabIndex = 11;
+            label19.Text = "Thêm số lượng:";
+            // 
+            // quantityNumberic
+            // 
+            quantityNumberic.Location = new Point(631, 400);
+            quantityNumberic.Name = "quantityNumberic";
+            quantityNumberic.Size = new Size(150, 27);
+            quantityNumberic.TabIndex = 10;
+            // 
+            // quantityLabel
+            // 
+            quantityLabel.AutoSize = true;
+            quantityLabel.Location = new Point(131, 402);
+            quantityLabel.Name = "quantityLabel";
+            quantityLabel.Size = new Size(17, 20);
+            quantityLabel.TabIndex = 9;
+            quantityLabel.Text = "0";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(42, 402);
+            label18.Name = "label18";
+            label18.Size = new Size(76, 20);
+            label18.TabIndex = 9;
+            label18.Text = "Số lượng: ";
             // 
             // descriptionBookAddTB
             // 
@@ -570,7 +620,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 32F);
-            label3.Location = new Point(694, 22);
+            label3.Location = new Point(692, 0);
             label3.Name = "label3";
             label3.Size = new Size(399, 72);
             label3.TabIndex = 5;
@@ -580,7 +630,7 @@
             // searchAuthorCB
             // 
             searchAuthorCB.FormattingEnabled = true;
-            searchAuthorCB.Location = new Point(456, 121);
+            searchAuthorCB.Location = new Point(460, 104);
             searchAuthorCB.Name = "searchAuthorCB";
             searchAuthorCB.Size = new Size(266, 28);
             searchAuthorCB.TabIndex = 4;
@@ -589,7 +639,7 @@
             // 
             // label2
             // 
-            label2.Location = new Point(370, 124);
+            label2.Location = new Point(374, 107);
             label2.Name = "label2";
             label2.Size = new Size(62, 25);
             label2.TabIndex = 3;
@@ -598,7 +648,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(16, 121);
+            label1.Location = new Point(20, 104);
             label1.Name = "label1";
             label1.Size = new Size(65, 20);
             label1.TabIndex = 2;
@@ -616,7 +666,7 @@
             // searchCategoryCB
             // 
             searchCategoryCB.FormattingEnabled = true;
-            searchCategoryCB.Location = new Point(106, 118);
+            searchCategoryCB.Location = new Point(110, 101);
             searchCategoryCB.Name = "searchCategoryCB";
             searchCategoryCB.Size = new Size(241, 28);
             searchCategoryCB.TabIndex = 1;
@@ -627,6 +677,7 @@
             dataGridViewBook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewBook.Location = new Point(0, 233);
             dataGridViewBook.Name = "dataGridViewBook";
+            dataGridViewBook.ReadOnly = true;
             dataGridViewBook.RowHeadersWidth = 51;
             dataGridViewBook.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewBook.Size = new Size(883, 308);
@@ -892,40 +943,6 @@
             label9.TabIndex = 0;
             label9.Text = "BẠN ĐỌC";
             // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new Point(42, 402);
-            label18.Name = "label18";
-            label18.Size = new Size(76, 20);
-            label18.TabIndex = 9;
-            label18.Text = "Số lượng: ";
-            // 
-            // quantityLabel
-            // 
-            quantityLabel.AutoSize = true;
-            quantityLabel.Location = new Point(131, 402);
-            quantityLabel.Name = "quantityLabel";
-            quantityLabel.Size = new Size(17, 20);
-            quantityLabel.TabIndex = 9;
-            quantityLabel.Text = "0";
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(631, 400);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(150, 27);
-            numericUpDown1.TabIndex = 10;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new Point(497, 402);
-            label19.Name = "label19";
-            label19.Size = new Size(111, 20);
-            label19.TabIndex = 11;
-            label19.Text = "Thêm số lượng:";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -957,6 +974,7 @@
             panel2.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)quantityNumberic).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBook).EndInit();
             memberPanel.ResumeLayout(false);
             memberPanel.PerformLayout();
@@ -965,7 +983,6 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1063,6 +1080,7 @@
         private Label label18;
         private Label quantityLabel;
         private Label label19;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown quantityNumberic;
+        private Button showAllBT;
     }
 }

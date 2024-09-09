@@ -66,7 +66,7 @@ namespace LibraryManagement.controllers
             try
             {
                 conn.Open();
-                string sql = "EXEC them_copies @bookId";
+                string sql = "EXEC them_copies @bookId, 1";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@bookId", bookId);
                 bool result = sqlExecute.executeNoneQuery(cmd);

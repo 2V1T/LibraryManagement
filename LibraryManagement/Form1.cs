@@ -41,16 +41,16 @@ namespace LibraryManagement
             dataGridViewBook.Columns[0].Width = 50;
             for (int i = 1; i <= 5; i++)
             {
-                dataGridViewBook.Columns[i].Width = (maxWidthDGWBook-130)/5;
+                dataGridViewBook.Columns[i].Width = (maxWidthDGWBook - 130) / 5;
             }
-       
+
         }
 
 
         private void addAvailibleBook(DataGridView dataGridView, int bookId)
         {
             CopiedBookController copiesController = new CopiedBookController();
-            DataTable data = copiesController.getAvailable(bookId);
+            DataTable data = copiesController.getByBookId(bookId);
             dataGridView.DataSource = data;
             int maxWidthCopies = dataGridView.Width;
             for (int i = 0; i < 3; i++)
@@ -58,8 +58,31 @@ namespace LibraryManagement
                 dataGridView.Columns[i].Width = (maxWidthCopies - 80) / 3;
             }
         }
+
+        private void reloadCategory()
+        {
+            addComboboxCategory(searchCategoryCB);
+            addComboboxCategory(categoryAddBookCB);
+            addAuthorToTable(dataGridViewAuthor);
+        }
+
+
+        private void reloadAuthor()
+        {
+            addComboboxAuthor(searchAuthorCB);
+            addComboboxAuthor(categoryAddBookCB);
+            addCategoryToTable(dataGridViewCategory);
+
+        }
+
+        private void reloadBook()
+        {
+            addBookToView(dataGridViewBook);
+
+        }
         private void addComboboxCategory(ComboBox comboBox)
         {
+            comboBox.Items.Clear();
             CategoryController controller = new CategoryController();
             DataTable dt = controller.getAll();
             foreach (DataRow dr in dt.Rows)
@@ -73,6 +96,7 @@ namespace LibraryManagement
 
         private void addComboboxAuthor(ComboBox comboBox)
         {
+            comboBox.Items.Clear();
             AuthorController controller = new AuthorController();
             DataTable dt = controller.getAll();
             foreach (DataRow dr in dt.Rows)
@@ -194,6 +218,41 @@ namespace LibraryManagement
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            BookController bookController = new BookController();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewBook.Rows[e.RowIndex];
+                int id = Convert.ToInt32(row.Cells["id"].Value);
+                addAvailibleBook(dataGridViewCopies, id);
+                Book book = bookController.getById(id);
+                nameAddBookTB.Text = book.Name;
+                descriptionBookAddTB.Text = book.Description;
+                quantityLabel.Text = bookController.getQuantity(id).ToString();
+                foreach (var item in authorAddBookCB.Items)
+                {
+                    if (item is KeyValuePair<string, int> pair)
+                    {
+                        string key = pair.Key;
+                        int value = pair.Value;
+                        if (value == book.AuthorId)
+                        {
+                            authorAddBookCB.SelectedItem = item;
+                        }
+                    }
+                }
+                foreach (var item in categoryAddBookCB.Items)
+                {
+                    if (item is KeyValuePair<string, int> pair)
+                    {
+                        string key = pair.Key;
+                        int value = pair.Value;
+                        if (value == book.CategoryId)
+                        {
+                            categoryAddBookCB.SelectedItem = item;
+                        }
+                    }
+                }
+            }
         }
 
         private void authorDropDownSearch_SelectedIndexChanged(object sender, EventArgs e)
@@ -246,14 +305,28 @@ namespace LibraryManagement
 
         private void đăngKíMớiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            QRReader qR = new QRReader(false);
+            QRReader qR = new QRReader(false,0);
             qR.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            QRReader qR = new QRReader(true);
+            int bookId = 0;
+
+            if (dataGridViewCopies.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewCopies.SelectedRows[0];
+                bookId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+            }
+            if (bookId != 0)
+            {
+            QRReader qR = new QRReader(true, bookId);
             qR.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn sách cho mượn!", "Thông báo");
+            }
         }
 
         private void đổiMậtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -264,7 +337,7 @@ namespace LibraryManagement
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
         private void addCategoryToTable(DataGridView dataGridView)
         {
@@ -309,7 +382,7 @@ namespace LibraryManagement
                     {
                         string key = pair.Key;
                         int value = pair.Value;
-                        if (value == book.AuthorId)
+                        if (value == book.CategoryId)
                         {
                             categoryAddBookCB.SelectedItem = item;
                         }
@@ -337,7 +410,7 @@ namespace LibraryManagement
                 if (result)
                 {
                     MessageBox.Show("Thêm tác giả thành công!", "Thông tin");
-                    loadData();
+                    reloadAuthor();
                     authorTB.Text = "";
                 }
                 else
@@ -364,7 +437,7 @@ namespace LibraryManagement
                 if (result)
                 {
                     MessageBox.Show("Cập nhật thông tin tác giả thành công!", "Thông báo");
-                    loadData();
+                    reloadAuthor();
                 }
                 else
                 {
@@ -396,7 +469,7 @@ namespace LibraryManagement
                         {
                             authorTB.Text = "";
                             MessageBox.Show("Xóa tác giả thành công!", "Thông báo");
-                            loadData();
+                            reloadAuthor();
                         }
                         else
                         {
@@ -430,7 +503,7 @@ namespace LibraryManagement
                 if (result)
                 {
                     MessageBox.Show("Thêm thể loại thành công!", "Thông báo");
-                    loadData();
+                    reloadCategory();
                     categoryTB.Text = "";
                 }
                 else
@@ -452,7 +525,7 @@ namespace LibraryManagement
                 if (result)
                 {
                     MessageBox.Show("Cập nhật thông tin thể loại thành công!", "Thông báo");
-                    loadData();
+                    reloadAuthor();
                 }
                 else
                 {
@@ -477,7 +550,7 @@ namespace LibraryManagement
                         {
                             categoryTB.Text = "";
                             MessageBox.Show("Xóa thể loại thành công!", "Thông báo");
-                            loadData();
+                            reloadCategory();
                         }
                         else
                         {
@@ -508,6 +581,99 @@ namespace LibraryManagement
             BookController bookController = new BookController();
             DataTable dtAuthor = bookController.search(searchNameTB.Text, idCategory, idAuthor);
             dataGridViewBook.DataSource = dtAuthor;
+        }
+        private void clearAddBook()
+        {
+            descriptionBookAddTB.Text = "";
+            nameAddBookTB.Text = "";
+            quantityNumberic.Value = 0;
+        }
+
+        private void updateBookBT_Click(object sender, EventArgs e)
+        {
+            int idBook = 0;
+            if (dataGridViewBook.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewBook.SelectedRows[0];
+                idBook = Convert.ToInt32(selectedRow.Cells["id"].Value);
+            }
+            BookController bookController = new BookController();
+            object selectedValueAuthor = authorAddBookCB.SelectedItem;
+            int idAuthor = 0;
+            int idCategory = 0;
+            if (selectedValueAuthor is KeyValuePair<string, int> pairAuthor)
+            {
+                idAuthor = pairAuthor.Value;
+            }
+
+            object selectedValueCategory = categoryAddBookCB.SelectedItem;
+            if (selectedValueCategory is KeyValuePair<string, int> pairCategory)
+            {
+                idCategory = pairCategory.Value;
+            }
+            string name = nameAddBookTB.Text;
+            string description = descriptionBookAddTB.Text;
+            if (name == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên sách!", "Thông báo");
+                return;
+            }
+            if (idCategory == 0)
+            {
+                MessageBox.Show("Vui lòng chọn thể loại!", "Thông báo");
+                return;
+            }
+            if (idAuthor == 0)
+            {
+                MessageBox.Show("Vui lòng chọn tác giả!", "Thông báo");
+                return;
+            }
+            if (description == "")
+            {
+                MessageBox.Show("Vui lòng điền mô tả cho sách!", "Thông báo");
+            }
+            int quantity = (int)quantityNumberic.Value;
+            CopiedBookController copiedBookController = new CopiedBookController();
+            if (quantity != 0)
+            {
+                for (int i = 0; i < quantity; i++)
+                {
+                    bool success = copiedBookController.add(idBook);
+                    if (success)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm số lượng thất bại!", "Thông báo");
+                        break;
+                    }
+                }
+            }
+            Book book = new Book();
+            book.Name = name;
+            book.Description = description;
+            book.CategoryId = idCategory;
+            book.AuthorId = idAuthor;
+            book.Id = idBook;
+            bool result = bookController.update(book);
+            if (result)
+            {
+                clearAddBook();
+                reloadBook();
+                MessageBox.Show("Cập nhật thông tin sách thành công!", "Thông báo");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật thông tin sách thất bại!", "Thông báo");
+                return;
+            }
+        }
+
+        private void showAllBT_Click(object sender, EventArgs e)
+        {
+            reloadBook();
         }
     }
 }
