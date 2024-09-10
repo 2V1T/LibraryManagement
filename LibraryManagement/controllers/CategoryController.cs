@@ -23,13 +23,13 @@ namespace LibraryManagement.controllers
                 string sql = "SELECT * FROM [category] ORDER BY name ASC";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                return data;
+                return data ?? new DataTable(); // Return an empty DataTable if data is null
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable(); // Return an empty DataTable in case of an exception
             }
             finally
             {

@@ -23,13 +23,12 @@ namespace LibraryManagement.controllers
                 string sql = "SELECT * FROM vwBook";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                return data;
-
+                return data ?? new DataTable();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable();
             }
             finally
             {
@@ -47,7 +46,7 @@ namespace LibraryManagement.controllers
                 sqlCommand.Parameters.AddWithValue("id", idCopies);
                 return sqlExecute.executeNoneQuery(sqlCommand);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -64,13 +63,12 @@ namespace LibraryManagement.controllers
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@AuthorId", AuthorId);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                return data;
-
+                return data ?? new DataTable();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable();
             }
             finally
             {
@@ -94,7 +92,7 @@ namespace LibraryManagement.controllers
                 }
                 conn.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                     return 0;
             }
@@ -110,12 +108,12 @@ namespace LibraryManagement.controllers
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@CategoryId", CategoryId);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                return data;
+                return data ?? new DataTable();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable();
             }
             finally
             {
@@ -207,7 +205,6 @@ namespace LibraryManagement.controllers
                     book.AuthorId = (int)data.Rows[0]["author_id"];
                     book.CategoryId = (int)data.Rows[0]["category_id"];
                     book.Description = (string)data.Rows[0]["description"];
-
                 }
                 conn.Close();
                 return book;
@@ -215,7 +212,7 @@ namespace LibraryManagement.controllers
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new Book();
             }
             finally
             {
@@ -275,12 +272,12 @@ namespace LibraryManagement.controllers
 
                 DataTable data = sqlExecute.executeQuery(cmd);
                 conn.Close();
-                return data;
+                return data ?? new DataTable();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable();
             }
             finally
             {

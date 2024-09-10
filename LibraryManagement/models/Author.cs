@@ -9,7 +9,7 @@ namespace LibraryManagement.models
     internal class Author
     {
         private int id;
-        private string name;
+        private string name = string.Empty; // Initialize to avoid CS8618
 
         public int Id
         {

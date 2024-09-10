@@ -72,6 +72,8 @@ namespace LibraryManagement.models
         }
         public Book()
         {
+            name = string.Empty;
+            description = string.Empty;
         }
         public Book(int id, string name, int author_id, int category_id, string description)
         {

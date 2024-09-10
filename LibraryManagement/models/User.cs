@@ -9,11 +9,11 @@ namespace LibraryManagement.models
     internal class User
     {
         private int id;
-        private string username;
-        private byte[] password;
-        private string name;
-        private string email;
-        private string address;
+        private string username = string.Empty;
+        private byte[] password = Array.Empty<byte>();
+        private string name = string.Empty;
+        private string email = string.Empty;
+        private string address = string.Empty;
         private int phone_no;
         private bool admin;
 

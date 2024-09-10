@@ -60,7 +60,7 @@ namespace LibraryManagement.controllers
                 conn.Close();
             }
         }
-        public BorrowedDetail getByIdMember(int memberId)
+        public BorrowedDetail? getByIdMember(int memberId)
         {
             try
             {
@@ -76,8 +76,9 @@ namespace LibraryManagement.controllers
                     borrowedDetail.MemberId = (int)data.Rows[0]["member_id"];
                     borrowedDetail.CopiesId = (int)data.Rows[0]["copies_id"];
                     borrowedDetail.ReturnDate = (DateTime)data.Rows[0]["return_date"];
+                    return borrowedDetail;
                 }
-                return borrowedDetail;
+                return null;
             }
             catch (Exception ex)
             {
@@ -90,7 +91,7 @@ namespace LibraryManagement.controllers
             }
         }
 
-        public DataRow getByIdNo(long idNo)
+        public DataRow? getByIdNo(long idNo)
         {
             try
             {
@@ -99,11 +100,12 @@ namespace LibraryManagement.controllers
                 SqlCommand sqlCommand = new SqlCommand(sql, conn);
                 sqlCommand.Parameters.AddWithValue("@id_no", idNo);
                 DataTable data = sqlExecute.executeQuery(sqlCommand);
-                if (data.Rows.Count > 0) { 
-                    return data.Rows[0]; 
+                if (data.Rows.Count > 0)
+                {
+                    return data.Rows[0];
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

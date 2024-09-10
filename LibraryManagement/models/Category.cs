@@ -21,7 +21,10 @@ namespace LibraryManagement.models
             get { return name; }
         }
 
-        public Category() { }
+        public Category()
+        {
+            name = string.Empty; // Initialize name to avoid CS8618
+        }
         public Category(int id, string name)
         {
             this.id = id;

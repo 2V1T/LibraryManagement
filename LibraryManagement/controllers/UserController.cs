@@ -55,7 +55,7 @@ namespace LibraryManagement.controllers
                     id = 0;
                 }
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 id = 0;
             }
             return id;
@@ -70,13 +70,13 @@ namespace LibraryManagement.controllers
                 bool result = sqlExecute.executeNoneQuery(cmd);
                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
         }
 
-        public string UpdatePassword(int id, string oldPassword, string newPassword, string retypePassword)
+        public string? UpdatePassword(int id, string oldPassword, string newPassword, string retypePassword)
         {
             try
             {
@@ -91,8 +91,8 @@ namespace LibraryManagement.controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: "+ex.Message);
-                return null;
+                MessageBox.Show("Lỗi: " + ex.Message);
+                return string.Empty;
             }
         }
 
@@ -109,7 +109,11 @@ namespace LibraryManagement.controllers
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                return null;
+                return new DataTable(); // Return an empty DataTable instead of null
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public bool UpdateInfo(int id, string name, string email, string address, int phoneNo) 

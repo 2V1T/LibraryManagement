@@ -13,40 +13,48 @@ namespace LibraryManagement.adapter
         private SqlDataAdapter adapter;
         private DataSet dataSet;
         private DataTable table;
-        public SQLExecute () {}
+        public SQLExecute()
+        {
+            adapter = new SqlDataAdapter();
+            dataSet = new DataSet();
+            table = new DataTable();
+        }
 
-        public DataTable executeQuery (SqlCommand sqlCommand)
+        public DataTable executeQuery(SqlCommand sqlCommand)
         {
             adapter = new SqlDataAdapter(sqlCommand);
             dataSet = new DataSet();
-            adapter.Fill (dataSet);
+            adapter.Fill(dataSet);
             table = dataSet.Tables[0];
             return table;
         }
 
-        public bool executeNoneQuery(SqlCommand sqlCommand) { 
+        public bool executeNoneQuery(SqlCommand sqlCommand)
+        {
             try
             {
                 int rowAffected = sqlCommand.ExecuteNonQuery();
                 return rowAffected > 0;
 
             }
-            catch (Exception ex) {
-                MessageBox.Show("Lỗi: " +ex.Message);
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
                 return false;
             }
         }
 
-        public byte[] excuteGetImage(SqlCommand sqlCommand, string key) { 
-            byte[] varbinaryData;
+        public byte[]? excuteGetImage(SqlCommand sqlCommand, string key)
+        {
+            byte[]? varbinaryData = null;
             using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
             {
-                if (dataReader.Read()) {
+                if (dataReader.Read())
+                {
                     varbinaryData = (byte[])dataReader[key];
-                return varbinaryData;
                 }
             }
-            return null;
+            return varbinaryData;
         }
     }
 }

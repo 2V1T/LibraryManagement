@@ -5,8 +5,8 @@ namespace LibraryManagement.database
 {
     public class DBConnection
     {
-        private static readonly string connString = "Data Source=DOANKHACVI;Initial Catalog=library;Integrated Security=True";
-        private static DBConnection _instance;
+        private static readonly string connString = "Data Source=localhost;Initial Catalog=library;Persist Security Info=True;User ID=sa;Password=AYClqt1893@;Encrypt=True;TrustServerCertificate=True";
+        private static DBConnection? _instance; // Declare as nullable
         private SqlConnection conn;
 
         // Private constructor to prevent instantiation

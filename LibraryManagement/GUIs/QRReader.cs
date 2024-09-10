@@ -25,6 +25,8 @@ namespace LibraryManagement.GUIs
         int bookId = 0;
         bool isReturn;
         RegisterMember registerMember = new RegisterMember();
+        FilterInfoCollection filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+        VideoCaptureDevice? videoCaptureDevice; // Make videoCaptureDevice nullable
 
         public QRReader(bool isMember, int bookId)
         {
@@ -40,8 +42,6 @@ namespace LibraryManagement.GUIs
             this.isReturn = isReturn;
         }
 
-        FilterInfoCollection filterInfoCollection;
-        VideoCaptureDevice videoCaptureDevice;
         private void startScanBt_Click(object sender, EventArgs e)
         {
             videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[comboBox.SelectedIndex].MonikerString);
@@ -75,11 +75,12 @@ namespace LibraryManagement.GUIs
             pictureBox.Image = (Bitmap)bitmap.Clone();
         }
 
-        private void borrowBook (long idNo, int idCopies)
+        private void borrowBook(long idNo, int idCopies)
         {
             MemberController memberController = new MemberController();
-      
-            if (memberController.memberAvailable(idNo)) {
+
+            if (memberController.memberAvailable(idNo))
+            {
                 DateTime currentDate = DateTime.Now;
                 DateTime nextMonthDate = currentDate.AddMonths(1);
                 DateTime returnDate = DateTime.Parse(nextMonthDate.ToString("yyyy-MM-dd"));
@@ -98,7 +99,7 @@ namespace LibraryManagement.GUIs
             {
                 MessageBox.Show("Bạn đọc chưa trả sách đã mượn không thể mượn thêm", "Thông báo");
             }
-            
+
         }
 
         private void returnBook(int idCopies)
@@ -123,13 +124,13 @@ namespace LibraryManagement.GUIs
                 Result result = reader.Decode((Bitmap)pictureBox.Image);
                 try
                 {
-                    string decode = result?.ToString().Trim();
+                    string? decode = result?.ToString()?.Trim();
                     if (decode != null)
                     {
                         timer1.Stop();
                         statusLB.Text = "Detected";
                         statusLB.ForeColor = Color.Green;
-                        string[] splitString = decode.Split("|");
+                        string[] splitString = decode.Split('|');
                         if (!isReturn)
                         {
                             if (!isMember)

@@ -22,7 +22,7 @@ namespace LibraryManagement.models
             set { id_no = value; }
         }
 
-        private string name;
+        private string name = string.Empty;
         public string Name
         {
             get { return name; }
@@ -36,28 +36,28 @@ namespace LibraryManagement.models
             set { phone_no = value; }
         }
 
-        private string email;
+        private string email = string.Empty;
         public string Email
         {
             get { return email; }
             set { email = value; }
         }
 
-        private string address;
+        private string address = string.Empty;
         public string Address
         {
             get { return address; }
             set { address = value; }
         }
 
-        private byte[] img_hash;
+        private byte[] img_hash = Array.Empty<byte>();
         public byte[] ImgHash
         {
             get { return img_hash; }
             set { img_hash = value; }
         }
 
-        private byte[] face_hash;
+        private byte[] face_hash = Array.Empty<byte>();
         public byte[] FaceHash
         {
             get { return face_hash; }

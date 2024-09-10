@@ -47,7 +47,7 @@ namespace LibraryManagement.controllers
                 conn.Close ();
                 return data.Rows[0][0].ToString() ;  
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "Thêm không thành công";
             }
@@ -102,7 +102,7 @@ namespace LibraryManagement.controllers
             conn.Open();
             string sql = "SELECT * FROM member WHERE name = @name";
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@name",name);
+            cmd.Parameters.AddWithValue("@name", name);
             DataTable data = sqlExecute.executeQuery(cmd);
             Member member = new Member();
             if (data.Rows.Count > 0)
@@ -112,10 +112,11 @@ namespace LibraryManagement.controllers
                 member.Email = (string)data.Rows[0]["email"];
                 member.PhoneNo = (int)data.Rows[0]["phone_no"];
                 member.Address = (string)data.Rows[0]["address"];
+                conn.Close();
                 return member;
             }
             conn.Close();
-            return null;
+            return new Member(); // Return an empty Member object instead of null
         }
 
         public Member getByCopiesId(int copiesId) {
@@ -136,7 +137,8 @@ namespace LibraryManagement.controllers
             return member;
         }
 
-        public Member getByIdNo(int idNo) {
+        public Member getByIdNo(int idNo)
+        {
             try
             {
                 conn.Open();
@@ -156,8 +158,9 @@ namespace LibraryManagement.controllers
                 conn.Close();
                 return member;
             }
-            catch (Exception ex) {
-                return null;
+            catch (Exception)
+            {
+                return new Member(); // Return an empty Member object instead of null
             }
         }
 

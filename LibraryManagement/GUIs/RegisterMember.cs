@@ -14,8 +14,8 @@ namespace LibraryManagement.GUIs
     public partial class RegisterMember : Form
     {
         MemberController controller = new MemberController();
-        public string Name;
-        public string idNo;
+        public new string Name { get; set; } = string.Empty; // Use 'new' keyword to hide inherited member
+        public string idNo { get; set; } = string.Empty;
         public RegisterMember()
         {
             InitializeComponent();
@@ -24,16 +24,17 @@ namespace LibraryManagement.GUIs
         public RegisterMember(string name, int id_no)
         {
             InitializeComponent();
+            Name = name;
+            idNo = id_no.ToString();
             phoneNoTB.Focus();
         }
 
-
         private void RegisterMember_Load(object sender, EventArgs e)
         {
-            if (Name != null && idNo != null)
+            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(idNo))
             {
                 nameTB.Text = Name;
-                cccdTB.Text = idNo.ToString();
+                cccdTB.Text = idNo;
             }
         }
 
@@ -42,7 +43,7 @@ namespace LibraryManagement.GUIs
             string email = emailTB.Text.Trim();
             string address = addressTB.Text.Trim();
             int phoneNo = int.Parse(phoneNoTB.Text.Trim());
-            if (email.Equals("") || address.Equals("") || phoneNoTB.Text.Trim().Equals(""))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(address) || string.IsNullOrEmpty(phoneNoTB.Text.Trim()))
             {
                 MessageBox.Show("Cần điền đầy đủ thông tin!");
                 return;

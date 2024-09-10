@@ -25,13 +25,12 @@ namespace LibraryManagement.controllers
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@bookId", bookId);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                return data;
-
+                return data ?? new DataTable();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable();
             }
             finally
             {
@@ -48,13 +47,12 @@ namespace LibraryManagement.controllers
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@bookId", bookId);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                return data;
-
+                return data ?? new DataTable();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return null;
+                return new DataTable();
             }
             finally
             {
