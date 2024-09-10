@@ -30,100 +30,95 @@ namespace LibraryManagement.GUIs
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            startScanBt = new Button();
-            pictureBox = new PictureBox();
-            comboBox = new ComboBox();
-            timer1 = new System.Windows.Forms.Timer(components);
-            label1 = new Label();
-            statusLB = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.startScanBt = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.comboBox = new System.Windows.Forms.ComboBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.statusLB = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.SuspendLayout();
             // 
             // startScanBt
             // 
-            startScanBt.Location = new Point(450, 488);
-            startScanBt.Margin = new Padding(4, 4, 4, 4);
-            startScanBt.Name = "startScanBt";
-            startScanBt.Size = new Size(118, 36);
-            startScanBt.TabIndex = 0;
-            startScanBt.Text = "Start";
-            startScanBt.UseVisualStyleBackColor = true;
-            startScanBt.Click += startScanBt_Click;
+            this.startScanBt.Location = new System.Drawing.Point(405, 390);
+            this.startScanBt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.startScanBt.Name = "startScanBt";
+            this.startScanBt.Size = new System.Drawing.Size(106, 29);
+            this.startScanBt.TabIndex = 0;
+            this.startScanBt.Text = "Start";
+            this.startScanBt.UseVisualStyleBackColor = true;
+            this.startScanBt.Click += new System.EventHandler(this.startScanBt_Click);
             // 
             // pictureBox
             // 
-            pictureBox.Location = new Point(31, 130);
-            pictureBox.Margin = new Padding(4, 4, 4, 4);
-            pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(569, 318);
-            pictureBox.TabIndex = 2;
-            pictureBox.TabStop = false;
-            pictureBox.Click += pictureBox_Click;
+            this.pictureBox.Location = new System.Drawing.Point(28, 104);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(512, 254);
+            this.pictureBox.TabIndex = 2;
+            this.pictureBox.TabStop = false;
             // 
             // comboBox
             // 
-            comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(31, 59);
-            comboBox.Margin = new Padding(4, 4, 4, 4);
-            comboBox.Name = "comboBox";
-            comboBox.Size = new Size(568, 33);
-            comboBox.TabIndex = 3;
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Location = new System.Drawing.Point(28, 47);
+            this.comboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(512, 28);
+            this.comboBox.TabIndex = 3;
             // 
             // timer1
             // 
-            timer1.Tick += Timer1_tick;
+            this.timer1.Tick += new System.EventHandler(this.Timer1_tick);
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(58, 491);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(69, 25);
-            label1.TabIndex = 7;
-            label1.Text = "Status: ";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(52, 393);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 20);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Status: ";
             // 
             // statusLB
             // 
-            statusLB.AutoSize = true;
-            statusLB.ForeColor = Color.DarkBlue;
-            statusLB.Location = new Point(135, 492);
-            statusLB.Margin = new Padding(4, 0, 4, 0);
-            statusLB.Name = "statusLB";
-            statusLB.Size = new Size(76, 25);
-            statusLB.TabIndex = 8;
-            statusLB.Text = "Pending";
-            statusLB.Visible = false;
+            this.statusLB.AutoSize = true;
+            this.statusLB.ForeColor = System.Drawing.Color.DarkBlue;
+            this.statusLB.Location = new System.Drawing.Point(122, 394);
+            this.statusLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLB.Name = "statusLB";
+            this.statusLB.Size = new System.Drawing.Size(67, 20);
+            this.statusLB.TabIndex = 8;
+            this.statusLB.Text = "Pending";
+            this.statusLB.Visible = false;
             // 
             // QRReader
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(641, 562);
-            Controls.Add(statusLB);
-            Controls.Add(label1);
-            Controls.Add(comboBox);
-            Controls.Add(pictureBox);
-            Controls.Add(startScanBt);
-            Margin = new Padding(4, 4, 4, 4);
-            Name = "QRReader";
-            Text = "Thành viên";
-            FormClosing += QRReader_FormClosing;
-            Load += QRReader_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(577, 450);
+            this.Controls.Add(this.statusLB);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox);
+            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.startScanBt);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "QRReader";
+            this.Text = "Thành viên";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QRReader_FormClosing);
+            this.Load += new System.EventHandler(this.QRReader_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         private void QRReader_Load(object sender, EventArgs e)
         {
-            filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo filterInfo in filterInfoCollection)
-            {
-                comboBox.Items.Add(filterInfo.Name);
-                comboBox.SelectedIndex = 0;
-            }
+
         }
 
         #endregion

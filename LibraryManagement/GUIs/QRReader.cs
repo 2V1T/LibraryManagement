@@ -162,10 +162,5 @@ namespace LibraryManagement.GUIs
                 }
             }
         }
-
-        private void pictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

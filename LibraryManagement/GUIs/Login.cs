@@ -39,6 +39,7 @@ namespace LibraryManagement.GUIs
                 if (id != 0)
                 {
                     Form1 mainForm = new Form1(id);
+                    MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
                     mainForm.ShowDialog();
                     if (Application.OpenForms.Count != 0)
@@ -70,6 +71,22 @@ namespace LibraryManagement.GUIs
         }
 
         private void loginButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                login();
+            }
+        }
+
+        private void loginUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                login();
+            }
+        }
+
+        private void loginPass_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

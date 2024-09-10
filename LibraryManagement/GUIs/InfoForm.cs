@@ -53,18 +53,18 @@ namespace LibraryManagement.GUIs
 
             if (name.Equals("") || email.Equals("") || address.Equals("") || phoneNo.Equals(""))
             {
-                MessageBox.Show("Cần điền đầy đủ thông tin");
+                MessageBox.Show("Cần điền đầy đủ thông tin", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             bool result = controller.UpdateInfo(this.id, name, email, address, int.Parse(phoneNo));
   
             if(result)
             {
-                MessageBox.Show("Cập nhật thông tin thành công");
+                MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Cập nhật thông tin thất bại");
+                MessageBox.Show("Cập nhật thông tin thất bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
