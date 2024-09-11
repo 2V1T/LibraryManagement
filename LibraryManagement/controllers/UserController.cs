@@ -92,7 +92,7 @@ namespace LibraryManagement.controllers
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: "+ex.Message);
-                return null;
+                return "";
             }
         }
 

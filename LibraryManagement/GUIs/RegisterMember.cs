@@ -32,6 +32,7 @@ namespace LibraryManagement.GUIs
         {
             if (Name != null && idNo != null)
             {
+                
                 nameTB.Text = Name;
                 cccdTB.Text = idNo.ToString();
             }

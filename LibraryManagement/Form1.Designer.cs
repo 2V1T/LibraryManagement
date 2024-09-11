@@ -39,6 +39,7 @@
             tácGiảToolStripMenuItem = new ToolStripMenuItem();
             bạnĐọcMớiToolStripMenuItem = new ToolStripMenuItem();
             đăngKíMớiToolStripMenuItem = new ToolStripMenuItem();
+            tìmBạnĐọcToolStripMenuItem = new ToolStripMenuItem();
             bookPanel = new Panel();
             showAllBT = new Button();
             borrowBT = new Button();
@@ -86,6 +87,7 @@
             searchCategoryCB = new ComboBox();
             dataGridViewBook = new DataGridView();
             memberPanel = new Panel();
+            showAllMemsBT = new Button();
             groupBox5 = new GroupBox();
             statusBorrowLabel = new Label();
             detailReturnDateTB = new TextBox();
@@ -97,7 +99,7 @@
             label15 = new Label();
             label14 = new Label();
             label13 = new Label();
-            button14 = new Button();
+            returnBT = new Button();
             searchMemberTB = new TextBox();
             searchMembersBT = new Button();
             panel3 = new Panel();
@@ -156,28 +158,28 @@
             // đổiThôngTinToolStripMenuItem
             // 
             đổiThôngTinToolStripMenuItem.Name = "đổiThôngTinToolStripMenuItem";
-            đổiThôngTinToolStripMenuItem.Size = new Size(184, 26);
+            đổiThôngTinToolStripMenuItem.Size = new Size(224, 26);
             đổiThôngTinToolStripMenuItem.Text = "Đổi thông tin ";
             đổiThôngTinToolStripMenuItem.Click += đổiThôngTinToolStripMenuItem_Click;
             // 
             // đổiMậtKhẩuToolStripMenuItem
             // 
             đổiMậtKhẩuToolStripMenuItem.Name = "đổiMậtKhẩuToolStripMenuItem";
-            đổiMậtKhẩuToolStripMenuItem.Size = new Size(184, 26);
+            đổiMậtKhẩuToolStripMenuItem.Size = new Size(224, 26);
             đổiMậtKhẩuToolStripMenuItem.Text = "Đổi mật khẩu";
             đổiMậtKhẩuToolStripMenuItem.Click += đổiMậtKhẩuToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(184, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
             // thoátToolStripMenuItem
             // 
             thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            thoátToolStripMenuItem.Size = new Size(184, 26);
+            thoátToolStripMenuItem.Size = new Size(224, 26);
             thoátToolStripMenuItem.Text = "Thoát";
             thoátToolStripMenuItem.Click += thoátToolStripMenuItem_Click;
             // 
@@ -197,7 +199,7 @@
             // 
             // tácGiảToolStripMenuItem
             // 
-            tácGiảToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bạnĐọcMớiToolStripMenuItem, đăngKíMớiToolStripMenuItem });
+            tácGiảToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bạnĐọcMớiToolStripMenuItem, đăngKíMớiToolStripMenuItem, tìmBạnĐọcToolStripMenuItem });
             tácGiảToolStripMenuItem.Name = "tácGiảToolStripMenuItem";
             tácGiảToolStripMenuItem.Size = new Size(146, 26);
             tácGiảToolStripMenuItem.Text = "Bạn đọc";
@@ -205,16 +207,23 @@
             // bạnĐọcMớiToolStripMenuItem
             // 
             bạnĐọcMớiToolStripMenuItem.Name = "bạnĐọcMớiToolStripMenuItem";
-            bạnĐọcMớiToolStripMenuItem.Size = new Size(173, 26);
+            bạnĐọcMớiToolStripMenuItem.Size = new Size(175, 26);
             bạnĐọcMớiToolStripMenuItem.Text = "Đã đăng kí";
             bạnĐọcMớiToolStripMenuItem.Click += bạnĐọcMớiToolStripMenuItem_Click;
             // 
             // đăngKíMớiToolStripMenuItem
             // 
             đăngKíMớiToolStripMenuItem.Name = "đăngKíMớiToolStripMenuItem";
-            đăngKíMớiToolStripMenuItem.Size = new Size(173, 26);
+            đăngKíMớiToolStripMenuItem.Size = new Size(175, 26);
             đăngKíMớiToolStripMenuItem.Text = "Đăng kí mới";
             đăngKíMớiToolStripMenuItem.Click += đăngKíMớiToolStripMenuItem_Click;
+            // 
+            // tìmBạnĐọcToolStripMenuItem
+            // 
+            tìmBạnĐọcToolStripMenuItem.Name = "tìmBạnĐọcToolStripMenuItem";
+            tìmBạnĐọcToolStripMenuItem.Size = new Size(175, 26);
+            tìmBạnĐọcToolStripMenuItem.Text = "Tìm bạn đọc";
+            tìmBạnĐọcToolStripMenuItem.Click += tìmBạnĐọcToolStripMenuItem_Click;
             // 
             // bookPanel
             // 
@@ -689,6 +698,7 @@
             // 
             // memberPanel
             // 
+            memberPanel.Controls.Add(showAllMemsBT);
             memberPanel.Controls.Add(groupBox5);
             memberPanel.Controls.Add(searchMemberTB);
             memberPanel.Controls.Add(searchMembersBT);
@@ -700,7 +710,18 @@
             memberPanel.Size = new Size(1780, 884);
             memberPanel.TabIndex = 14;
             memberPanel.Visible = false;
+            memberPanel.VisibleChanged += memberPanel_VisibleChanged;
             memberPanel.Paint += memberPanel_Paint;
+            // 
+            // showAllMemsBT
+            // 
+            showAllMemsBT.Location = new Point(758, 816);
+            showAllMemsBT.Name = "showAllMemsBT";
+            showAllMemsBT.Size = new Size(94, 29);
+            showAllMemsBT.TabIndex = 8;
+            showAllMemsBT.Text = "Hiện tất cả";
+            showAllMemsBT.UseVisualStyleBackColor = true;
+            showAllMemsBT.Click += showAllMemsBT_Click;
             // 
             // groupBox5
             // 
@@ -714,7 +735,7 @@
             groupBox5.Controls.Add(label15);
             groupBox5.Controls.Add(label14);
             groupBox5.Controls.Add(label13);
-            groupBox5.Controls.Add(button14);
+            groupBox5.Controls.Add(returnBT);
             groupBox5.Location = new Point(912, 444);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(865, 401);
@@ -726,7 +747,7 @@
             // 
             statusBorrowLabel.AutoSize = true;
             statusBorrowLabel.BackColor = SystemColors.Control;
-            statusBorrowLabel.ForeColor = Color.DeepSkyBlue;
+            statusBorrowLabel.ForeColor = Color.Blue;
             statusBorrowLabel.Location = new Point(150, 280);
             statusBorrowLabel.Name = "statusBorrowLabel";
             statusBorrowLabel.Size = new Size(119, 20);
@@ -810,15 +831,15 @@
             label13.TabIndex = 1;
             label13.Text = "Tên sách:";
             // 
-            // button14
+            // returnBT
             // 
-            button14.Location = new Point(679, 276);
-            button14.Name = "button14";
-            button14.Size = new Size(94, 29);
-            button14.TabIndex = 0;
-            button14.Text = "Trả sách";
-            button14.UseVisualStyleBackColor = true;
-            button14.Click += button14_Click;
+            returnBT.Location = new Point(679, 276);
+            returnBT.Name = "returnBT";
+            returnBT.Size = new Size(94, 29);
+            returnBT.TabIndex = 0;
+            returnBT.Text = "Trả sách";
+            returnBT.UseVisualStyleBackColor = true;
+            returnBT.Click += button14_Click;
             // 
             // searchMemberTB
             // 
@@ -826,6 +847,7 @@
             searchMemberTB.Name = "searchMemberTB";
             searchMemberTB.Size = new Size(667, 27);
             searchMemberTB.TabIndex = 4;
+            searchMemberTB.TextChanged += searchMemberTB_TextChanged;
             // 
             // searchMembersBT
             // 
@@ -835,6 +857,7 @@
             searchMembersBT.TabIndex = 3;
             searchMembersBT.Text = "Tìm kiếm";
             searchMembersBT.UseVisualStyleBackColor = true;
+            searchMembersBT.Click += searchMembersBT_Click;
             // 
             // panel3
             // 
@@ -896,7 +919,6 @@
             // 
             // memberNameTB
             // 
-            memberNameTB.Enabled = false;
             memberNameTB.Location = new Point(154, 10);
             memberNameTB.Name = "memberNameTB";
             memberNameTB.ReadOnly = true;
@@ -905,7 +927,6 @@
             // 
             // memberCCCDTB
             // 
-            memberCCCDTB.Enabled = false;
             memberCCCDTB.Location = new Point(153, 59);
             memberCCCDTB.Name = "memberCCCDTB";
             memberCCCDTB.ReadOnly = true;
@@ -1022,11 +1043,7 @@
             PerformLayout();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
+     
         private void AuthorDropDownSearch_SelectedValueChanged(object sender, EventArgs e)
         {
         }
@@ -1093,7 +1110,7 @@
         private Label label15;
         private Label label14;
         private Label label13;
-        private Button button14;
+        private Button returnBT;
         private TextBox searchMemberTB;
         private Button searchMembersBT;
         private Panel panel3;
@@ -1120,5 +1137,7 @@
         private Label label20;
         private Label label21;
         private Label statusBorrowLabel;
+        private ToolStripMenuItem tìmBạnĐọcToolStripMenuItem;
+        private Button showAllMemsBT;
     }
 }

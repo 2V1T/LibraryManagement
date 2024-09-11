@@ -17,10 +17,13 @@ namespace LibraryManagement.GUIs
 
     public partial class ChangePassword : Form
     {
+        public static Form1 mainForm = new Form1();
+        public static Login login = new Login();
         UserController controller = new UserController();
         SqlConnection conn = DBConnection.GetInstance().GetConnection();
         SQLExecute sqlExecute = new SQLExecute();
         int id;
+        public bool isExit = false;
         public ChangePassword(int id)
         {
             this.id = id;
@@ -39,7 +42,13 @@ namespace LibraryManagement.GUIs
                 return;
             }
             string result = controller.UpdatePassword(this.id, oldPassword, newPassword, confirmPassword);
+            mainForm.isLogout = true;
+            if (!result.Equals(""))
+            {
+                isExit = true;
+            }
             MessageBox.Show(result);
+           this.Close();
         }
     }
 }

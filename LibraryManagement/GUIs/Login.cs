@@ -38,6 +38,8 @@ namespace LibraryManagement.GUIs
                 int id = controller.Login(username, pass);
                 if (id != 0)
                 {
+                    loginUsername.Text = "";
+                    loginPass.Text = "";
                     Form1 mainForm = new Form1(id);
                     this.Hide();
                     mainForm.ShowDialog();

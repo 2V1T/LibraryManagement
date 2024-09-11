@@ -42,73 +42,68 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 30F);
-            label1.Location = new Point(248, 24);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(198, 19);
             label1.Name = "label1";
-            label1.Size = new Size(452, 81);
+            label1.Size = new Size(377, 67);
             label1.TabIndex = 0;
             label1.Text = "ĐỔI MẬT KHẨU";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(105, 168);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(84, 134);
             label2.Name = "label2";
-            label2.Size = new Size(118, 25);
+            label2.Size = new Size(96, 20);
             label2.TabIndex = 1;
             label2.Text = "Mật khẩu cũ: ";
             // 
             // oldPassTB
             // 
-            oldPassTB.Location = new Point(302, 164);
-            oldPassTB.Margin = new Padding(4, 4, 4, 4);
+            oldPassTB.Location = new Point(242, 131);
             oldPassTB.Name = "oldPassTB";
-            oldPassTB.Size = new Size(415, 31);
-            oldPassTB.TabIndex = 2;
+            oldPassTB.PasswordChar = '*';
+            oldPassTB.Size = new Size(333, 27);
+            oldPassTB.TabIndex = 0;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(105, 244);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(84, 195);
             label3.Name = "label3";
-            label3.Size = new Size(131, 25);
+            label3.Size = new Size(107, 20);
             label3.TabIndex = 1;
             label3.Text = "Mật khẩu mới: ";
             // 
             // newPassTB
             // 
-            newPassTB.Location = new Point(302, 240);
-            newPassTB.Margin = new Padding(4, 4, 4, 4);
+            newPassTB.Location = new Point(242, 192);
             newPassTB.Name = "newPassTB";
-            newPassTB.Size = new Size(415, 31);
-            newPassTB.TabIndex = 2;
+            newPassTB.PasswordChar = '*';
+            newPassTB.Size = new Size(333, 27);
+            newPassTB.TabIndex = 1;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(105, 324);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(84, 259);
             label4.Name = "label4";
-            label4.Size = new Size(160, 25);
+            label4.Size = new Size(133, 20);
             label4.TabIndex = 1;
             label4.Text = "Nhập lại mật khẩu:";
             // 
             // retypePassTB
             // 
-            retypePassTB.Location = new Point(302, 320);
-            retypePassTB.Margin = new Padding(4, 4, 4, 4);
+            retypePassTB.Location = new Point(242, 256);
             retypePassTB.Name = "retypePassTB";
-            retypePassTB.Size = new Size(415, 31);
+            retypePassTB.PasswordChar = '*';
+            retypePassTB.Size = new Size(333, 27);
             retypePassTB.TabIndex = 2;
             // 
             // submitBT
             // 
-            submitBT.Location = new Point(601, 394);
-            submitBT.Margin = new Padding(4, 4, 4, 4);
+            submitBT.Location = new Point(481, 315);
             submitBT.Name = "submitBT";
-            submitBT.Size = new Size(118, 36);
+            submitBT.Size = new Size(94, 29);
             submitBT.TabIndex = 3;
             submitBT.Text = "Đổi";
             submitBT.UseVisualStyleBackColor = true;
@@ -116,9 +111,9 @@
             // 
             // ChangePassword
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(899, 464);
+            ClientSize = new Size(719, 371);
             Controls.Add(submitBT);
             Controls.Add(retypePassTB);
             Controls.Add(newPassTB);
@@ -127,7 +122,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(4, 4, 4, 4);
             Name = "ChangePassword";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ChangePassword";

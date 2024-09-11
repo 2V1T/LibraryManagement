@@ -16,6 +16,7 @@ using System.Drawing;
 using ZXing.Aztec;
 using LibraryManagement.controllers;
 using LibraryManagement.models;
+using System.Reflection.Metadata.Ecma335;
 
 namespace LibraryManagement.GUIs
 {
@@ -25,19 +26,21 @@ namespace LibraryManagement.GUIs
         int bookId = 0;
         bool isReturn;
         RegisterMember registerMember = new RegisterMember();
-
+        bool isSearch;
+        public long resultIdNo = 0;
         public QRReader(bool isMember, int bookId)
         {
             InitializeComponent();
             this.isMember = isMember;
             this.bookId = bookId;
         }
-        public QRReader(bool isMember, int bookId, bool isReturn)
+        public QRReader(bool isMember, int bookId, bool isReturn, bool isSearch)
         {
             InitializeComponent();
             this.isMember = isMember;
             this.bookId = bookId;
             this.isReturn = isReturn;
+            this.isSearch = isSearch;
         }
 
         FilterInfoCollection filterInfoCollection;
@@ -114,6 +117,20 @@ namespace LibraryManagement.GUIs
             }
         }
 
+        private void searchMember (long idNo)
+        {
+            MemberController memberController = new MemberController();
+            Member member = memberController.getByIdNo(idNo);
+            if (member != null)
+            {
+                this.resultIdNo = idNo;
+            }
+            else
+            {
+                MessageBox.Show("Người dùng chưa đăng kí tài khoản, vui lòng đăng kí!", "Thông báo");
+            }
+        }
+
         private void Timer1_tick(object sender, EventArgs e)
         {
             MemberController memberController = new MemberController();
@@ -130,26 +147,42 @@ namespace LibraryManagement.GUIs
                         statusLB.Text = "Detected";
                         statusLB.ForeColor = Color.Green;
                         string[] splitString = decode.Split("|");
-                        if (!isReturn)
+                        if (!isSearch)
                         {
-                            if (!isMember)
+                            if (!isReturn)
                             {
-                                registerMember.Name = splitString[2];
-                                registerMember.idNo = splitString[0];
-                                registerMember.ShowDialog();
-                                this.Close();
-                                return;
+                                if (!isMember)
+                                {
+                                    registerMember.Name = splitString[2];
+                                    registerMember.idNo = splitString[0];
+                                    Member member = memberController.getByIdNo(long.Parse(splitString[0]));
+                                    if (member != null)
+                                    {
+                                        MessageBox.Show("Người dùng đã đăng kí tài khoản!", "Thông báo");
+                                    }
+                                    else
+                                    {
+                                        registerMember.ShowDialog();
+                                    }
+                                    this.Close();
+                                    return;
+                                }
+                                else
+                                {
+                                    long idNo = long.Parse(splitString[0]);
+                                    borrowBook(idNo, this.bookId);
+                                }
                             }
-                            else
+                            else if (isReturn)
                             {
-                                long idNo = long.Parse(splitString[0]);
-                                borrowBook(idNo, this.bookId);
+                                returnBook(int.Parse(splitString[0]));
                             }
                         }
                         else
                         {
-                            returnBook(int.Parse(splitString[0]));
+                            searchMember(long.Parse(splitString[0]));
                         }
+                        
 
                         this.Close();
 

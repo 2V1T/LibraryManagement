@@ -12,7 +12,10 @@ namespace LibraryManagement
     public partial class Form1 : Form
     {
         static Login loginForm = new Login();
-        int id;
+        public int id;
+        public bool isLogout;
+
+        public Form1 () { }
         public Form1(int id)
         {
             InitializeComponent();
@@ -45,7 +48,7 @@ namespace LibraryManagement
             {
                 dataGridViewBook.Columns[i].Width = (maxWidthDGWBook - 130) / 5;
             }
-
+            returnBT.Enabled = false;
         }
 
 
@@ -211,6 +214,7 @@ namespace LibraryManagement
             switch (result)
             {
                 case DialogResult.OK:
+                    this.isLogout = false;
                     Application.Exit();
                     break;
                 case DialogResult.Cancel:
@@ -224,7 +228,9 @@ namespace LibraryManagement
             switch (result)
             {
                 case DialogResult.OK:
+                    this.isLogout = true;   
                     this.Close();
+                    loginForm.ShowDialog();
                     break;
                 case DialogResult.Cancel:
                     break;
@@ -297,17 +303,8 @@ namespace LibraryManagement
             }
             else
             {
-                Member member = memberController.getByName(name);
-                if (member != null)
-                {
-                    List<Member> list = new List<Member>();
-                    list.Add(member);
-                    dataGridViewMember.DataSource = list;
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy bạn đọc vui lòng thử lại!", "Thông báo");
-                }
+                DataTable dt = memberController.getByKeyword(name);
+                dataGridViewMember.DataSource = dt;
             }
         }
 
@@ -348,6 +345,12 @@ namespace LibraryManagement
         {
             ChangePassword changePassword = new ChangePassword(this.id);
             changePassword.ShowDialog();
+            if (changePassword.isExit == true)
+            {
+                this.isLogout = true;
+                this.Close();
+                loginForm.ShowDialog();
+            }
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -410,6 +413,18 @@ namespace LibraryManagement
         {
 
         }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isLogout)
+            {
+                this.Hide();
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
+
 
         private void addAuthorBT_Click(object sender, EventArgs e)
         {
@@ -708,6 +723,7 @@ namespace LibraryManagement
             DataRow data = borrowedDetailController.getByIdNo(member.IdNo);
             if (data != null)
             {
+                returnBT.Enabled = true;
                 detailBookIdTB.Text = data["book_id"].ToString();
                 detailBookNameTB.Text = data["name"].ToString();
                 detailCopiesIdTB.Text = data["id"].ToString();
@@ -749,8 +765,54 @@ namespace LibraryManagement
 
         private void button14_Click(object sender, EventArgs e)
         {
-            QRReader qRReader = new QRReader(true, 1, true);
+            QRReader qRReader = new QRReader(true, 1, true, false);
             qRReader.ShowDialog();
+        }
+
+        private void tìmBạnĐọcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            QRReader qRReader = new QRReader(false, 1, false, true);
+            qRReader.ShowDialog();
+            long idNo = 0;
+            idNo = qRReader.resultIdNo;
+            if (idNo != 0)
+            {
+                memberPanel.Visible = true;
+                bookPanel.Visible = false;
+                foreach (DataGridViewRow row in dataGridViewMember.Rows)
+                {
+                    if (row.Cells["id_no"].Value != null)
+                    {
+                        long parsedIdNo;
+                        if (long.TryParse(row.Cells["id_no"].Value.ToString(), out parsedIdNo))
+                        {
+                            if (idNo == parsedIdNo)
+                            {
+                                dataGridViewMember.Rows[0].Selected = false;
+                                dataGridViewMember.Rows[row.Index].Selected = true;
+                                MemberController memberController = new MemberController();
+                                Member member = memberController.getByIdNo(parsedIdNo);
+                                addInforMember(member);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void memberPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            addMemberToView(dataGridViewMember);
+        }
+
+        private void searchMemberTB_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showAllMemsBT_Click(object sender, EventArgs e)
+        {
+            addMemberToView(dataGridViewMember);
         }
     }
 }

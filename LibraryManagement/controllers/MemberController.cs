@@ -111,6 +111,7 @@ namespace LibraryManagement.controllers
                 member.Name = (string)data.Rows[0]["name"];
                 member.Email = (string)data.Rows[0]["email"];
                 member.PhoneNo = (int)data.Rows[0]["phone_no"];
+                member.IdNo = (long)data.Rows[0]["id_no"];
                 member.Address = (string)data.Rows[0]["address"];
                 return member;
             }
@@ -136,22 +137,24 @@ namespace LibraryManagement.controllers
             return member;
         }
 
-        public Member getByIdNo(int idNo) {
+        public Member getByIdNo(long idNo) {
             try
             {
                 conn.Open();
-                string sql = "select * from [member] where id_no = @id";
+                string sql = "select * from tim_member_theo_cccd (@id)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", idNo);
                 DataTable data = sqlExecute.executeQuery(cmd);
-                Member member = new Member();
+                Member member = null;
                 if (data.Rows.Count > 0)
                 {
+                    member = new Member();
                     member.Id = (int)data.Rows[0]["id"];
                     member.Name = (string)data.Rows[0]["name"];
                     member.Email = (string)data.Rows[0]["email"];
                     member.PhoneNo = (int)data.Rows[0]["phone_no"];
                     member.IdNo = (long)data.Rows[0]["id_no"];
+                    member.Address = (string)data.Rows[0]["address"];
                 }
                 conn.Close();
                 return member;
@@ -159,7 +162,27 @@ namespace LibraryManagement.controllers
             catch (Exception ex) {
                 return null;
             }
+
         }
 
+        public DataTable getByKeyword(string keyword)
+        {
+            try
+            {
+                conn.Open();
+                string sql = "SELECT * FROM member where name LIKE @keyword";
+                SqlCommand sqlCommand = new SqlCommand(sql, conn);
+                sqlCommand.Parameters.AddWithValue("keyword", '%' + keyword + '%');
+                DataTable data = sqlExecute.executeQuery(sqlCommand);
+                return data;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally { 
+                conn.Close();
+            }
+        }
     }
 }
