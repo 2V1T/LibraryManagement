@@ -158,28 +158,28 @@
             // đổiThôngTinToolStripMenuItem
             // 
             đổiThôngTinToolStripMenuItem.Name = "đổiThôngTinToolStripMenuItem";
-            đổiThôngTinToolStripMenuItem.Size = new Size(224, 26);
+            đổiThôngTinToolStripMenuItem.Size = new Size(184, 26);
             đổiThôngTinToolStripMenuItem.Text = "Đổi thông tin ";
             đổiThôngTinToolStripMenuItem.Click += đổiThôngTinToolStripMenuItem_Click;
             // 
             // đổiMậtKhẩuToolStripMenuItem
             // 
             đổiMậtKhẩuToolStripMenuItem.Name = "đổiMậtKhẩuToolStripMenuItem";
-            đổiMậtKhẩuToolStripMenuItem.Size = new Size(224, 26);
+            đổiMậtKhẩuToolStripMenuItem.Size = new Size(184, 26);
             đổiMậtKhẩuToolStripMenuItem.Text = "Đổi mật khẩu";
             đổiMậtKhẩuToolStripMenuItem.Click += đổiMậtKhẩuToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(184, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
             // thoátToolStripMenuItem
             // 
             thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            thoátToolStripMenuItem.Size = new Size(224, 26);
+            thoátToolStripMenuItem.Size = new Size(184, 26);
             thoátToolStripMenuItem.Text = "Thoát";
             thoátToolStripMenuItem.Click += thoátToolStripMenuItem_Click;
             // 
@@ -1005,8 +1005,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
             Controls.Add(menuStrip1);
-            Controls.Add(memberPanel);
             Controls.Add(bookPanel);
+            Controls.Add(memberPanel);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1043,7 +1043,6 @@
             PerformLayout();
         }
 
-     
         private void AuthorDropDownSearch_SelectedValueChanged(object sender, EventArgs e)
         {
         }

@@ -616,6 +616,8 @@ namespace LibraryManagement
         {
             descriptionBookAddTB.Text = "";
             nameAddBookTB.Text = "";
+            categoryAddBookCB.Text = "";
+            authorAddBookCB.Text = "";
             quantityNumberic.Value = 0;
         }
 
