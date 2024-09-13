@@ -78,30 +78,37 @@ namespace LibraryManagement.GUIs
             pictureBox.Image = (Bitmap)bitmap.Clone();
         }
 
-        private void borrowBook (long idNo, int idCopies)
+        private void borrowBook (long idNo, int idBook)
         {
             MemberController memberController = new MemberController();
       
-            if (memberController.memberAvailable(idNo)) {
-                DateTime currentDate = DateTime.Now;
-                DateTime nextMonthDate = currentDate.AddMonths(1);
-                DateTime returnDate = DateTime.Parse(nextMonthDate.ToString("yyyy-MM-dd"));
-                BorrowedDetailController borrowedDetailController = new BorrowedDetailController();
-                bool result = borrowedDetailController.add(idCopies, idNo, returnDate);
-                if (result)
+            Member member = memberController.getByIdNo(idNo);
+            if (member != null) {
+                if (memberController.memberAvailable(idNo))
                 {
-                    MessageBox.Show("Cho bạn đọc có mã cccd " + idNo + " mượn sách thành công!", "Thông báo", MessageBoxButtons.OK);
+                    DateTime currentDate = DateTime.Now;
+                    DateTime nextMonthDate = currentDate.AddMonths(1);
+                    DateTime returnDate = DateTime.Parse(nextMonthDate.ToString("yyyy-MM-dd"));
+                    BorrowedDetailController borrowedDetailController = new BorrowedDetailController();
+                    bool result = borrowedDetailController.add(idBook, idNo, returnDate);
+                    if (result)
+                    {
+                        MessageBox.Show("Cho bạn đọc có mã cccd " + idNo + " mượn sách thành công!", "Thông báo", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cho bạn đọc mượn thất bại vui lòng thử lại!", "Thông báo");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Cho bạn đọc mượn thất bại vui lòng thử lại!", "Thông báo");
+                    MessageBox.Show("Bạn đọc chưa trả sách đã mượn không thể mượn thêm", "Thông báo");
                 }
             }
             else
             {
-                MessageBox.Show("Bạn đọc chưa trả sách đã mượn không thể mượn thêm", "Thông báo");
+                MessageBox.Show("Bạn đọc chưa đăng kí thành viên!", "Thông báo");
             }
-            
         }
 
         private void returnBook(int idCopies)
@@ -110,6 +117,7 @@ namespace LibraryManagement.GUIs
             if (bookController.returnBook(idCopies))
             {
                 MessageBox.Show("Trả sách thành công!", "Thông báo");
+                resultIdNo = idCopies;
             }
             else
             {
@@ -171,6 +179,7 @@ namespace LibraryManagement.GUIs
                                 {
                                     long idNo = long.Parse(splitString[0]);
                                     borrowBook(idNo, this.bookId);
+                                    resultIdNo = long.Parse(splitString[0]);
                                 }
                             }
                             else if (isReturn)

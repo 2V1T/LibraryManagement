@@ -16,15 +16,15 @@ namespace LibraryManagement.controllers
         SqlConnection conn = DBConnection.GetInstance().GetConnection();
         SQLExecute sqlExecute = new SQLExecute();
 
-        public bool add(int idCopies, long idNo, DateTime returnDate)
+        public bool add(int idBook, long idNo, DateTime returnDate)
         {
             try
             {
                 conn.Open();
-                string sql = "EXEC muon_sach @id_no, @id_copies, @return_date";
+                string sql = "EXEC muon_sach @id_no, @id_book, @return_date";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id_no", idNo);
-                cmd.Parameters.AddWithValue("@id_copies", idCopies);
+                cmd.Parameters.AddWithValue("@id_book", idBook);
                 cmd.Parameters.AddWithValue("@return_date", returnDate);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;

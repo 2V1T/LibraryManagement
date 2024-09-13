@@ -44,7 +44,7 @@ namespace LibraryManagement.controllers
                 conn.Open();
                 string sql = "EXEC tra_sach @id";
                 SqlCommand sqlCommand  = new SqlCommand(sql, conn);
-                sqlCommand.Parameters.AddWithValue("id", idCopies);
+                sqlCommand.Parameters.AddWithValue("@id", idCopies);
                 return sqlExecute.executeNoneQuery(sqlCommand);
             }
             catch (Exception e)
@@ -101,6 +101,29 @@ namespace LibraryManagement.controllers
             return quantity;
         }
 
+        public int getAvailableQuantity(int bookId)
+        {
+            int quantity = 0;
+            try
+            {
+                conn.Open();
+                string sql = "SELECT COUNT(*) AS quantity FROM Copies WHERE book_id = @Id AND available = 1";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Id", bookId);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                if (data.Rows.Count > 0)
+                {
+                    quantity = int.Parse(data.Rows[0]["quantity"].ToString());
+                }
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            return quantity;
+        }
+
         public DataTable getByCategoryId(int CategoryId)
         {
             try
@@ -122,13 +145,19 @@ namespace LibraryManagement.controllers
                 conn.Close();
             }
         }
-        public bool add(Book book)
+        public bool add(Book book, int quantity)
         {
             try
             {
                 conn.Open();
-                string sql = "";
+                string sql = "EXEC them_sach @name, @author_id, @category_id, @description, @book_image, @quantity";
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", book.Name);
+                cmd.Parameters.AddWithValue("@author_id", book.AuthorId);
+                cmd.Parameters.AddWithValue("@category_id", book.CategoryId);
+                cmd.Parameters.AddWithValue("@description", book.Description);
+                cmd.Parameters.AddWithValue("@book_image", book.BookImg);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
             }
@@ -143,7 +172,66 @@ namespace LibraryManagement.controllers
             }
         }
 
+        public Book getByName(string name) {
+            try
+            {
+                conn.Open();
+                string sql = "SELECT * FROM Book WHERE name = @name ORDER BY id DESC LIMIT 1";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", name);
+                DataTable data = sqlExecute.executeQuery(cmd);
+                Book book = new Book();
+                if (data.Rows.Count > 0)
+                {
+                    book.Id = (int)data.Rows[0]["id"];
+                    book.Name = (string)data.Rows[0]["name"];
+                    book.AuthorId = (int)data.Rows[0]["author_id"];
+                    book.CategoryId = (int)data.Rows[0]["category_id"];
+                    book.Description = (string)data.Rows[0]["description"];
+                    book.BookImg = (byte[])data.Rows[0]["book_img"];
+
+                }
+                conn.Close();
+                return book;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public bool update(Book book)
+        {
+            try
+            {
+                conn.Open();
+                string sql = "UPDATE Book SET name=@Name, author_id=@AuthorId, category_id=@CategoryId, description=@Description, book_img = @book_img WHERE id=@Id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Name", book.Name);
+                cmd.Parameters.AddWithValue("@AuthorId", book.AuthorId);
+                cmd.Parameters.AddWithValue("@CategoryId", book.CategoryId);
+                cmd.Parameters.AddWithValue("@Description", book.Description);
+                cmd.Parameters.AddWithValue("@book_img", book.BookImg);
+                cmd.Parameters.AddWithValue("@Id", book.Id);
+                bool result = sqlExecute.executeNoneQuery(cmd);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public bool updateNoImg(Book book)
         {
             try
             {
@@ -207,6 +295,7 @@ namespace LibraryManagement.controllers
                     book.AuthorId = (int)data.Rows[0]["author_id"];
                     book.CategoryId = (int)data.Rows[0]["category_id"];
                     book.Description = (string)data.Rows[0]["description"];
+                    book.BookImg = (byte[])data.Rows[0]["book_img"];
 
                 }
                 conn.Close();

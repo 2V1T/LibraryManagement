@@ -43,12 +43,9 @@
             bookPanel = new Panel();
             showAllBT = new Button();
             borrowBT = new Button();
-            deleteCopyBT = new Button();
             addBookBT = new Button();
             updateBookBT = new Button();
             deleteBookBT = new Button();
-            groupBox3 = new GroupBox();
-            dataGridViewCopies = new DataGridView();
             label8 = new Label();
             searchBookBT = new Button();
             searchNameTB = new TextBox();
@@ -67,6 +64,11 @@
             dataGridViewCategory = new DataGridView();
             panel2 = new Panel();
             groupBox4 = new GroupBox();
+            clearBTN = new Button();
+            availableQuantityLB = new Label();
+            label24 = new Label();
+            pictureBox = new PictureBox();
+            label22 = new Label();
             label19 = new Label();
             quantityNumberic = new NumericUpDown();
             quantityLabel = new Label();
@@ -119,8 +121,6 @@
             label9 = new Label();
             menuStrip1.SuspendLayout();
             bookPanel.SuspendLayout();
-            groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewCopies).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAuthor).BeginInit();
             panel4.SuspendLayout();
@@ -128,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategory).BeginInit();
             panel2.SuspendLayout();
             groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)quantityNumberic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBook).BeginInit();
             memberPanel.SuspendLayout();
@@ -229,11 +230,9 @@
             // 
             bookPanel.Controls.Add(showAllBT);
             bookPanel.Controls.Add(borrowBT);
-            bookPanel.Controls.Add(deleteCopyBT);
             bookPanel.Controls.Add(addBookBT);
             bookPanel.Controls.Add(updateBookBT);
             bookPanel.Controls.Add(deleteBookBT);
-            bookPanel.Controls.Add(groupBox3);
             bookPanel.Controls.Add(label8);
             bookPanel.Controls.Add(searchBookBT);
             bookPanel.Controls.Add(searchNameTB);
@@ -256,7 +255,7 @@
             // 
             // showAllBT
             // 
-            showAllBT.Location = new Point(789, 552);
+            showAllBT.Location = new Point(2, 816);
             showAllBT.Name = "showAllBT";
             showAllBT.Size = new Size(94, 29);
             showAllBT.TabIndex = 11;
@@ -274,15 +273,6 @@
             borrowBT.UseVisualStyleBackColor = true;
             borrowBT.Click += button4_Click;
             // 
-            // deleteCopyBT
-            // 
-            deleteCopyBT.Location = new Point(0, 816);
-            deleteCopyBT.Name = "deleteCopyBT";
-            deleteCopyBT.Size = new Size(94, 29);
-            deleteCopyBT.TabIndex = 10;
-            deleteCopyBT.Text = "Xóa mất";
-            deleteCopyBT.UseVisualStyleBackColor = true;
-            // 
             // addBookBT
             // 
             addBookBT.Location = new Point(1017, 816);
@@ -291,10 +281,11 @@
             addBookBT.TabIndex = 0;
             addBookBT.Text = "Thêm";
             addBookBT.UseVisualStyleBackColor = true;
+            addBookBT.Click += addBookBT_Click;
             // 
             // updateBookBT
             // 
-            updateBookBT.Location = new Point(1594, 816);
+            updateBookBT.Location = new Point(1623, 816);
             updateBookBT.Name = "updateBookBT";
             updateBookBT.Size = new Size(94, 29);
             updateBookBT.TabIndex = 1;
@@ -304,35 +295,12 @@
             // 
             // deleteBookBT
             // 
-            deleteBookBT.Location = new Point(1324, 816);
+            deleteBookBT.Location = new Point(1336, 816);
             deleteBookBT.Name = "deleteBookBT";
             deleteBookBT.Size = new Size(94, 29);
             deleteBookBT.TabIndex = 1;
             deleteBookBT.Text = "Xóa ";
             deleteBookBT.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            groupBox3.Controls.Add(dataGridViewCopies);
-            groupBox3.Location = new Point(3, 580);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(880, 211);
-            groupBox3.TabIndex = 9;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Các bản sách khả dụng";
-            groupBox3.Enter += groupBox3_Enter;
-            // 
-            // dataGridViewCopies
-            // 
-            dataGridViewCopies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCopies.Location = new Point(-1, 26);
-            dataGridViewCopies.Name = "dataGridViewCopies";
-            dataGridViewCopies.ReadOnly = true;
-            dataGridViewCopies.RowHeadersWidth = 51;
-            dataGridViewCopies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewCopies.Size = new Size(883, 173);
-            dataGridViewCopies.TabIndex = 10;
-            dataGridViewCopies.CellContentClick += dataGridView4_CellContentClick;
             // 
             // label8
             // 
@@ -405,7 +373,6 @@
             dataGridViewAuthor.Size = new Size(282, 133);
             dataGridViewAuthor.TabIndex = 2;
             dataGridViewAuthor.CellClick += dataGridViewAuthor_CellClick;
-            dataGridViewAuthor.CellContentClick += dataGridView2_CellContentClick;
             // 
             // authorTB
             // 
@@ -505,6 +472,11 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(clearBTN);
+            groupBox4.Controls.Add(availableQuantityLB);
+            groupBox4.Controls.Add(label24);
+            groupBox4.Controls.Add(pictureBox);
+            groupBox4.Controls.Add(label22);
             groupBox4.Controls.Add(label19);
             groupBox4.Controls.Add(quantityNumberic);
             groupBox4.Controls.Add(quantityLabel);
@@ -524,6 +496,55 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Sách";
             // 
+            // clearBTN
+            // 
+            clearBTN.Location = new Point(719, 0);
+            clearBTN.Name = "clearBTN";
+            clearBTN.Size = new Size(94, 29);
+            clearBTN.TabIndex = 18;
+            clearBTN.Text = "Clear All";
+            clearBTN.UseVisualStyleBackColor = true;
+            clearBTN.Click += clearBTN_Click;
+            // 
+            // availableQuantityLB
+            // 
+            availableQuantityLB.AutoSize = true;
+            availableQuantityLB.ForeColor = Color.Blue;
+            availableQuantityLB.Location = new Point(335, 402);
+            availableQuantityLB.Name = "availableQuantityLB";
+            availableQuantityLB.Size = new Size(17, 20);
+            availableQuantityLB.TabIndex = 16;
+            availableQuantityLB.Text = "0";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(193, 402);
+            label24.Name = "label24";
+            label24.Size = new Size(127, 20);
+            label24.TabIndex = 17;
+            label24.Text = "Số bản khả dụng: ";
+            // 
+            // pictureBox
+            // 
+            pictureBox.BackColor = SystemColors.ButtonShadow;
+            pictureBox.Location = new Point(631, 159);
+            pictureBox.Name = "pictureBox";
+            pictureBox.Size = new Size(182, 213);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.TabIndex = 15;
+            pictureBox.TabStop = false;
+            pictureBox.Click += pictureBox_Click;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(537, 159);
+            label22.Name = "label22";
+            label22.Size = new Size(71, 20);
+            label22.TabIndex = 12;
+            label22.Text = "Hình ảnh:";
+            // 
             // label19
             // 
             label19.AutoSize = true;
@@ -537,7 +558,7 @@
             // 
             quantityNumberic.Location = new Point(631, 400);
             quantityNumberic.Name = "quantityNumberic";
-            quantityNumberic.Size = new Size(150, 27);
+            quantityNumberic.Size = new Size(182, 27);
             quantityNumberic.TabIndex = 10;
             // 
             // quantityLabel
@@ -560,16 +581,16 @@
             // 
             // descriptionBookAddTB
             // 
-            descriptionBookAddTB.Location = new Point(126, 160);
+            descriptionBookAddTB.Location = new Point(94, 157);
             descriptionBookAddTB.Name = "descriptionBookAddTB";
-            descriptionBookAddTB.Size = new Size(658, 215);
+            descriptionBookAddTB.Size = new Size(432, 215);
             descriptionBookAddTB.TabIndex = 8;
             descriptionBookAddTB.Text = "";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(43, 163);
+            label5.Location = new Point(14, 163);
             label5.Name = "label5";
             label5.Size = new Size(51, 20);
             label5.TabIndex = 5;
@@ -578,7 +599,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(420, 106);
+            label7.Location = new Point(406, 106);
             label7.Name = "label7";
             label7.Size = new Size(62, 20);
             label7.TabIndex = 7;
@@ -587,7 +608,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(43, 106);
+            label6.Location = new Point(8, 106);
             label6.Name = "label6";
             label6.Size = new Size(65, 20);
             label6.TabIndex = 6;
@@ -596,7 +617,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(40, 45);
+            label4.Location = new Point(8, 45);
             label4.Name = "label4";
             label4.Size = new Size(68, 20);
             label4.TabIndex = 2;
@@ -604,26 +625,30 @@
             // 
             // nameAddBookTB
             // 
-            nameAddBookTB.Location = new Point(126, 42);
+            nameAddBookTB.Location = new Point(97, 42);
             nameAddBookTB.Name = "nameAddBookTB";
-            nameAddBookTB.Size = new Size(658, 27);
+            nameAddBookTB.Size = new Size(716, 27);
             nameAddBookTB.TabIndex = 3;
             // 
             // categoryAddBookCB
             // 
+            categoryAddBookCB.AutoCompleteMode = AutoCompleteMode.Append;
+            categoryAddBookCB.AutoCompleteSource = AutoCompleteSource.ListItems;
             categoryAddBookCB.FormattingEnabled = true;
-            categoryAddBookCB.Location = new Point(126, 101);
+            categoryAddBookCB.Location = new Point(94, 101);
             categoryAddBookCB.Name = "categoryAddBookCB";
-            categoryAddBookCB.Size = new Size(263, 28);
+            categoryAddBookCB.Size = new Size(280, 28);
             categoryAddBookCB.TabIndex = 1;
             categoryAddBookCB.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // authorAddBookCB
             // 
+            authorAddBookCB.AutoCompleteMode = AutoCompleteMode.Append;
+            authorAddBookCB.AutoCompleteSource = AutoCompleteSource.ListItems;
             authorAddBookCB.FormattingEnabled = true;
             authorAddBookCB.Location = new Point(497, 101);
             authorAddBookCB.Name = "authorAddBookCB";
-            authorAddBookCB.Size = new Size(287, 28);
+            authorAddBookCB.Size = new Size(316, 28);
             authorAddBookCB.TabIndex = 1;
             authorAddBookCB.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
@@ -640,6 +665,8 @@
             // 
             // searchAuthorCB
             // 
+            searchAuthorCB.AutoCompleteMode = AutoCompleteMode.Append;
+            searchAuthorCB.AutoCompleteSource = AutoCompleteSource.ListItems;
             searchAuthorCB.FormattingEnabled = true;
             searchAuthorCB.Location = new Point(460, 104);
             searchAuthorCB.Name = "searchAuthorCB";
@@ -676,6 +703,8 @@
             // 
             // searchCategoryCB
             // 
+            searchCategoryCB.AutoCompleteMode = AutoCompleteMode.Append;
+            searchCategoryCB.AutoCompleteSource = AutoCompleteSource.ListItems;
             searchCategoryCB.FormattingEnabled = true;
             searchCategoryCB.Location = new Point(110, 101);
             searchCategoryCB.Name = "searchCategoryCB";
@@ -691,10 +720,9 @@
             dataGridViewBook.ReadOnly = true;
             dataGridViewBook.RowHeadersWidth = 51;
             dataGridViewBook.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewBook.Size = new Size(883, 308);
+            dataGridViewBook.Size = new Size(883, 558);
             dataGridViewBook.TabIndex = 0;
-            dataGridViewBook.CellClick += dataGridViewBook_CellClick;
-            dataGridViewBook.CellContentClick += dataGridView1_CellContentClick;
+            dataGridViewBook.CellMouseClick += dataGridViewBook_CellMouseClick;
             // 
             // memberPanel
             // 
@@ -987,7 +1015,7 @@
             dataGridViewMember.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewMember.Size = new Size(804, 509);
             dataGridViewMember.TabIndex = 1;
-            dataGridViewMember.CellClick += dataGridViewMember_CellClick;
+            dataGridViewMember.CellMouseClick += DataGridViewMember_CellMouseClick;
             // 
             // label9
             // 
@@ -1005,8 +1033,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
             Controls.Add(menuStrip1);
-            Controls.Add(bookPanel);
             Controls.Add(memberPanel);
+            Controls.Add(bookPanel);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1018,8 +1046,6 @@
             menuStrip1.PerformLayout();
             bookPanel.ResumeLayout(false);
             bookPanel.PerformLayout();
-            groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewCopies).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAuthor).EndInit();
@@ -1030,6 +1056,7 @@
             panel2.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)quantityNumberic).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBook).EndInit();
             memberPanel.ResumeLayout(false);
@@ -1091,13 +1118,10 @@
         private Label label8;
         private Button searchBookBT;
         private TextBox searchNameTB;
-        private GroupBox groupBox3;
-        private DataGridView dataGridViewCopies;
         private GroupBox groupBox4;
         private ToolStripMenuItem bạnĐọcMớiToolStripMenuItem;
         private ToolStripMenuItem đăngKíMớiToolStripMenuItem;
         private ToolStripMenuItem thoátToolStripMenuItem;
-        private Button deleteCopyBT;
         private Panel memberPanel;
         private GroupBox groupBox5;
         private TextBox detailReturnDateTB;
@@ -1134,9 +1158,13 @@
         private Button showAllBT;
         private TextBox memberNameTB;
         private Label label20;
-        private Label label21;
         private Label statusBorrowLabel;
         private ToolStripMenuItem tìmBạnĐọcToolStripMenuItem;
         private Button showAllMemsBT;
+        private Label label22;
+        private PictureBox pictureBox;
+        private Label availableQuantityLB;
+        private Label label24;
+        private Button clearBTN;
     }
 }
