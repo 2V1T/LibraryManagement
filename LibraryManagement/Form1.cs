@@ -85,7 +85,7 @@ namespace LibraryManagement
             dataGridView.DataSource = data;
         }
 
-        private void reloadMember()
+        public void reloadMember()
         {
             addMemberToView(dataGridViewMember);
         }
@@ -1018,6 +1018,99 @@ namespace LibraryManagement
                     case DialogResult.No:
                         break;
                 }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn sách cần xóa!", "Thông báo");
+            }
+        }
+
+        private void updateMemberBT_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridViewMember.CurrentRow;
+            long idNo = long.Parse(currentRow.Cells["id_no"].Value.ToString());
+            string name = memberNameTB.Text;
+            string cccd = memberCCCDTB.Text;
+            string email = memberEmailTB.Text;
+            string address = memberAddressTB.Text;
+            string phoneNo = memberPhoneNoTB.Text;
+            if (name.Equals("") || cccd.Equals("") || email.Equals("") || address.Equals("") || phoneNo.Equals("")) 
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin bạn đọc!", "Thông báo");
+                return;
+            }
+            MemberController memberController = new MemberController(); 
+            Member member = new Member();
+            member.Name = name;
+            member.Address = address;
+            member.Email = email;
+            member.IdNo = idNo;
+            member.PhoneNo = int.Parse(phoneNo);
+            if (memberController.update(member))
+            {
+                MessageBox.Show("Cập nhật thông tin bạn đọc thành công!", "Thông báo");
+                reloadMember();
+                clearMemberDetails();
+                clearBorrowedDetails();
+            }
+            else {
+                MessageBox.Show("Cập nhật thông tin bạn đọc thất bại!", "Thông báo");
+            }
+        }
+
+        private void clearMemberDetails()
+        {
+            memberNameTB.Text = "";
+            memberAddressTB.Text = "";
+            memberCCCDTB.Text = "";
+            memberEmailTB.Text = "";
+            memberAddressTB.Text = "";
+            memberPhoneNoTB.Text = "";
+        }
+
+
+        private void deleteMemberBT_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridViewMember.CurrentRow;
+            long idNo = long.Parse(currentRow.Cells["id_no"].Value.ToString());
+            MemberController memberController = new MemberController();
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc chắn muốn xóa bạn đọc này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (memberController.remove(idNo))
+                {
+                    MessageBox.Show("Xóa bạn đọc thành công!", "Thông báo");
+                    clearBorrowedDetails();
+                    clearMemberDetails();
+                    reloadMember();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa bạn đọc thất bại!", "Thông báo");
+                }
+            }
+        }
+
+        private void lostBookBTN_Click(object sender, EventArgs e)
+        {
+            BookController bookController = new BookController();
+            int bookId = 0;
+            if (dataGridViewBook.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewBook.SelectedRows[0];
+                bookId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+            }
+            if (bookId != 0)
+            {
+                DeleteCopies deleteCopies = new DeleteCopies(bookId);
+                deleteCopies.ShowDialog();
+                if (deleteCopies.isSuccess) { 
+                    reloadBook();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn sách cần xóa mất!", "Thông báo");
             }
         }
     }

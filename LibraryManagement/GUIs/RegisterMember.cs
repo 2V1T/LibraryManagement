@@ -40,16 +40,24 @@ namespace LibraryManagement.GUIs
 
         private void addBT_Click(object sender, EventArgs e)
         {
-            string email = emailTB.Text.Trim();
-            string address = addressTB.Text.Trim();
-            int phoneNo = int.Parse(phoneNoTB.Text.Trim());
-            if (email.Equals("") || address.Equals("") || phoneNoTB.Text.Trim().Equals(""))
+            string email = emailTB.Text.ToString();
+            string address = addressTB.Text.ToString();
+            string phoneNo = phoneNoTB.Text.ToString();
+            if (email.Equals("") || address.Equals("") || phoneNoTB.Text.ToString().Equals(""))
             {
                 MessageBox.Show("Cần điền đầy đủ thông tin!");
                 return;
             }
-            string result = controller.add(long.Parse(idNo), Name, phoneNo, email, address);
-            MessageBox.Show(result);
+            if (controller.add(long.Parse(idNo), Name, int.Parse(phoneNo), email, address))
+            {
+                MessageBox.Show("Đăng kí thành công!", "Thông báo");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Đăng kí thất bại vui lòng thử lại!", "Thông báo");
+                this.Close();  
+            }
         }
     }
 }

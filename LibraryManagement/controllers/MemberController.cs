@@ -31,7 +31,7 @@ namespace LibraryManagement.controllers
             return data;
         }
 
-        public string add(long idNo, string name, int phoneNo, string email, string address)
+        public bool add(long idNo, string name, int phoneNo, string email, string address)
         {
             try
             {
@@ -43,20 +43,37 @@ namespace LibraryManagement.controllers
                 cmd.Parameters.AddWithValue("phone_no", phoneNo);
                 cmd.Parameters.AddWithValue("email", email);
                 cmd.Parameters.AddWithValue("address", address);
-                DataTable data = sqlExecute.executeQuery(cmd);
+                bool result = sqlExecute.executeNoneQuery(cmd);
                 conn.Close ();
-                return data.Rows[0][0].ToString() ;  
+                return result;
             }
             catch (Exception ex)
             {
-                return "Thêm không thành công";
+                return false;
             }
+        }
+
+        public bool update(Member member) { 
+           try
+            {
+                conn.Open();
+                string sql = "EXEC sua_member @id_no, @phone_no, @email, @address";
+                SqlCommand sqlCommand = new SqlCommand(sql, conn);
+                sqlCommand.Parameters.AddWithValue("@id_no", member.IdNo);
+                sqlCommand.Parameters.AddWithValue("@phone_no", member.PhoneNo);
+                sqlCommand.Parameters.AddWithValue("@email", member.Email);
+                sqlCommand.Parameters.AddWithValue("@address", member.Address);
+                bool result = sqlExecute.executeNoneQuery(sqlCommand);
+                conn.Close();
+                return result;
+            }
+            catch (Exception e) { return false; }
         }
         public bool memberAvailable (long idNo)
         {
             bool result = false;
                 conn.Open();
-                string sql = "select count(*) as count from member inner join BorrowedDetails on member.id = BorrowedDetails.member_id WHere id_no = @id_no";
+                string sql = "select count(*) as count from member inner join BorrowedDetails on member.id = BorrowedDetails.member_id WHERE id_no = @id_no AND BorrowedDetails.[return] = 0";
                 SqlCommand sqlCommand = new SqlCommand(sql, conn);
                 sqlCommand.Parameters.AddWithValue("@id_no", idNo);
                 DataTable data = sqlExecute.executeQuery(sqlCommand);
@@ -68,11 +85,11 @@ namespace LibraryManagement.controllers
             return result;
         }
 
-        public bool remove(int id) {
+        public bool remove(long idNo) {
             conn.Open();
-            string sql = "DELETE * FROM member WHERE id = @Id";
+            string sql = "DELETE FROM member WHERE id_no = @idNo";
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@idNo", idNo);
             bool result = sqlExecute.executeNoneQuery(cmd);
             conn.Close();
             return result;

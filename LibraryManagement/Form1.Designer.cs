@@ -41,6 +41,7 @@
             đăngKíMớiToolStripMenuItem = new ToolStripMenuItem();
             tìmBạnĐọcToolStripMenuItem = new ToolStripMenuItem();
             bookPanel = new Panel();
+            lostBookBTN = new Button();
             showAllBT = new Button();
             borrowBT = new Button();
             addBookBT = new Button();
@@ -105,8 +106,8 @@
             searchMemberTB = new TextBox();
             searchMembersBT = new Button();
             panel3 = new Panel();
-            button13 = new Button();
-            button15 = new Button();
+            deleteMemberBT = new Button();
+            updateMemberBT = new Button();
             memberEmailTB = new TextBox();
             memberAddressTB = new TextBox();
             memberPhoneNoTB = new TextBox();
@@ -228,6 +229,7 @@
             // 
             // bookPanel
             // 
+            bookPanel.Controls.Add(lostBookBTN);
             bookPanel.Controls.Add(showAllBT);
             bookPanel.Controls.Add(borrowBT);
             bookPanel.Controls.Add(addBookBT);
@@ -252,6 +254,16 @@
             bookPanel.TabIndex = 2;
             bookPanel.Visible = false;
             bookPanel.Paint += panel1_Paint;
+            // 
+            // lostBookBTN
+            // 
+            lostBookBTN.Location = new Point(388, 816);
+            lostBookBTN.Name = "lostBookBTN";
+            lostBookBTN.Size = new Size(94, 29);
+            lostBookBTN.TabIndex = 12;
+            lostBookBTN.Text = "Xóa mất";
+            lostBookBTN.UseVisualStyleBackColor = true;
+            lostBookBTN.Click += lostBookBTN_Click;
             // 
             // showAllBT
             // 
@@ -338,7 +350,7 @@
             groupBox1.Controls.Add(updateAuthorBT);
             groupBox1.Location = new Point(901, 118);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(424, 255);
+            groupBox1.Size = new Size(424, 245);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tác giả";
@@ -397,7 +409,7 @@
             panel4.Controls.Add(groupBox2);
             panel4.Location = new Point(1321, 118);
             panel4.Name = "panel4";
-            panel4.Size = new Size(405, 255);
+            panel4.Size = new Size(405, 245);
             panel4.TabIndex = 0;
             // 
             // groupBox2
@@ -409,7 +421,7 @@
             groupBox2.Controls.Add(dataGridViewCategory);
             groupBox2.Location = new Point(3, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(426, 255);
+            groupBox2.Size = new Size(426, 245);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thể loại";
@@ -890,8 +902,8 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(button13);
-            panel3.Controls.Add(button15);
+            panel3.Controls.Add(deleteMemberBT);
+            panel3.Controls.Add(updateMemberBT);
             panel3.Controls.Add(memberEmailTB);
             panel3.Controls.Add(memberAddressTB);
             panel3.Controls.Add(memberPhoneNoTB);
@@ -907,23 +919,25 @@
             panel3.Size = new Size(868, 266);
             panel3.TabIndex = 2;
             // 
-            // button13
+            // deleteMemberBT
             // 
-            button13.Location = new Point(717, 147);
-            button13.Name = "button13";
-            button13.Size = new Size(94, 29);
-            button13.TabIndex = 5;
-            button13.Text = "Xóa";
-            button13.UseVisualStyleBackColor = true;
+            deleteMemberBT.Location = new Point(717, 144);
+            deleteMemberBT.Name = "deleteMemberBT";
+            deleteMemberBT.Size = new Size(94, 29);
+            deleteMemberBT.TabIndex = 5;
+            deleteMemberBT.Text = "Xóa";
+            deleteMemberBT.UseVisualStyleBackColor = true;
+            deleteMemberBT.Click += deleteMemberBT_Click;
             // 
-            // button15
+            // updateMemberBT
             // 
-            button15.Location = new Point(717, 81);
-            button15.Name = "button15";
-            button15.Size = new Size(94, 29);
-            button15.TabIndex = 5;
-            button15.Text = "Sửa";
-            button15.UseVisualStyleBackColor = true;
+            updateMemberBT.Location = new Point(717, 81);
+            updateMemberBT.Name = "updateMemberBT";
+            updateMemberBT.Size = new Size(94, 29);
+            updateMemberBT.TabIndex = 5;
+            updateMemberBT.Text = "Sửa";
+            updateMemberBT.UseVisualStyleBackColor = true;
+            updateMemberBT.Click += updateMemberBT_Click;
             // 
             // memberEmailTB
             // 
@@ -1034,8 +1048,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
             Controls.Add(menuStrip1);
-            Controls.Add(bookPanel);
             Controls.Add(memberPanel);
+            Controls.Add(bookPanel);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1138,8 +1152,8 @@
         private TextBox searchMemberTB;
         private Button searchMembersBT;
         private Panel panel3;
-        private Button button13;
-        private Button button15;
+        private Button deleteMemberBT;
+        private Button updateMemberBT;
         private TextBox memberEmailTB;
         private TextBox memberAddressTB;
         private TextBox memberPhoneNoTB;
@@ -1167,5 +1181,6 @@
         private Label availableQuantityLB;
         private Label label24;
         private Button clearBTN;
+        private Button lostBookBTN;
     }
 }
