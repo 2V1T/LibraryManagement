@@ -231,40 +231,15 @@ namespace LibraryManagement.controllers
                 conn.Close();
             }
         }
-        public bool updateNoImg(Book book)
-        {
-            try
-            {
-                conn.Open();
-                string sql = "UPDATE Book SET name=@Name, author_id=@AuthorId, category_id=@CategoryId, description=@Description WHERE id=@Id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Name", book.Name);
-                cmd.Parameters.AddWithValue("@AuthorId", book.AuthorId);
-                cmd.Parameters.AddWithValue("@CategoryId", book.CategoryId);
-                cmd.Parameters.AddWithValue("@Description", book.Description);
-                cmd.Parameters.AddWithValue("@Id", book.Id);
-                bool result = sqlExecute.executeNoneQuery(cmd);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                return false;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
 
         public bool delete(int id)
         {
             try
             {
                 conn.Open();
-                string sql = "DELETE * FROM Book WHERE id = @Id";
+                string sql = "EXEC xoa_sach @id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@id", id);
                 bool result = sqlExecute.executeNoneQuery(cmd);
                 return result;
             }

@@ -301,6 +301,7 @@
             deleteBookBT.TabIndex = 1;
             deleteBookBT.Text = "Xóa ";
             deleteBookBT.UseVisualStyleBackColor = true;
+            deleteBookBT.Click += deleteBookBT_Click;
             // 
             // label8
             // 
@@ -1033,8 +1034,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
             Controls.Add(menuStrip1);
-            Controls.Add(memberPanel);
             Controls.Add(bookPanel);
+            Controls.Add(memberPanel);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;

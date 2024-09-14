@@ -348,7 +348,8 @@ namespace LibraryManagement
             }
             if (bookId != 0)
             {
-                if (int.Parse(availableQuantityLB.Text) == 0) {
+                if (int.Parse(availableQuantityLB.Text) == 0)
+                {
                     MessageBox.Show("Không còn bản sao khả dụng nào cho sách này!", "Thông báo");
                     return;
                 }
@@ -628,7 +629,7 @@ namespace LibraryManagement
             pictureBox.Image = null;
         }
 
-        private void clearBorrowedDetails ()
+        private void clearBorrowedDetails()
         {
             detailBookIdTB.Text = "";
             detailBookNameTB.Text = "";
@@ -942,7 +943,7 @@ namespace LibraryManagement
         {
             DataGridViewRow currentRow = dataGridViewMember.CurrentRow;
             long idNo = long.Parse(currentRow.Cells["id_no"].Value.ToString());
-            MemberController memberController= new MemberController();
+            MemberController memberController = new MemberController();
             Member member = memberController.getByIdNo(idNo);
             addInforMember(member);
         }
@@ -981,6 +982,41 @@ namespace LibraryManagement
                     {
                         categoryAddBookCB.SelectedItem = pair;
                     }
+                }
+            }
+        }
+
+        private void deleteBookBT_Click(object sender, EventArgs e)
+        {
+            BookController bookController = new BookController();
+            int bookId = 0;
+            if (dataGridViewBook.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewBook.SelectedRows[0];
+                bookId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+            }
+            if (bookId != 0)
+            {
+                DialogResult result = MessageBox.Show("Bạn có muốn xóa sách này không?", "Cảnh báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        string name = dataGridViewBook.SelectedRows[0].Cells["name"].Value.ToString();
+                        bool isSuccess = bookController.delete(bookId);
+                        if (isSuccess)
+                        {
+                            MessageBox.Show($"Xóa sách \"{name}\" thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            reloadBook();
+                            clearAddBook();
+                            break;
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Xóa sách \"{name}\" không thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        break;
+                    case DialogResult.No:
+                        break;
                 }
             }
         }
