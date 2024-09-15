@@ -39,6 +39,21 @@ namespace LibraryManagement.controllers
                 conn.Close();
             }
         }
+
+        public DataTable reportTable () {
+            try
+            {
+                conn.Open();
+                string sql = "SELECT * FROM baocao";
+                SqlCommand sqlCommand = new SqlCommand(sql, conn);
+                conn.Close();
+                return sqlExecute.executeQuery(sqlCommand);
+            }
+            catch (Exception e) {
+                MessageBox.Show(e.ToString());
+                return null;
+            }
+        }
         public bool delete(int id)
         {
             try

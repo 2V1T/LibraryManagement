@@ -40,6 +40,7 @@
             bạnĐọcMớiToolStripMenuItem = new ToolStripMenuItem();
             đăngKíMớiToolStripMenuItem = new ToolStripMenuItem();
             tìmBạnĐọcToolStripMenuItem = new ToolStripMenuItem();
+            báoCáoToolStripMenuItem = new ToolStripMenuItem();
             bookPanel = new Panel();
             lostBookBTN = new Button();
             showAllBT = new Button();
@@ -120,6 +121,10 @@
             label10 = new Label();
             dataGridViewMember = new DataGridView();
             label9 = new Label();
+            reportPannel = new Panel();
+            dataGridViewReport = new DataGridView();
+            label23 = new Label();
+            label21 = new Label();
             menuStrip1.SuspendLayout();
             bookPanel.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -136,6 +141,8 @@
             groupBox5.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).BeginInit();
+            reportPannel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewReport).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -187,7 +194,7 @@
             // 
             // quảnLýToolStripMenuItem
             // 
-            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sáchToolStripMenuItem, tácGiảToolStripMenuItem });
+            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sáchToolStripMenuItem, tácGiảToolStripMenuItem, báoCáoToolStripMenuItem });
             quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             quảnLýToolStripMenuItem.Size = new Size(73, 24);
             quảnLýToolStripMenuItem.Text = "Quản lý";
@@ -226,6 +233,13 @@
             tìmBạnĐọcToolStripMenuItem.Size = new Size(175, 26);
             tìmBạnĐọcToolStripMenuItem.Text = "Tìm bạn đọc";
             tìmBạnĐọcToolStripMenuItem.Click += tìmBạnĐọcToolStripMenuItem_Click;
+            // 
+            // báoCáoToolStripMenuItem
+            // 
+            báoCáoToolStripMenuItem.Name = "báoCáoToolStripMenuItem";
+            báoCáoToolStripMenuItem.Size = new Size(146, 26);
+            báoCáoToolStripMenuItem.Text = "Báo cáo";
+            báoCáoToolStripMenuItem.Click += báoCáoToolStripMenuItem_Click;
             // 
             // bookPanel
             // 
@@ -1042,11 +1056,52 @@
             label9.TabIndex = 0;
             label9.Text = "BẠN ĐỌC";
             // 
+            // reportPannel
+            // 
+            reportPannel.Controls.Add(dataGridViewReport);
+            reportPannel.Controls.Add(label23);
+            reportPannel.Location = new Point(69, 54);
+            reportPannel.Name = "reportPannel";
+            reportPannel.Size = new Size(1780, 889);
+            reportPannel.TabIndex = 0;
+            reportPannel.Visible = false;
+            reportPannel.VisibleChanged += reportPannel_VisibleChanged;
+            // 
+            // dataGridViewReport
+            // 
+            dataGridViewReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewReport.Location = new Point(107, 224);
+            dataGridViewReport.Name = "dataGridViewReport";
+            dataGridViewReport.RowHeadersWidth = 51;
+            dataGridViewReport.Size = new Size(1578, 495);
+            dataGridViewReport.TabIndex = 1;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 32F);
+            label23.Location = new Point(571, 71);
+            label23.Name = "label23";
+            label23.Size = new Size(653, 72);
+            label23.TabIndex = 0;
+            label23.Text = "BÁO CÁO CHI TIẾT MƯỢN";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 32F);
+            label21.Location = new Point(533, 30);
+            label21.Name = "label21";
+            label21.Size = new Size(763, 72);
+            label21.TabIndex = 0;
+            label21.Text = "BÁO CÁO CHI TIẾT MƯỢN TRẢ";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1897, 970);
+            Controls.Add(reportPannel);
             Controls.Add(menuStrip1);
             Controls.Add(memberPanel);
             Controls.Add(bookPanel);
@@ -1081,6 +1136,9 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMember).EndInit();
+            reportPannel.ResumeLayout(false);
+            reportPannel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewReport).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1182,5 +1240,10 @@
         private Label label24;
         private Button clearBTN;
         private Button lostBookBTN;
+        private Panel reportPannel;
+        private ToolStripMenuItem báoCáoToolStripMenuItem;
+        private Label label21;
+        private DataGridView dataGridViewReport;
+        private Label label23;
     }
 }

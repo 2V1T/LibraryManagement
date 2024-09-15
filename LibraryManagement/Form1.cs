@@ -175,6 +175,7 @@ namespace LibraryManagement
         {
             bookPanel.Visible = true;
             memberPanel.Visible = false;
+            reportPannel.Visible = false;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -187,6 +188,7 @@ namespace LibraryManagement
         {
             memberPanel.Visible = true;
             bookPanel.Visible = false;
+            reportPannel.Visible = false;
 
         }
 
@@ -1034,12 +1036,12 @@ namespace LibraryManagement
             string email = memberEmailTB.Text;
             string address = memberAddressTB.Text;
             string phoneNo = memberPhoneNoTB.Text;
-            if (name.Equals("") || cccd.Equals("") || email.Equals("") || address.Equals("") || phoneNo.Equals("")) 
+            if (name.Equals("") || cccd.Equals("") || email.Equals("") || address.Equals("") || phoneNo.Equals(""))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin bạn đọc!", "Thông báo");
                 return;
             }
-            MemberController memberController = new MemberController(); 
+            MemberController memberController = new MemberController();
             Member member = new Member();
             member.Name = name;
             member.Address = address;
@@ -1053,7 +1055,8 @@ namespace LibraryManagement
                 clearMemberDetails();
                 clearBorrowedDetails();
             }
-            else {
+            else
+            {
                 MessageBox.Show("Cập nhật thông tin bạn đọc thất bại!", "Thông báo");
             }
         }
@@ -1104,13 +1107,31 @@ namespace LibraryManagement
             {
                 DeleteCopies deleteCopies = new DeleteCopies(bookId);
                 deleteCopies.ShowDialog();
-                if (deleteCopies.isSuccess) { 
+                if (deleteCopies.isSuccess)
+                {
                     reloadBook();
                 }
             }
             else
             {
                 MessageBox.Show("Vui lòng chọn sách cần xóa mất!", "Thông báo");
+            }
+        }
+
+        private void báoCáoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            memberPanel.Visible = false;
+            bookPanel.Visible = false;
+            reportPannel.Visible = true;
+        }
+
+        private void reportPannel_VisibleChanged(object sender, EventArgs e)
+        {
+            BorrowedDetailController borrowedDetailController = new BorrowedDetailController();
+            DataTable data = borrowedDetailController.reportTable();
+            dataGridViewReport.DataSource = data;
+            for (int i = 0; i < 9; i++) {
+                dataGridViewReport.Columns[i].Width = ((dataGridViewReport.Width - 50)) / 9;
             }
         }
     }
